@@ -1,27 +1,38 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {testInventory} from '../data/testInventory';
+import OverviewItem from './overviewItem';
+
+const inventoryList = testInventory.map((inventory) =>
+	<OverviewItem
+		key={inventory.id}
+		item={inventory}
+		colour={'#009933'}/>
+);
 
 interface Props {}
 export default class Overview extends Component<Props> {
 	render() {
 		return (
-			<View style={styles.container}>
-				<Text style={styles.hello}>Hello, World!</Text>
+			<View style={styles.overview}>
+				<Text style={styles.heading}>
+					My Stuff
+				</Text>
+				{inventoryList}
 			</View>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#F5FCFF',
+	overview: {
+		backgroundColor: '#e6e6e6',
 	},
-	hello: {
-		fontSize: 20,
+	heading: {
+		fontSize: 30,
+		fontWeight: 'bold',
 		textAlign: 'center',
-		margin: 10,
+		marginBottom: 10,
+		marginTop: 20,
 	},
 });
