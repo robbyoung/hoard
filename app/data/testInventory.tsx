@@ -1,37 +1,27 @@
 import { Book, Inventory } from "./testCategories";
 
-export const testInventory: Inventory[] = [{
-	name: "Gardens of the Moon",
-	completed: true,
-	id: 'testId1',
-	category: 'Book',
-	pageCount: 666,
-	series: 'Malazan Book of the Fallen',
-} as Book, {
-	name: "Deadhouse Gates",
-	completed: true,
-	id: 'testId2',
-	category: 'Book',
-	pageCount: 0,
-	series: 'Malazan Book of the Fallen',
-} as Book, {
-	name: "Memories of Ice",
-	completed: true,
-	id: 'testId3',
-	category: 'Book',
-	pageCount: 0,
-	series: 'Malazan Book of the Fallen',
-} as Book, {
-	name: "House of Chains",
-	completed: true,
-	id: 'testId4',
-	category: 'Book',
-	pageCount: 0,
-	series: 'Malazan Book of the Fallen',
-} as Book, {
-	name: "Light in August",
-	completed: false,
-	id: 'testId5',
-	category: 'Book',
-	pageCount: 507,
-} as Book]
+const bookNames = [
+	"Gardens of the Moon",
+	"Deadhouse Gates",
+	"Memories of Ice",
+	"House of Chains",
+	"Midnight Tides",
+	"The Bonehunters",
+	"Reaper's Gale",
+	"Toll the Hounds",
+	"Dust of Dreams",
+	"The Crippled God",
+	"Tess of the d'Urbervilles",
+	"Far from the Madding Crowd",
+	"The Mayor of Casterbridge",
+	"Eye of the World",
+]
+
+export const testInventory: Inventory[] = bookNames.map((name, i) => {
+	return {
+		name,
+		category: 'Book',
+		completed: i > 6,
+		id: `id${i}`,
+	}
+});

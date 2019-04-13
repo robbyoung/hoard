@@ -8,14 +8,12 @@ interface Props {
 	colour: string;
 }
 export default class OverviewItem extends Component<Props> {
-	private labelStyle = {
+	private containerColour = {
 		backgroundColor: this.props.colour,
-		margin: 10,
-		borderRadius: 2,
 	}
 	render() {
 		return (
-			<View style={this.labelStyle}>
+			<View style={[this.containerColour, styles.container]}>
 				<FontAwesome style={styles.icon}>
 					{Icons.book}
 				</FontAwesome>
@@ -28,6 +26,12 @@ export default class OverviewItem extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		display: 'flex',
+		flexDirection: 'row',
+		// borderRadius: 3,
+		marginBottom: 1,
+	},
 	title: {
 		fontSize: 22,
 		textAlign: 'center',
@@ -38,6 +42,8 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 		textAlign: 'center',
 		marginTop: 10,
+		marginLeft: 10,
+		paddingTop: 3,
 		color: 'white',
 	}
 });

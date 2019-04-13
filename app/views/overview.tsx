@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import {testInventory} from '../data/testInventory';
 import OverviewItem from './overviewItem';
 
@@ -18,7 +18,9 @@ export default class Overview extends Component<Props> {
 				<Text style={styles.heading}>
 					My Stuff
 				</Text>
-				{inventoryList}
+				<ScrollView style={styles.list}>
+					{inventoryList}
+				</ScrollView>
 			</View>
 		);
 	}
@@ -31,8 +33,10 @@ const styles = StyleSheet.create({
 	heading: {
 		fontSize: 30,
 		fontWeight: 'bold',
-		textAlign: 'center',
-		marginBottom: 10,
-		marginTop: 20,
+		padding: 10,
+		borderBottomWidth: 2,
+		borderBottomColor: '#565656'
 	},
+	list: {
+	}
 });
