@@ -29,9 +29,7 @@ export default class OverviewItem extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		display: 'flex',
-		flex: 1,
 		flexDirection: 'row',
-		// borderRadius: 3,
 		marginBottom: 1,
 	},
 	title: {

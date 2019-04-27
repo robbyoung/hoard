@@ -37,5 +37,6 @@ const styles = StyleSheet.create({
 		borderBottomColor: '#565656'
 	},
 	list: {
+		flexGrow: 0.83,
 	}
 });
