@@ -1,17 +1,23 @@
+export enum Category {
+	Book = "Book",
+	Game = "Game",
+}
+
 export interface Inventory {
 	name: string;
-	category: string;
 	id: string;
+	category: Category;
+	fields: InventoryFieldLookup;
 }
 
-export interface Book extends Inventory {
-	category: 'Book';
-	completed: boolean;
-	pageCount: number;
-	series?: string;
+export enum BookFields {
+	Completed = "Completed",
+	PageCount = "Page Count",
+	Series = "Series",
 }
 
-export interface Game {
-	category: 'Game';
-	completed: boolean;
+export enum GameFields {
+	Completed = "Completed",
 }
+
+export type InventoryFieldLookup = { [id: string] : any; };

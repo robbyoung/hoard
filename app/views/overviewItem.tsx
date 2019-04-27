@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Inventory} from '../data/testCategories';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
+import FontAwesome from 'react-native-fontawesome';
+import { getCategoryIcon } from '../utils/iconHelpers';
+import { getCategoryColour } from '../utils/colourHelpers';
 
 interface Props {
 	item: Inventory;
-	colour: string;
 }
 export default class OverviewItem extends Component<Props> {
 	private containerColour = {
-		backgroundColor: this.props.colour,
+		backgroundColor: getCategoryColour(this.props.item.category),
 	}
 	render() {
 		return (
 			<View style={[this.containerColour, styles.container]}>
 				<FontAwesome style={styles.icon}>
-					{Icons.book}
+					{getCategoryIcon(this.props.item.category)}
 				</FontAwesome>
 				<Text style={styles.title}>
 					{this.props.item.name}
@@ -28,6 +29,7 @@ export default class OverviewItem extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		display: 'flex',
+		flex: 1,
 		flexDirection: 'row',
 		// borderRadius: 3,
 		marginBottom: 1,

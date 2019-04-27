@@ -1,4 +1,4 @@
-import { Book, Inventory } from "./testCategories";
+import { Inventory, InventoryFieldLookup, Category } from "./testCategories";
 
 const bookNames = [
 	"Gardens of the Moon",
@@ -18,10 +18,32 @@ const bookNames = [
 ]
 
 export const testInventory: Inventory[] = bookNames.map((name, i) => {
+	const fields: InventoryFieldLookup = {
+		"completed": i > 6,
+	}
 	return {
 		name,
-		category: 'Book',
-		completed: i > 6,
-		id: `id${i}`,
+		id: `idb${i}`,
+		category: Category.Book,
+		fields,
+	}
+});
+
+const gameNames = [
+	"Dark Souls",
+	"Dark Souls III",
+	"Bloodborne",
+	"Sekiro",
+]
+
+export const testGames: Inventory[] = gameNames.map((name, i) => {
+	const fields: InventoryFieldLookup = {
+		"completed": i > 2,
+	}
+	return {
+		name,
+		id: `idg${i}`,
+		category: Category.Book,
+		fields,
 	}
 });

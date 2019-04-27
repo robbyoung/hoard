@@ -6,8 +6,7 @@ import OverviewItem from './overviewItem';
 const inventoryList = testInventory.map((inventory) =>
 	<OverviewItem
 		key={inventory.id}
-		item={inventory}
-		colour={'#009933'}/>
+		item={inventory}/>
 );
 
 interface Props {}
