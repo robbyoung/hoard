@@ -1,25 +1,19 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
-import {testInventory} from '../data/testInventory';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { testInventory } from '../data/testInventory';
 import OverviewItem from './overviewItem';
 
-const inventoryList = testInventory.map((inventory) =>
-	<OverviewItem
-		key={inventory.id}
-		item={inventory}/>
-);
+const inventoryList = testInventory.map((inventory) => (
+	<OverviewItem key={inventory.id} item={inventory} />
+));
 
 interface Props {}
 export default class Overview extends Component<Props> {
 	render() {
 		return (
 			<View style={styles.overview}>
-				<Text style={styles.heading}>
-					My Stuff
-				</Text>
-				<ScrollView style={styles.list}>
-					{inventoryList}
-				</ScrollView>
+				<Text style={styles.heading}>My Stuff</Text>
+				<ScrollView style={styles.list}>{inventoryList}</ScrollView>
 			</View>
 		);
 	}
@@ -34,9 +28,9 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		padding: 10,
 		borderBottomWidth: 2,
-		borderBottomColor: '#565656'
+		borderBottomColor: '#565656',
 	},
 	list: {
 		flexGrow: 0.83,
-	}
+	},
 });

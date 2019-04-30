@@ -1,6 +1,6 @@
 export enum Category {
-	Book = "Book",
-	Game = "Game",
+	Book = 'Book',
+	Game = 'Game',
 }
 
 export interface Inventory {
@@ -11,13 +11,13 @@ export interface Inventory {
 }
 
 export enum BookFields {
-	Completed = "Completed",
-	PageCount = "Page Count",
-	Series = "Series",
+	Completed = 'Completed',
+	PageCount = 'Page Count',
+	Series = 'Series',
 }
 
 export enum GameFields {
-	Completed = "Completed",
+	Completed = 'Completed',
 }
 
-export type InventoryFieldLookup = { [id: string] : any; };
+export type InventoryFieldLookup = { [id: string]: any };

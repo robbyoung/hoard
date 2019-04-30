@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Inventory} from '../data/testCategories';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Inventory } from '../data/testCategories';
 import FontAwesome from 'react-native-fontawesome';
 import { getCategoryIcon } from '../utils/iconHelpers';
 import { getCategoryColour } from '../utils/colourHelpers';
@@ -11,16 +11,14 @@ interface Props {
 export default class OverviewItem extends Component<Props> {
 	private containerColour = {
 		backgroundColor: getCategoryColour(this.props.item.category),
-	}
+	};
 	render() {
 		return (
 			<View style={[this.containerColour, styles.container]}>
 				<FontAwesome style={styles.icon}>
 					{getCategoryIcon(this.props.item.category)}
 				</FontAwesome>
-				<Text style={styles.title}>
-					{this.props.item.name}
-				</Text>
+				<Text style={styles.title}>{this.props.item.name}</Text>
 			</View>
 		);
 	}
@@ -45,5 +43,5 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 		paddingTop: 3,
 		color: 'white',
-	}
+	},
 });
