@@ -19,28 +19,32 @@ const bookNames = [
 
 const gameNames = ['Dark Souls', 'Dark Souls III', 'Bloodborne', 'Sekiro'];
 
-const testBooks: Inventory[] = bookNames.map((name, i) => {
-	const fields: InventoryFieldLookup = {
-		completed: i > 6,
-	};
-	return {
-		name,
-		id: `idb${i}`,
-		category: Category.Book,
-		fields,
-	};
-});
+const testBooks: Inventory[] = bookNames.map(
+	(name, i): Inventory => {
+		const fields: InventoryFieldLookup = {
+			completed: `${i > 6}`,
+		};
+		return {
+			name,
+			id: `idb${i}`,
+			category: Category.Book,
+			fields,
+		};
+	},
+);
 
-const testGames: Inventory[] = gameNames.map((name, i) => {
-	const fields: InventoryFieldLookup = {
-		completed: i > 2,
-	};
-	return {
-		name,
-		id: `idg${i}`,
-		category: Category.Game,
-		fields,
-	};
-});
+const testGames: Inventory[] = gameNames.map(
+	(name, i): Inventory => {
+		const fields: InventoryFieldLookup = {
+			completed: `${i > 2}`,
+		};
+		return {
+			name,
+			id: `idg${i}`,
+			category: Category.Game,
+			fields,
+		};
+	},
+);
 
 export const testInventory = [...testBooks, ...testGames];

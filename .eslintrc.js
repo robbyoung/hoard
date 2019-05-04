@@ -30,6 +30,6 @@ module.exports = {
 	},
     "rules": {
 		"@typescript-eslint/indent": "off",
-		"indent": [2, "tab"]
+		"indent": [2, "tab", {"SwitchCase": 1}]
     }
 };

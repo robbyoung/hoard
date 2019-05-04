@@ -20,4 +20,6 @@ export enum GameFields {
 	Completed = 'Completed',
 }
 
-export type InventoryFieldLookup = { [id: string]: any };
+export interface InventoryFieldLookup {
+	[id: string]: string;
+}
