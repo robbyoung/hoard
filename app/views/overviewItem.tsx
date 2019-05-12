@@ -4,10 +4,11 @@ import { Inventory } from '../data/testCategories';
 import FontAwesome from 'react-native-fontawesome';
 import { getCategoryIcon } from '../utils/iconHelpers';
 import { getCategoryColour } from '../utils/colourHelpers';
+import { TouchableHighlight } from 'react-native-gesture-handler';
+import { NavigationInjectedProps } from 'react-navigation';
 
 const styles = StyleSheet.create({
 	container: {
-		display: 'flex',
 		flexDirection: 'row',
 		marginBottom: 1,
 	},
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-interface Props {
+interface Props extends NavigationInjectedProps {
 	item: Inventory;
 }
 export default class OverviewItem extends Component<Props> {
@@ -36,12 +37,14 @@ export default class OverviewItem extends Component<Props> {
 	};
 	public render(): JSX.Element {
 		return (
+			<TouchableHighlight onPress={() => this.props.navigation.navigate('Item')}>
 			<View style={[this.containerColour, styles.container]}>
 				<FontAwesome style={styles.icon}>
 					{getCategoryIcon(this.props.item.category)}
 				</FontAwesome>
 				<Text style={styles.title}>{this.props.item.name}</Text>
 			</View>
+			</TouchableHighlight>
 		);
 	}
 }
