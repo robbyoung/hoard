@@ -1,14 +1,10 @@
-import React, {Component} from 'react';
+import {createStackNavigator, createAppContainer} from 'react-navigation';
 import Overview from './views/overview';
-import {View} from 'react-native';
+import Item from './views/item';
 
-interface Props {}
-export class App extends Component<Props> {
-  render() {
-	return (
-		<View>
-	  		<Overview/>
-		</View>
-	);
-  }
-}
+const MainNavigator = createStackNavigator({
+  Overview: {screen: Overview},
+  Item: {screen: Item},
+});
+
+export const App = createAppContainer(MainNavigator);
