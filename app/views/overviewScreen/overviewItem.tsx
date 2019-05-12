@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Inventory } from '../data/testCategories';
+import { Inventory } from '../../data/testCategories';
 import FontAwesome from 'react-native-fontawesome';
-import { getCategoryIcon } from '../utils/iconHelpers';
-import { getCategoryColour } from '../utils/colourHelpers';
+import { getCategoryIcon } from '../../utils/iconHelpers';
+import { getCategoryColour } from '../../utils/colourHelpers';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { NavigationInjectedProps } from 'react-navigation';
+import { NavigateToItemDetails } from '../itemDetailsScreen/itemDetails.nav';
 
 const styles = StyleSheet.create({
 	container: {
@@ -37,13 +38,18 @@ export default class OverviewItem extends Component<Props> {
 	};
 	public render(): JSX.Element {
 		return (
-			<TouchableHighlight onPress={() => this.props.navigation.navigate('Item')}>
-			<View style={[this.containerColour, styles.container]}>
-				<FontAwesome style={styles.icon}>
-					{getCategoryIcon(this.props.item.category)}
-				</FontAwesome>
-				<Text style={styles.title}>{this.props.item.name}</Text>
-			</View>
+			<TouchableHighlight
+				onPress={(): void =>
+					NavigateToItemDetails(this.props.navigation, {
+						item: this.props.item,
+					})
+				}>
+				<View style={[this.containerColour, styles.container]}>
+					<FontAwesome style={styles.icon}>
+						{getCategoryIcon(this.props.item.category)}
+					</FontAwesome>
+					<Text style={styles.title}>{this.props.item.name}</Text>
+				</View>
 			</TouchableHighlight>
 		);
 	}

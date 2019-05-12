@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { testInventory } from '../data/testInventory';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { testInventory } from '../../data/testInventory';
 import OverviewItem from './overviewItem';
 import { NavigationInjectedProps } from 'react-navigation';
 
@@ -13,13 +13,14 @@ const styles = StyleSheet.create({
 export default class Overview extends Component<NavigationInjectedProps> {
 	public static navigationOptions = {
 		title: 'My Stuff',
-	}
+	};
 	private inventoryList = testInventory.map(
 		(inventory): JSX.Element => (
-			<OverviewItem 
-				key={inventory.id} 
+			<OverviewItem
+				key={inventory.id}
 				item={inventory}
-				navigation={this.props.navigation}/>
+				navigation={this.props.navigation}
+			/>
 		),
 	);
 	public render(): JSX.Element {
