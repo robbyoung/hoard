@@ -4,7 +4,7 @@ import { Inventory } from '../../data/testCategories';
 import FontAwesome from 'react-native-fontawesome';
 import { getCategoryIcon } from '../../utils/iconHelpers';
 import { getCategoryColour } from '../../utils/colourHelpers';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationInjectedProps } from 'react-navigation';
 import { NavigateToItemDetails } from '../itemDetailsScreen/itemDetails.nav';
 
@@ -38,7 +38,7 @@ export default class OverviewItem extends Component<Props> {
 	};
 	public render(): JSX.Element {
 		return (
-			<TouchableHighlight
+			<TouchableOpacity
 				onPress={(): void =>
 					NavigateToItemDetails(this.props.navigation, {
 						item: this.props.item,
@@ -50,7 +50,7 @@ export default class OverviewItem extends Component<Props> {
 					</FontAwesome>
 					<Text style={styles.title}>{this.props.item.name}</Text>
 				</View>
-			</TouchableHighlight>
+			</TouchableOpacity>
 		);
 	}
 }

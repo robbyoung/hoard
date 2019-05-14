@@ -7,7 +7,7 @@ export interface Inventory {
 	name: string;
 	id: string;
 	category: Category;
-	fields: InventoryFieldLookup;
+	attributes: Attribute[];
 }
 
 export enum BookFields {
@@ -20,6 +20,7 @@ export enum GameFields {
 	Completed = 'Completed',
 }
 
-export interface InventoryFieldLookup {
-	[id: string]: string;
+export interface Attribute {
+	key: string;
+	value: string;
 }
