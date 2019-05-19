@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import {
 	StatsNavigationParams,
 	extractStatsParams,
 } from './stats.nav';
-import { PieChart } from 'react-native-chart-kit';
+import Pie from 'react-native-pie';
 
+const CHART_MARGINS = 40;
 const styles = StyleSheet.create({
 	title: {
 		fontSize: 30,
 		textAlign: 'center',
 		margin: 10,
 	},
+	chart: {
+		margin: CHART_MARGINS,
+	}
 });
 
 export default class Stats extends Component<NavigationInjectedProps> {
@@ -25,30 +29,14 @@ export default class Stats extends Component<NavigationInjectedProps> {
 	};
 
 	public render(): JSX.Element {
-		const data = [
-			{ name: 'Seoul', value: 21500000, color: 'rgba(131, 167, 234, 1)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'Toronto', value: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'Beijing', value: 527612, color: 'red', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'New York', value: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'Moscow', value: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
-			];
-		const chartConfig = {
-			backgroundGradientFrom: '#1E2923',
-			backgroundGradientTo: '#08130D',
-			color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-			strokeWidth: 2 // optional, default 3
-		};
 		return (
-			<View>
-				<Text style={styles.title}>Hello there</Text>
-				<PieChart
-					data={data}
-					width={220}
-					height={220}
-					chartConfig={chartConfig}
-					accessor="value"
-				/>
+			<View style={styles.chart}>
+				<Pie
+					radius={Dimensions.get('window').width / 2 - CHART_MARGINS }
+					series={[57, 43]}
+					colors={['#db5353', '#d3d3d3']}/>
 			</View>
+			
 		);
 	}
 }
