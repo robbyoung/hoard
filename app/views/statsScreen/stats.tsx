@@ -26,11 +26,11 @@ export default class Stats extends Component<NavigationInjectedProps> {
 
 	public render(): JSX.Element {
 		const data = [
-			{ name: 'Seoul', population: 21500000, color: 'rgba(131, 167, 234, 1)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'Toronto', population: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'Beijing', population: 527612, color: 'red', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'New York', population: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
-			{ name: 'Moscow', population: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
+			{ name: 'Seoul', value: 21500000, color: 'rgba(131, 167, 234, 1)', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+			{ name: 'Toronto', value: 2800000, color: '#F00', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+			{ name: 'Beijing', value: 527612, color: 'red', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+			{ name: 'New York', value: 8538000, color: '#ffffff', legendFontColor: '#7F7F7F', legendFontSize: 15 },
+			{ name: 'Moscow', value: 11920000, color: 'rgb(0, 0, 255)', legendFontColor: '#7F7F7F', legendFontSize: 15 }
 			];
 		const chartConfig = {
 			backgroundGradientFrom: '#1E2923',
@@ -46,10 +46,7 @@ export default class Stats extends Component<NavigationInjectedProps> {
 					width={220}
 					height={220}
 					chartConfig={chartConfig}
-					accessor="population"
-					backgroundColor="transparent"
-					paddingLeft="15"
-					absolute
+					accessor="value"
 				/>
 			</View>
 		);
