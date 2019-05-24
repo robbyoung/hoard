@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import {
 	StatsNavigationParams,
