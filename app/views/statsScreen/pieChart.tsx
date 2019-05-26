@@ -32,19 +32,7 @@ export interface PieChartData {
 export interface PieChartProps {
 	data: PieChartData[];
 }
-
 export default class PieChart extends Component<PieChartProps> {
-	private legend = this.props.data.map(
-		(data): JSX.Element => (
-			<View key={data.key} style={styles.legendItem}>
-				<FontAwesome style={{color: data.colour, fontSize: 24, paddingTop: 5}}>{Icons.circle}</FontAwesome>
-				<Text style={styles.legendText}>{data.key}</Text>
-				<Text style={styles.legendText}>{data.count}</Text>
-				<Text style={styles.legendText}>({Math.round(data.percentage)}%)</Text>
-			</View>
-			
-		),
-	);
 	public render(): JSX.Element {
 		return (
 			<View style={styles.chart}>
@@ -52,9 +40,6 @@ export default class PieChart extends Component<PieChartProps> {
 					radius={Dimensions.get('window').width / 2 - CHART_MARGINS }
 					series={this.props.data.map((d) => d.percentage)}
 					colors={this.props.data.map((d) => d.colour)}/>
-					<View style={styles.legend}>
-						{this.legend}
-					</View>
 			</View>
 		);
 	}

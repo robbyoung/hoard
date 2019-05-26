@@ -7,11 +7,13 @@ import {
 } from './stats.nav';
 import { testInventory } from '../../data/testInventory';
 import PieChart, { PieChartData } from './pieChart';
+import AttributePicker from './attributePicker';
+import Legend from './legend';
+import { getColourForWedgeIndex } from '../../utils/colourHelpers';
+import { ScrollView } from 'react-native-gesture-handler';
 
-const COLOURS = ['#db5353', '#2f69c6', '#27b239', '#dde02f'];
-
-function getDataForChart(category: string = "All", attribute: string | undefined): PieChartData[] {
-	const items = testInventory.filter((item) => category === 'All' || category === item.category);
+function getDataForChart(category: string, attribute: string | undefined): PieChartData[] {
+	const items = testInventory.filter((item) => category === item.category);
 	if (attribute === undefined) {
 		attribute = items[0].attributes[0].key;
 	}
@@ -27,23 +29,31 @@ function getDataForChart(category: string = "All", attribute: string | undefined
 	}
 	
 	const data: PieChartData[] = [];
-	let colourIndex = 0;
+	let wedgeIndex = 0;
 	for (const key in tally) {
 		data.push({
 			key,
 			count: tally[key],
 			percentage: tally[key] / items.length * 100,
-			colour: COLOURS[colourIndex],
+			colour: getColourForWedgeIndex(wedgeIndex),
 		});
-		colourIndex++;
+		wedgeIndex++;
 	}
 	return data;
 }
 
-export default class Stats extends Component<NavigationInjectedProps> {
+interface StatsState {
+	data: PieChartData[],
+	attribute: string,
+}
+export default class Stats extends Component<NavigationInjectedProps, StatsState> {
 	private params: StatsNavigationParams = extractStatsParams(
 		this.props.navigation,
 	);
+	public state = {
+		data: getDataForChart(this.params.category, undefined),
+		attribute: 'Completed'
+	}
 	public static navigationOptions = {
 		title: 'Stats',
 	};
@@ -51,7 +61,17 @@ export default class Stats extends Component<NavigationInjectedProps> {
 	public render(): JSX.Element {	
 		return (
 			<View>
-				<PieChart data={getDataForChart(this.params.category, undefined)}/>
+				<ScrollView>
+				<AttributePicker attribute={this.state.attribute} onSelect={
+					(attribute: string): void => {
+						this.setState({
+							attribute,
+							data: getDataForChart(this.params.category, attribute),
+						});
+					}}/>
+				<PieChart data={this.state.data}/>
+				<Legend data={this.state.data}></Legend>
+				</ScrollView>
 			</View>
 			
 		);

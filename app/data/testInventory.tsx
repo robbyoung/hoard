@@ -27,8 +27,12 @@ const testBooks: Inventory[] = bookNames.map(
 				value: `${i < 8}`,
 			},
 			{
-				key: 'Number of Pages',
+				key: 'Page Count',
 				value: `${i * 100}`,
+			},
+			{
+				key: 'Series',
+				value: `${i < 10 ? 'Malazan' : 'N/A' }`,
 			},
 		];
 		return {

@@ -21,7 +21,7 @@ export default class Overview extends Component<NavigationInjectedProps> {
 		return {
 			title: 'My Stuff',
 			headerRight: (
-				<TouchableOpacity onPress={() => NavigateToStats(props.navigation, { category: 'All' })}>
+				<TouchableOpacity onPress={() => NavigateToStats(props.navigation, { category: 'Book' })}>
 					<FontAwesome style={styles.statsButton}>{Icons.chartPie}</FontAwesome>
 				</TouchableOpacity>
 			),
