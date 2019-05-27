@@ -62,7 +62,7 @@ export default class Stats extends Component<NavigationInjectedProps, StatsState
 		return (
 			<View>
 				<ScrollView>
-				<AttributePicker attribute={this.state.attribute} onSelect={
+				<AttributePicker selected={this.state.attribute} attributeList={["Completed", "Page Count", "Series"]} onSelect={
 					(attribute: string): void => {
 						this.setState({
 							attribute,

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 import Pie from 'react-native-pie';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 const CHART_MARGINS = 40;
 const styles = StyleSheet.create({
