@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-export interface PieChartData {
+export interface ChartData {
 	key: string;
 	count: number;
 	percentage: number;
@@ -29,7 +29,7 @@ export interface PieChartData {
 }
 
 export interface PieChartProps {
-	data: PieChartData[];
+	data: ChartData[];
 }
 export default class PieChart extends Component<PieChartProps> {
 	public render(): JSX.Element {

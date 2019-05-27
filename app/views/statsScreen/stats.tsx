@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import { StatsNavigationParams, extractStatsParams } from './stats.nav';
 import { testInventory } from '../../data/testInventory';
-import PieChart, { PieChartData } from './pieChart';
+import PieChart, { ChartData } from './pieChart';
 import AttributePicker from './attributePicker';
 import Legend from './legend';
 import { getColourForWedgeIndex } from '../../utils/colourHelpers';
@@ -12,7 +12,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 function getDataForChart(
 	category: string,
 	attribute: string | undefined,
-): PieChartData[] {
+): ChartData[] {
 	const items = testInventory.filter(
 		(item): boolean => category === item.category,
 	);
@@ -30,7 +30,7 @@ function getDataForChart(
 		}
 	}
 
-	const data: PieChartData[] = [];
+	const data: ChartData[] = [];
 	let wedgeIndex = 0;
 	for (const key in tally) {
 		data.push({
@@ -45,7 +45,7 @@ function getDataForChart(
 }
 
 interface StatsState {
-	data: PieChartData[];
+	data: ChartData[];
 	attribute: string;
 }
 export default class Stats extends Component<
