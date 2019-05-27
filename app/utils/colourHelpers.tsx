@@ -27,5 +27,5 @@ const CHART_COLOURS: string[] = [
 ];
 
 export function getColourForWedgeIndex(index: number): string {
-	return CHART_COLOURS[index % CHART_COLOURS.length]
+	return CHART_COLOURS[index % CHART_COLOURS.length];
 }

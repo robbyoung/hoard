@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
 import { testInventory } from '../../data/testInventory';
 import OverviewItem from './overviewItem';
-import { NavigationInjectedProps } from 'react-navigation';
+import {
+	NavigationInjectedProps,
+	NavigationStackScreenOptions,
+} from 'react-navigation';
 import { NavigateToStats } from '../statsScreen/stats.nav';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 
@@ -13,19 +16,26 @@ const styles = StyleSheet.create({
 	statsButton: {
 		marginRight: 20,
 		fontSize: 20,
-	}
+	},
 });
 
 export default class Overview extends Component<NavigationInjectedProps> {
-	public static navigationOptions = (props: NavigationInjectedProps) => {
+	public static navigationOptions = (
+		props: NavigationInjectedProps,
+	): NavigationStackScreenOptions => {
 		return {
 			title: 'My Stuff',
 			headerRight: (
-				<TouchableOpacity onPress={() => NavigateToStats(props.navigation, { category: 'Book' })}>
-					<FontAwesome style={styles.statsButton}>{Icons.chartPie}</FontAwesome>
+				<TouchableOpacity
+					onPress={(): void =>
+						NavigateToStats(props.navigation, { category: 'Book' })
+					}>
+					<FontAwesome style={styles.statsButton}>
+						{Icons.chartPie}
+					</FontAwesome>
 				</TouchableOpacity>
 			),
-		}
+		};
 	};
 	private inventoryList = testInventory.map(
 		(inventory): JSX.Element => (

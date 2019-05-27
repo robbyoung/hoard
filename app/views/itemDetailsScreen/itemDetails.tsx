@@ -45,7 +45,7 @@ export default class ItemDetails extends Component<NavigationInjectedProps> {
 
 	private attributeList = this.params.item.attributes.map(
 		(attribute): JSX.Element => (
-			<ItemAttribute attribute={attribute} key={attribute.key}/>
+			<ItemAttribute attribute={attribute} key={attribute.key} />
 		),
 	);
 	public render(): JSX.Element {
@@ -56,11 +56,11 @@ export default class ItemDetails extends Component<NavigationInjectedProps> {
 					<FontAwesome style={styles.icon}>
 						{getCategoryIcon(this.params.item.category)}
 					</FontAwesome>
-					<Text style={styles.category}>{this.params.item.category}</Text>
+					<Text style={styles.category}>
+						{this.params.item.category}
+					</Text>
 				</View>
-				<View style={styles.attributes}>
-					{this.attributeList}
-				</View>
+				<View style={styles.attributes}>{this.attributeList}</View>
 			</View>
 		);
 	}

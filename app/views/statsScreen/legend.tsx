@@ -7,14 +7,14 @@ const styles = StyleSheet.create({
 		margin: 20,
 	},
 	legendItem: {
-		flexDirection: "row",
-		justifyContent: "space-around",
+		flexDirection: 'row',
+		justifyContent: 'space-around',
 		margin: 2,
 	},
 	legendText: {
 		fontSize: 25,
-		marginRight: 2
-	}
+		marginRight: 2,
+	},
 });
 
 export interface PieChartData {
@@ -34,12 +34,20 @@ export default class Legend extends Component<LegendProps> {
 				{this.props.data.map(
 					(data): JSX.Element => (
 						<View key={data.key} style={styles.legendItem}>
-							<FontAwesome style={{color: data.colour, fontSize: 24, paddingTop: 5}}>{Icons.circle}</FontAwesome>
+							<FontAwesome
+								style={{
+									color: data.colour,
+									fontSize: 24,
+									paddingTop: 5,
+								}}>
+								{Icons.circle}
+							</FontAwesome>
 							<Text style={styles.legendText}>{data.key}</Text>
 							<Text style={styles.legendText}>{data.count}</Text>
-							<Text style={styles.legendText}>({Math.round(data.percentage)}%)</Text>
+							<Text style={styles.legendText}>
+								({Math.round(data.percentage)}%)
+							</Text>
 						</View>
-						
 					),
 				)}
 			</View>

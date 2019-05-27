@@ -13,19 +13,21 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 	},
 	value: {
-		color: "#000000",
+		color: '#000000',
 		fontSize: 22,
 	},
 });
 
 interface Props {
-	attribute: Attribute
+	attribute: Attribute;
 }
 export default class ItemAttribute extends Component<Props> {
 	public render(): JSX.Element {
 		return (
 			<View style={styles.container}>
-				<Text style={styles.key}>{this.props.attribute.key + ':  '}</Text>
+				<Text style={styles.key}>
+					{this.props.attribute.key + ':  '}
+				</Text>
 				<Text style={styles.value}>{this.props.attribute.value}</Text>
 			</View>
 		);

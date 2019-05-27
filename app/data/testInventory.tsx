@@ -32,7 +32,7 @@ const testBooks: Inventory[] = bookNames.map(
 			},
 			{
 				key: 'Series',
-				value: `${i < 10 ? 'Malazan' : 'N/A' }`,
+				value: `${i < 10 ? 'Malazan' : 'N/A'}`,
 			},
 		];
 		return {
