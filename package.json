@@ -10,7 +10,9 @@
 		"check": "npm run tsc && npm run prettier && npm run eslint && echo Passed!"
 	},
 	"dependencies": {
+		"@types/lodash": "^4.14.133",
 		"@types/redux": "^3.6.0",
+		"lodash": "^4.17.11",
 		"prop-types": "^15.7.2",
 		"react": "16.8.3",
 		"react-native": "0.59.4",
