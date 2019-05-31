@@ -1,5 +1,5 @@
 import { Inventory, Category } from "./data/testCategories";
-import { ChartData } from "./views/statsScreen/pieChart";
+import { ChartData } from "./components/statsScreen/pieChart";
 
 export interface InventoryState {
 	inventory: Inventory[];

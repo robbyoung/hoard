@@ -3,10 +3,11 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
+		"start": "react-native run-android",
+		"tsc": "tsc -p tsconfig.json",
 		"prettier": "prettier --write app/**/*.tsx",
 		"eslint": "eslint -c .eslintrc.js app/**/*.tsx",
-		"check": "npm run prettier && npm run eslint && echo Passed!"
+		"check": "npm run tsc && npm run prettier && npm run eslint && echo Passed!"
 	},
 	"dependencies": {
 		"@types/redux": "^3.6.0",
@@ -24,7 +25,6 @@
 		"@babel/core": "^7.4.3",
 		"@babel/runtime": "^7.4.3",
 		"@types/jest": "^24.0.11",
-		"@types/react": "^16.8.13",
 		"@types/react-native": "^0.57.42",
 		"@types/react-test-renderer": "^16.8.1",
 		"@typescript-eslint/eslint-plugin": "^1.7.0",
