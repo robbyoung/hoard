@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Pie from 'react-native-pie';
+import { ChartData } from './stats';
 
 const CHART_MARGINS = 40;
 const styles = StyleSheet.create({
@@ -20,13 +21,6 @@ const styles = StyleSheet.create({
 		marginRight: 2,
 	},
 });
-
-export interface ChartData {
-	key: string;
-	count: number;
-	percentage: number;
-	colour: string;
-}
 
 export interface PieChartProps {
 	data: ChartData[];

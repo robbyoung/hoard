@@ -2,23 +2,22 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import { StatsNavigationParams, extractStatsParams } from './stats.nav';
-import { testInventory } from '../../data/testInventory';
-import PieChart, { ChartData } from './pieChart';
+import PieChart from './pieChart';
 import AttributePicker from './attributePicker';
 import Legend from './legend';
-import { getColourForWedgeIndex } from '../../utils/colourHelpers';
 import { ScrollView } from 'react-native-gesture-handler';
+import store from '../../store';
+import { StatsActionType } from '../../reducers/stats';
+import { getColourForWedgeIndex } from '../../utils/colourHelpers';
 
-function getDataForChart(
-	category: string,
-	attribute: string | undefined,
-): ChartData[] {
-	const items = testInventory.filter(
+function getDataForChart(): StatsState {
+	const state = store.getState()
+	const category = state.stats.category;
+	const attribute = state.stats.attribute;
+
+	const items = state.inventory.inventory.filter(
 		(item): boolean => category === item.category,
 	);
-	if (attribute === undefined) {
-		attribute = items[0].attributes[0].key;
-	}
 	const tally: { [id: string]: number } = {};
 	for (const item of items) {
 		const match = item.attributes.find((a): boolean => a.key === attribute);
@@ -41,13 +40,26 @@ function getDataForChart(
 		});
 		wedgeIndex++;
 	}
-	return data;
+	return {
+		data,
+		category,
+		attribute,
+	};
+}
+
+export interface ChartData {
+	key: string;
+	count: number;
+	percentage: number;
+	colour: string;
 }
 
 interface StatsState {
-	data: ChartData[];
-	attribute: string;
+	data: ChartData[],
+	category: string,
+	attribute: string,
 }
+
 export default class Stats extends Component<
 	NavigationInjectedProps,
 	StatsState
@@ -55,15 +67,13 @@ export default class Stats extends Component<
 	private params: StatsNavigationParams = extractStatsParams(
 		this.props.navigation,
 	);
-	public state = {
-		data: getDataForChart(this.params.category, undefined),
-		attribute: 'Completed',
-	};
+	public state = getDataForChart();
 	public static navigationOptions = {
 		title: 'Stats',
 	};
 
 	public render(): JSX.Element {
+		store.subscribe(() => this.setState(getDataForChart()));
 		return (
 			<View>
 				<ScrollView>
@@ -71,12 +81,9 @@ export default class Stats extends Component<
 						selected={this.state.attribute}
 						attributeList={['Completed', 'Page Count', 'Series']}
 						onSelect={(attribute: string): void => {
-							this.setState({
+							store.dispatch({
+								type: StatsActionType.SetAttribute,
 								attribute,
-								data: getDataForChart(
-									this.params.category,
-									attribute,
-								),
 							});
 						}}
 					/>

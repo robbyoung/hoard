@@ -3,9 +3,8 @@ import { StatsState } from "../../state";
 import { cloneDeep } from 'lodash';
 
 const defaultState: StatsState = {
-	data: [],
-	category: '',
-	attribute: '',
+	category: 'Book',
+	attribute: 'Completed',
 }
 
 export enum StatsActionType {
@@ -13,12 +12,35 @@ export enum StatsActionType {
 	SetAttribute = 'SET ATTRIBUTE',
 }
 
+export interface SetCategoryAction extends Action {
+	category: string;
+}
+
+export interface SetAttributeAction extends Action {
+	attribute: string;
+}
+
+function setCategory(action: SetCategoryAction, oldState: StatsState): StatsState {
+	return {
+		category: action.category,
+		attribute: oldState.attribute,
+	};
+}
+
+function SetAttribute(action: SetAttributeAction, oldState: StatsState): StatsState {
+	return {
+		category: oldState.category,
+		attribute: action.attribute,
+	};
+}
+
 export default function statsReducer(state: StatsState = defaultState, action: Action): StatsState {
-	const newState = cloneDeep(state);
 	switch (action.type) {
-		case StatsActionType.SetCategory: 
+		case StatsActionType.SetCategory:
+			return setCategory(action as SetCategoryAction, state);
 		case StatsActionType.SetAttribute:
+			return SetAttribute(action as SetAttributeAction, state);
 		default:
-			return newState;
+			return cloneDeep(state);
 	}
 }
