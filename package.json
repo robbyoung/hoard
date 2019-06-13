@@ -7,7 +7,8 @@
 		"tsc": "tsc -p tsconfig.json",
 		"prettier": "prettier --write app/**/*.tsx",
 		"eslint": "eslint -c .eslintrc.js app/**/*.tsx",
-		"check": "npm run tsc && npm run prettier && npm run eslint && echo Passed!"
+		"test": "jest",
+		"check": "npm run prettier && npm run tsc && npm run eslint && npm run test && echo Passed!"
 	},
 	"dependencies": {
 		"@types/lodash": "^4.14.133",
