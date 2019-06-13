@@ -7,11 +7,11 @@ import AttributePicker from './attributePicker';
 import Legend from './legend';
 import { ScrollView } from 'react-native-gesture-handler';
 import store from '../../store';
-import { StatsActionType } from '../../reducers/stats';
 import { getColourForWedgeIndex } from '../../utils/colourHelpers';
+import { ActionType } from '../../reducers';
 
 function getDataForChart(): StatsState {
-	const state = store.getState()
+	const state = store.getState();
 	const category = state.stats.category;
 	const attribute = state.stats.attribute;
 
@@ -55,9 +55,9 @@ export interface ChartData {
 }
 
 interface StatsState {
-	data: ChartData[],
-	category: string,
-	attribute: string,
+	data: ChartData[];
+	category: string;
+	attribute: string;
 }
 
 export default class Stats extends Component<
@@ -73,7 +73,7 @@ export default class Stats extends Component<
 	};
 
 	public render(): JSX.Element {
-		store.subscribe(() => this.setState(getDataForChart()));
+		store.subscribe((): void => this.setState(getDataForChart()));
 		return (
 			<View>
 				<ScrollView>
@@ -82,7 +82,7 @@ export default class Stats extends Component<
 						attributeList={['Completed', 'Page Count', 'Series']}
 						onSelect={(attribute: string): void => {
 							store.dispatch({
-								type: StatsActionType.SetAttribute,
+								type: ActionType.SetStatsAttribute,
 								attribute,
 							});
 						}}

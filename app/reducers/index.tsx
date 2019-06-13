@@ -8,3 +8,12 @@ export default combineReducers({
 	categories,
 	stats,
 });
+
+export enum ActionType {
+	AddCategory = 'ADD CATEGORY',
+	RemoveCategory = 'REMOVE CATEGORY',
+	AddInventory = 'ADD INVENTORY',
+	RemoveInventory = 'REMOVE INVENTORY',
+	SetStatsCategory = 'SET CATEGORY',
+	SetStatsAttribute = 'SET ATTRIBUTE',
+}

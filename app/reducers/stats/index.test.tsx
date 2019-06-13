@@ -1,24 +1,27 @@
-import reducer, { StatsActionType, SetCategoryAction, SetAttributeAction } from './index';
+import reducer, { SetCategoryAction, SetAttributeAction } from './index';
 import { StatsState } from '../../state';
 import { Action } from 'redux';
+import { ActionType } from '..';
 
 const DEFAULT_TEST_STATE = {
 	attribute: 'default',
 	category: 'default',
 };
 
-describe('Stats Reducer', () => {
+describe('Stats Reducer', (): void => {
 	let state: StatsState | undefined;
 	let action: Action;
 
-	beforeEach(() => {
-		state = DEFAULT_TEST_STATE;
-		action = {
-			type: undefined,
-		}
-	});
+	beforeEach(
+		(): void => {
+			state = DEFAULT_TEST_STATE;
+			action = {
+				type: undefined,
+			};
+		},
+	);
 
-	it('has a default state if none is passed in', () => {
+	it('has a default state if none is passed in', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
 		expect(newState).toEqual({
@@ -27,15 +30,15 @@ describe('Stats Reducer', () => {
 		});
 	});
 
-	it('can return state unchanged for unrelated actions', () => {
+	it('can return state unchanged for unrelated actions', (): void => {
 		const newState = reducer(state, action);
 		expect(newState).toEqual(DEFAULT_TEST_STATE);
 	});
 
-	it('can update the stats category', () => {
+	it('can update the stats category', (): void => {
 		const newCategory = 'new category';
 		const setCategoryAction: SetCategoryAction = {
-			type: StatsActionType.SetCategory,
+			type: ActionType.SetStatsCategory,
 			category: newCategory,
 		};
 		const newState = reducer(state, setCategoryAction);
@@ -45,10 +48,10 @@ describe('Stats Reducer', () => {
 		});
 	});
 
-	it('can update the stats attribute', () => {
+	it('can update the stats attribute', (): void => {
 		const newAttribute = 'new attribute';
 		const setAttributeAction: SetAttributeAction = {
-			type: StatsActionType.SetAttribute,
+			type: ActionType.SetStatsAttribute,
 			attribute: newAttribute,
 		};
 		const newState = reducer(state, setAttributeAction);

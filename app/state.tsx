@@ -1,16 +1,18 @@
-import { Inventory, Category } from "./data/testCategories";
+import { Inventory, Category } from './data/testCategories';
 
 export interface InventoryState {
 	inventory: Inventory[];
 	filteredInventory: Inventory[];
 }
 
-export type CategoriesState = { [key:string]: Category; };
+export interface CategoriesState {
+	categories: Category[];
+}
 
 export interface StatsState {
-	category: string,
-	attribute: string,
-};
+	category: string;
+	attribute: string;
+}
 
 export interface HoardState {
 	inventory: InventoryState;

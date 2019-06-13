@@ -1,13 +1,22 @@
-import { Action } from "redux";
-import { Inventory } from "../../data/testCategories";
-import { InventoryState } from "../../state";
-import { testInventory } from "../../data/testInventory";
+import { Action } from 'redux';
+import { InventoryState } from '../../state';
+import { testInventory } from '../../data/testInventory';
+import { cloneDeep } from 'lodash';
+import { ActionType } from '..';
 
 const defaultState: InventoryState = {
 	inventory: testInventory,
 	filteredInventory: testInventory,
 };
 
-export default function inventoryReducer(state: InventoryState = defaultState, action: Action): InventoryState {
-	return state;
+export default function inventoryReducer(
+	state: InventoryState = defaultState,
+	action: Action,
+): InventoryState {
+	switch (action.type) {
+		case ActionType.AddInventory:
+		case ActionType.RemoveInventory:
+		default:
+			return cloneDeep(state);
+	}
 }
