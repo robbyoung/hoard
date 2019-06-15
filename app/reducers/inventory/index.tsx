@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { InventoryState } from '../../state';
 import { testInventory } from '../../data/testInventory';
 import { cloneDeep } from 'lodash';
-import { ActionType } from '..';
+import { ActionType } from '../actions';
 
 const defaultState: InventoryState = {
 	inventory: testInventory,

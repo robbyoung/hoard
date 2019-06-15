@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { StatsState } from '../../state';
 import { cloneDeep } from 'lodash';
-import { ActionType } from '..';
+import { ActionType } from '../actions';
 
 const defaultState: StatsState = {
 	category: 'Book',

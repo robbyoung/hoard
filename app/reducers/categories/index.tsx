@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { CategoriesState } from '../../state';
 import { cloneDeep } from 'lodash';
-import { ActionType } from '..';
+import { ActionType } from '../actions';
 
 const defaultCategories: CategoriesState = {
 	categories: [],

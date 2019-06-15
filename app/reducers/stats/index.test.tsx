@@ -1,7 +1,7 @@
 import reducer, { SetCategoryAction, SetAttributeAction } from './index';
 import { StatsState } from '../../state';
 import { Action } from 'redux';
-import { ActionType } from '..';
+import { ActionType } from '..//actions';
 
 const DEFAULT_TEST_STATE = {
 	attribute: 'default',

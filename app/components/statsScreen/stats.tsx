@@ -8,7 +8,7 @@ import Legend from './legend';
 import { ScrollView } from 'react-native-gesture-handler';
 import store from '../../store';
 import { getColourForWedgeIndex } from '../../utils/colourHelpers';
-import { ActionType } from '../../reducers';
+import { ActionType } from '../../reducers/actions';
 
 function getDataForChart(): StatsState {
 	const state = store.getState();
