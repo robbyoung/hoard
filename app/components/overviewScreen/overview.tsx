@@ -6,16 +6,11 @@ import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
 } from 'react-navigation';
-import { NavigateToStats } from '../statsScreen/stats.nav';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
+import HeaderIcons from './headerIcons';
 
 const styles = StyleSheet.create({
 	overview: {
 		backgroundColor: '#e6e6e6',
-	},
-	statsButton: {
-		marginRight: 20,
-		fontSize: 20,
 	},
 });
 
@@ -25,16 +20,7 @@ export default class Overview extends Component<NavigationInjectedProps> {
 	): NavigationStackScreenOptions => {
 		return {
 			title: 'My Stuff',
-			headerRight: (
-				<TouchableOpacity
-					onPress={(): void =>
-						NavigateToStats(props.navigation, { category: 'Book' })
-					}>
-					<FontAwesome style={styles.statsButton}>
-						{Icons.chartPie}
-					</FontAwesome>
-				</TouchableOpacity>
-			),
+			headerRight: <HeaderIcons navigation={props.navigation} />,
 		};
 	};
 	private inventoryList = testInventory.map(

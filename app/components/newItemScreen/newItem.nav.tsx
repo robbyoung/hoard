@@ -8,7 +8,7 @@ export interface NewItemNavigationParams {
 	// empty
 }
 
-export function Navigate(
+export function NavigateToNewItem(
 	navigation: NavigationScreenProp<
 		NavigationRoute<NavigationParams>,
 		NavigationParams
