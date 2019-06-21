@@ -1,4 +1,23 @@
-import { Inventory, Category } from './data/testCategories';
+export enum AttributeType {
+	Bool,
+	String,
+	Int,
+	Percent,
+	Rating,
+}
+
+export interface Attribute {
+	name: string;
+	value: string;
+	type: AttributeType;
+}
+
+export interface Inventory {
+	name: string;
+	id: string;
+	category: string;
+	attributes: Attribute[];
+}
 
 export interface InventoryState {
 	inventory: Inventory[];
@@ -6,7 +25,7 @@ export interface InventoryState {
 }
 
 export interface CategoriesState {
-	categories: Category[];
+	[categoryName: string]: Attribute[];
 }
 
 export interface StatsState {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { testInventory } from '../../data/testInventory';
 import OverviewItem from './overviewItem';
 import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
 } from 'react-navigation';
 import HeaderIcons from './headerIcons';
+import store from '../../store';
 
 const styles = StyleSheet.create({
 	overview: {
@@ -23,7 +23,7 @@ export default class Overview extends Component<NavigationInjectedProps> {
 			headerRight: <HeaderIcons navigation={props.navigation} />,
 		};
 	};
-	private inventoryList = testInventory.map(
+	private inventoryList = store.getState().inventory.inventory.map(
 		(inventory): JSX.Element => (
 			<OverviewItem
 				key={inventory.id}

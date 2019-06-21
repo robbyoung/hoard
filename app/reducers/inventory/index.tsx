@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { InventoryState } from '../../state';
-import { testInventory } from '../../data/testInventory';
+import testInventory from './testInventory';
 import { cloneDeep } from 'lodash';
 import { ActionType } from '../actions';
 

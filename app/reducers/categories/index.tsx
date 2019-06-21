@@ -2,10 +2,9 @@ import { Action } from 'redux';
 import { CategoriesState } from '../../state';
 import { cloneDeep } from 'lodash';
 import { ActionType } from '../actions';
+import testCategories from './testCategories';
 
-const defaultCategories: CategoriesState = {
-	categories: [],
-};
+const defaultCategories = testCategories;
 
 export default function categoriesReducer(
 	state: CategoriesState = defaultCategories,

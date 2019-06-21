@@ -20,7 +20,7 @@ function getDataForChart(): StatsState {
 	);
 	const tally: { [id: string]: number } = {};
 	for (const item of items) {
-		const match = item.attributes.find((a): boolean => a.key === attribute);
+		const match = item.attributes.find((a): boolean => a.name === attribute);
 		const value = match ? match.value : 'Unknown';
 		if (tally[value]) {
 			tally[value]++;

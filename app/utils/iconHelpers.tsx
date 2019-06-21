@@ -1,11 +1,10 @@
-import { Category } from '../data/testCategories';
 import { Icons } from 'react-native-fontawesome';
 
-export function getCategoryIcon(category: Category): string {
+export function getCategoryIcon(category: string): string {
 	switch (category) {
-		case Category.Book:
+		case "Book":
 			return Icons.book;
-		case Category.Game:
+		case "Game":
 			return Icons.gamepad;
 		default:
 			throw new Error('Unknown category');

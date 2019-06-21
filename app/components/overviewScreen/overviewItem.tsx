@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Inventory } from '../../data/testCategories';
 import FontAwesome from 'react-native-fontawesome';
 import { getCategoryIcon } from '../../utils/iconHelpers';
 import { getCategoryColour } from '../../utils/colourHelpers';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationInjectedProps } from 'react-navigation';
 import { NavigateToItemDetails } from '../itemDetailsScreen/itemDetails.nav';
+import { Inventory } from '../../state';
 
 const styles = StyleSheet.create({
 	container: {

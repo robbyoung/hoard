@@ -1,4 +1,4 @@
-import { Inventory, Attribute, Category } from './testCategories';
+import { Attribute, Inventory, AttributeType } from "../../state";
 
 const bookNames = [
 	'Gardens of the Moon',
@@ -23,22 +23,25 @@ const testBooks: Inventory[] = bookNames.map(
 	(name, i): Inventory => {
 		const attributes: Attribute[] = [
 			{
-				key: 'Completed',
+				name: 'Completed',
 				value: `${i < 8}`,
+				type: AttributeType.Bool,
 			},
 			{
-				key: 'Page Count',
+				name: 'Page Count',
 				value: `${i * 100}`,
+				type: AttributeType.Bool,
 			},
 			{
-				key: 'Series',
+				name: 'Series',
 				value: `${i < 10 ? 'Malazan' : 'N/A'}`,
+				type: AttributeType.String,
 			},
 		];
 		return {
 			name,
 			id: `idb${i}`,
-			category: Category.Book,
+			category: "Book",
 			attributes,
 		};
 	},
@@ -48,17 +51,18 @@ const testGames: Inventory[] = gameNames.map(
 	(name, i): Inventory => {
 		const attributes: Attribute[] = [
 			{
-				key: 'Completed',
+				name: 'Completed',
 				value: `${i < 2}`,
+				type: AttributeType.Bool,
 			},
 		];
 		return {
 			name,
 			id: `idg${i}`,
-			category: Category.Game,
+			category: "Game",
 			attributes,
 		};
 	},
 );
 
-export const testInventory = [...testBooks, ...testGames];
+export default [...testBooks, ...testGames];

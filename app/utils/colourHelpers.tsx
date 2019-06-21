@@ -1,13 +1,11 @@
-import { Category } from '../data/testCategories';
-
 const DARK_GREEN = '#009933';
 const DARK_RED = '#cc0000';
 
-export function getCategoryColour(category: Category): string {
+export function getCategoryColour(category: string): string {
 	switch (category) {
-		case Category.Book:
+		case "Book":
 			return DARK_GREEN;
-		case Category.Game:
+		case "Game":
 			return DARK_RED;
 		default:
 			throw new Error('Unknown category');

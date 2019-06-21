@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Attribute } from '../../data/testCategories';
+import { Attribute } from '../../state';
 
 const styles = StyleSheet.create({
 	container: {
@@ -26,7 +26,7 @@ export default class ItemAttribute extends Component<Props> {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.key}>
-					{this.props.attribute.key + ':  '}
+					{this.props.attribute.name + ':  '}
 				</Text>
 				<Text style={styles.value}>{this.props.attribute.value}</Text>
 			</View>

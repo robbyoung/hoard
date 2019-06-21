@@ -45,7 +45,7 @@ export default class ItemDetails extends Component<NavigationInjectedProps> {
 
 	private attributeList = this.params.item.attributes.map(
 		(attribute): JSX.Element => (
-			<ItemAttribute attribute={attribute} key={attribute.key} />
+			<ItemAttribute attribute={attribute} key={attribute.name} />
 		),
 	);
 	public render(): JSX.Element {

@@ -1,4 +1,4 @@
-import { Inventory } from '../../data/testCategories';
+import { Inventory } from '../../state';
 import {
 	NavigationScreenProp,
 	NavigationRoute,
