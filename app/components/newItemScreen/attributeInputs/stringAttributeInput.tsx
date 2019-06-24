@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { Attribute } from '../../../state';
-
-const styles = StyleSheet.create({
-	row: {
-		flexDirection: 'row',
-	},
-});
+import { styles } from '../newItem';
 
 export default class StringAttributeInput extends Component<{ attribute: Attribute }> {
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
-				<Text>{this.props.attribute.name}: </Text>
-				<TextInput></TextInput>
+				<Text style={styles.heading}>{this.props.attribute.name}: </Text>
+				<TextInput style={styles.textField}></TextInput>
 			</View>
 		);
 	}

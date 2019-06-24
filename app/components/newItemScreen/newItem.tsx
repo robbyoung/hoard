@@ -6,13 +6,24 @@ import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import { AttributeType } from '../../state';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
 	row: {
 		flexDirection: 'row',
+		margin: 10,
 	},
-	categoryPicker: {
-		width: 100,
-		height: 20,
+	inputField: {
+		width: 200,
+		height: 30,
+	},
+	textField: {
+		width: 200,
+	},
+	heading: {
+		fontWeight: 'bold',
+		fontSize: 22,
+	},
+	text: {
+		fontSize: 22,
 	}
 });
 
@@ -48,8 +59,8 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 		return (
 			<View>
 				<View style={styles.row}>
-					<Text>Category:</Text>
-					<Picker style={styles.categoryPicker}
+					<Text style={styles.heading}>Category:</Text>
+					<Picker style={styles.inputField}
 							onValueChange={(chosenCategory) => {
 								this.setState({
 									attributeFields: setAttributeFields(chosenCategory),
