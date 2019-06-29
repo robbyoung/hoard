@@ -40,7 +40,7 @@ describe('New Item Reducer', (): void => {
 	it('has a default state if none is passed in', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
-		expect(newState).toEqual( {
+		expect(newState).toEqual({
 			item: {
 				id: "",
 				name: "",
