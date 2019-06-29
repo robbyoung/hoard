@@ -64,9 +64,6 @@ export default class Stats extends Component<
 	NavigationInjectedProps,
 	StatsState
 > {
-	private params: StatsNavigationParams = extractStatsParams(
-		this.props.navigation,
-	);
 	public state = getDataForChart();
 	public static navigationOptions = {
 		title: 'Stats',

@@ -5,6 +5,8 @@ import store from '../../store';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import { AttributeType } from '../../state';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
+import { ActionType } from '../../reducers/actions';
+import ItemAttribute from '../itemDetailsScreen/itemAttribute';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -27,31 +29,22 @@ export const styles = StyleSheet.create({
 	}
 });
 
-function setAttributeFields(categoryName: string): JSX.Element[] {
-	const category = store.getState().categories[categoryName];
-	return category.map((attribute): JSX.Element => {
-		switch(attribute.type) {
-			case AttributeType.String:
-				return <StringAttributeInput attribute={attribute} key={attribute.name}/>
-			case AttributeType.Bool:
-				return <BoolAttributeInput attribute={attribute} key={attribute.name}/>
-			default:
-				return <View key="invalid"/>
-		}
-	});
-}
-
 interface NewItemState {
+	categoryName: string;
 	attributeFields: JSX.Element[];
 }
 export default class NewItem extends Component<NavigationInjectedProps, NewItemState> {
 	public static navigationOptions = {
 		title: 'New Item',
 	};
+
 	public state = {
-		attributeFields: setAttributeFields('Game'),
+		categoryName: Object.keys(store.getState().categories)[0],
+		attributeFields: [],
 	};
+
 	public render(): JSX.Element {
+		store.subscribe((): void => this.setAttributeFields());
 		const categories = store.getState().categories;
 		const categoryPickerItems = Object.keys(categories).map((name, i) => (
 			<Picker.Item label={name} value={name} key={i}></Picker.Item>
@@ -61,9 +54,13 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 				<View style={styles.row}>
 					<Text style={styles.heading}>Category:</Text>
 					<Picker style={styles.inputField}
-							onValueChange={(chosenCategory) => {
-								this.setState({
-									attributeFields: setAttributeFields(chosenCategory),
+							selectedValue={this.state.categoryName}
+							onValueChange={(categoryName) => {
+								const attributes = store.getState().categories[categoryName];
+								store.dispatch({
+									type: ActionType.SetNewItemCategory,
+									categoryName,
+									attributes,
 								});
 							}}>
 						{categoryPickerItems}
@@ -72,5 +69,23 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 				{this.state.attributeFields}
 			</View>
 		);
+	}
+
+	private setAttributeFields(): void {
+		const newItem = store.getState().newItem.item;
+		const attributeFields = newItem.attributes.map((attribute): JSX.Element => {
+			switch(attribute.type) {
+				case AttributeType.String:
+					return <StringAttributeInput attribute={attribute} key={attribute.name}/>
+				case AttributeType.Bool:
+					return <BoolAttributeInput attribute={attribute} key={attribute.name}/>
+				default:
+					return <View key="invalid"/>
+			}
+		});
+		this.setState({
+			categoryName: newItem.category,
+			attributeFields,
+		});
 	}
 }
