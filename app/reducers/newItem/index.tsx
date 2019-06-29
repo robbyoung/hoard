@@ -40,7 +40,7 @@ function setCategory(oldState: NewItemState, action: SetNewItemCategoryAction): 
 
 function setAttribute(oldState: NewItemState, action: SetNewItemAttributeAction): NewItemState {
 	const newState = cloneDeep(oldState);
-	const match = newState.item.attributes.find((): boolean => newState.item.name === action.attribute.name);
+	const match = newState.item.attributes.find((attr): boolean => attr.name === action.attribute.name);
 	if (match) {
 		match.value = action.attribute.value;
 	}
