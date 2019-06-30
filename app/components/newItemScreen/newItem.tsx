@@ -9,6 +9,7 @@ import { ActionType } from '../../reducers/actions';
 import { AddInventoryAction } from '../../reducers/inventory';
 import { SetNewItemNameAction } from '../../reducers/newItem';
 import { Unsubscribe } from 'redux';
+import CategoryPicker from './categoryPicker';
 
 const SELECT_CATEGORY_TEXT = "Pick One"
 
@@ -33,8 +34,16 @@ export const styles = StyleSheet.create({
 		fontSize: 22,
 	},
 	button: {
-		width: 200,
+		width: 80,
+		height: 40,
 		backgroundColor: "#bbb",
+		margin: 10,
+		alignContent: "center",
+	},
+	buttonText: {
+		fontSize: 20,
+		padding: 10,
+		color: "#fff"
 	}
 });
 
@@ -52,7 +61,7 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 
 	public state = {
 		itemName: "",
-		categoryName: "Select a Category",
+		categoryName: SELECT_CATEGORY_TEXT,
 		attributeFields: [],
 	};
 
@@ -71,34 +80,21 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 		));
 		return (
 			<View>
-				<TextInput
-					value={this.state.itemName}
-					onChangeText={(value: string) => this.setItemName(value)}
-					placeholder="Name"
-					style={styles.textField}
-				/>
 				<View style={styles.row}>
-					<Text style={styles.heading}>Category:</Text>
-					<Picker style={styles.inputField}
-							selectedValue={this.state.categoryName}
-							onValueChange={(categoryName) => {
-								const attributes = store.getState().categories[categoryName];
-								store.dispatch({
-									type: ActionType.SetNewItemCategory,
-									categoryName,
-									attributes,
-								});
-							}}>
-						<Picker.Item label={SELECT_CATEGORY_TEXT} value={SELECT_CATEGORY_TEXT} key={-1}></Picker.Item>
-						{categoryPickerItems}
-					</Picker>
+					<TextInput
+						value={this.state.itemName}
+						onChangeText={(value: string) => this.setItemName(value)}
+						placeholder="Name"
+						style={styles.textField}
+					/>
 				</View>
+				<CategoryPicker chosenCategory={this.state.categoryName}/>
 				{this.state.attributeFields}
 				<TouchableOpacity
 					onPress={() => this.submitItem()}
 					style={styles.button}
 				>
-					<Text>Submit</Text>
+					<Text style={styles.buttonText}>Submit</Text>
 				</TouchableOpacity>
 			</View>
 		);
