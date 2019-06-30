@@ -14,7 +14,11 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default class Overview extends Component<NavigationInjectedProps> {
+
+interface OverviewState {
+	inventoryList: JSX.Element[],
+}
+export default class Overview extends Component<NavigationInjectedProps, OverviewState> {
 	public static navigationOptions = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
@@ -23,20 +27,31 @@ export default class Overview extends Component<NavigationInjectedProps> {
 			headerRight: <HeaderIcons navigation={props.navigation} />,
 		};
 	};
-	private inventoryList = store.getState().inventory.inventory.map(
-		(inventory): JSX.Element => (
-			<OverviewItem
-				key={inventory.id}
-				item={inventory}
-				navigation={this.props.navigation}
-			/>
-		),
-	);
+
+	public state = {
+		inventoryList: this.getInventoryList(),
+	}
+	
 	public render(): JSX.Element {
+		store.subscribe(() => this.setState({
+			inventoryList: this.getInventoryList(),
+		}));
 		return (
 			<View style={styles.overview}>
-				<ScrollView>{this.inventoryList}</ScrollView>
+				<ScrollView>{this.state.inventoryList}</ScrollView>
 			</View>
+		);
+	}
+
+	private getInventoryList(): JSX.Element[] {
+		return store.getState().inventory.inventory.map(
+			(inventory): JSX.Element => (
+				<OverviewItem
+					key={inventory.id}
+					item={inventory}
+					navigation={this.props.navigation}
+				/>
+			),
 		);
 	}
 }

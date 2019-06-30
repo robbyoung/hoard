@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Picker, Text, Button } from 'react-native';
+import { View, StyleSheet, Picker, Text, Button, TextInput, TouchableOpacity } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import store from '../../store';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import { AttributeType } from '../../state';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import { ActionType } from '../../reducers/actions';
-import ItemAttribute from '../itemDetailsScreen/itemAttribute';
+import { AddInventoryAction } from '../../reducers/inventory';
+import { SetNewItemNameAction } from '../../reducers/newItem';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -19,6 +20,7 @@ export const styles = StyleSheet.create({
 	},
 	textField: {
 		width: 200,
+		backgroundColor: "#eee",
 	},
 	heading: {
 		fontWeight: 'bold',
@@ -26,10 +28,15 @@ export const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 22,
+	},
+	button: {
+		width: 200,
+		backgroundColor: "#bbb",
 	}
 });
 
 interface NewItemState {
+	itemName: string,
 	categoryName: string;
 	attributeFields: JSX.Element[];
 }
@@ -39,6 +46,7 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 	};
 
 	public state = {
+		itemName: "",
 		categoryName: Object.keys(store.getState().categories)[0],
 		attributeFields: [],
 	};
@@ -51,6 +59,12 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 		));
 		return (
 			<View>
+				<TextInput
+					value={this.state.itemName}
+					onChangeText={(value: string) => this.setItemName(value)}
+					placeholder="Name"
+					style={styles.textField}
+				/>
 				<View style={styles.row}>
 					<Text style={styles.heading}>Category:</Text>
 					<Picker style={styles.inputField}
@@ -67,6 +81,12 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 					</Picker>
 				</View>
 				{this.state.attributeFields}
+				<TouchableOpacity
+					onPress={() => this.submitItem()}
+					style={styles.button}
+				>
+					<Text>Submit</Text>
+				</TouchableOpacity>
 			</View>
 		);
 	}
@@ -84,8 +104,29 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 			}
 		});
 		this.setState({
+			itemName: newItem.name,
 			categoryName: newItem.category,
 			attributeFields,
 		});
+	}
+
+	private setItemName(name: string) {
+		const setNameAction: SetNewItemNameAction = {
+			type: ActionType.SetNewItemName,
+			name,
+		};
+		store.dispatch(setNameAction);
+	}
+
+	private submitItem() {
+		const addInventoryAction: AddInventoryAction = {
+			type: ActionType.AddInventory,
+			newItem: store.getState().newItem.item,
+		};
+		store.dispatch(addInventoryAction);
+		store.dispatch({
+			type: ActionType.ResetNewItem,
+		});
+		this.props.navigation.goBack();
 	}
 }
