@@ -7,6 +7,7 @@ import {
 } from 'react-navigation';
 import HeaderIcons from './headerIcons';
 import store from '../../store';
+import { Unsubscribe } from 'redux';
 
 const styles = StyleSheet.create({
 	overview: {
@@ -19,6 +20,8 @@ interface OverviewState {
 	inventoryList: JSX.Element[],
 }
 export default class Overview extends Component<NavigationInjectedProps, OverviewState> {
+	private unsubscribe: Unsubscribe = () => undefined;
+
 	public static navigationOptions = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
@@ -31,11 +34,18 @@ export default class Overview extends Component<NavigationInjectedProps, Overvie
 	public state = {
 		inventoryList: this.getInventoryList(),
 	}
-	
-	public render(): JSX.Element {
-		store.subscribe(() => this.setState({
+
+	public componentWillMount() {
+		this.unsubscribe = store.subscribe(() => this.setState({
 			inventoryList: this.getInventoryList(),
 		}));
+	}
+
+	public componentWillUnmount() {
+		this.unsubscribe();
+	}
+	
+	public render(): JSX.Element {
 		return (
 			<View style={styles.overview}>
 				<ScrollView>{this.state.inventoryList}</ScrollView>

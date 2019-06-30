@@ -8,6 +8,9 @@ import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import { ActionType } from '../../reducers/actions';
 import { AddInventoryAction } from '../../reducers/inventory';
 import { SetNewItemNameAction } from '../../reducers/newItem';
+import { Unsubscribe } from 'redux';
+
+const SELECT_CATEGORY_TEXT = "Pick One"
 
 export const styles = StyleSheet.create({
 	row: {
@@ -41,18 +44,27 @@ interface NewItemState {
 	attributeFields: JSX.Element[];
 }
 export default class NewItem extends Component<NavigationInjectedProps, NewItemState> {
+	private unsubscribe: Unsubscribe = () => undefined;
+
 	public static navigationOptions = {
 		title: 'New Item',
 	};
 
 	public state = {
 		itemName: "",
-		categoryName: Object.keys(store.getState().categories)[0],
+		categoryName: "Select a Category",
 		attributeFields: [],
 	};
 
+	public componentWillMount() {
+		this.unsubscribe = store.subscribe((): void => this.setAttributeFields());
+	}
+
+	public componentWillUnmount() {
+		this.unsubscribe();
+	}
+
 	public render(): JSX.Element {
-		store.subscribe((): void => this.setAttributeFields());
 		const categories = store.getState().categories;
 		const categoryPickerItems = Object.keys(categories).map((name, i) => (
 			<Picker.Item label={name} value={name} key={i}></Picker.Item>
@@ -77,6 +89,7 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 									attributes,
 								});
 							}}>
+						<Picker.Item label={SELECT_CATEGORY_TEXT} value={SELECT_CATEGORY_TEXT} key={-1}></Picker.Item>
 						{categoryPickerItems}
 					</Picker>
 				</View>
