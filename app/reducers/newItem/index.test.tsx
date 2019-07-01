@@ -15,7 +15,7 @@ const DEFAULT_TEST_STATE: NewItemState = {
 		}, {
 			name: "Page Count",
 			value: "750",
-			type: AttributeType.Int,
+			type: AttributeType.Number,
 		}, {
 			name: "Series",
 			value: "N/A",
@@ -71,7 +71,7 @@ describe('New Item Reducer', (): void => {
 			attributes: [{
 				name: "Author",
 				value: "Neil Gaiman",
-				type: AttributeType.Int,
+				type: AttributeType.Number,
 			}],
 		};
 		const setCategoryAction: SetNewItemCategoryAction = {
@@ -102,7 +102,7 @@ describe('New Item Reducer', (): void => {
 		}, {
 			name: "Page Count",
 			value: "750",
-			type: AttributeType.Int,
+			type: AttributeType.Number,
 		}, {
 			name: "Series",
 			value: "N/A",

@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { Attribute } from '../../../state';
 import { styles } from '../newItem';
-import store from '../../../store';
-import { ActionType } from '../../../reducers/actions';
 import { SetNewItemAttributeAction } from '../../../reducers/newItem';
+import { ActionType } from '../../../reducers/actions';
+import store from '../../../store';
 
-function setBoolAttributeValue(value: boolean, attribute: Attribute) {
+function setNumberAttributeValue(value: string, attribute: Attribute) {
 	const action: SetNewItemAttributeAction = {
 		type: ActionType.SetNewItemAttribute,
 		attribute: {
 			name: attribute.name,
 			type: attribute.type,
-			value: value ? "T" : "F",
+			value,
 		}
 	};
 	store.dispatch(action);
 }
 
-export default class BoolAttributeInput extends Component<{ attribute: Attribute }> {
+export default class NumberAttributeInput extends Component<{ attribute: Attribute }> {
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
 				<Text style={styles.heading}>{this.props.attribute.name}: </Text>
-				<Switch
-					onValueChange={(value: boolean) => setBoolAttributeValue(value, this.props.attribute)}
-					value={this.props.attribute.value === "T"}
+				<TextInput
+					value={this.props.attribute.value}
+					onChangeText={(value: string) => setNumberAttributeValue(value, this.props.attribute)}
+					keyboardType="numeric"
+					style={styles.textField}
 				/>
 			</View>
 		);

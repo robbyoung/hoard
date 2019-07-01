@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
 	},
 });
 
-
 interface OverviewState {
 	inventoryList: JSX.Element[],
 }

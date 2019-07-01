@@ -10,6 +10,7 @@ import { AddInventoryAction } from '../../reducers/inventory';
 import { SetNewItemNameAction } from '../../reducers/newItem';
 import { Unsubscribe } from 'redux';
 import CategoryPicker from './categoryPicker';
+import NumberAttributeInput from './attributeInputs/numberAttributeInput';
 
 const SELECT_CATEGORY_TEXT = "Pick One"
 
@@ -108,6 +109,8 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 					return <StringAttributeInput attribute={attribute} key={attribute.name}/>
 				case AttributeType.Bool:
 					return <BoolAttributeInput attribute={attribute} key={attribute.name}/>
+				case AttributeType.Number:
+					return <NumberAttributeInput attribute={attribute} key={attribute.name}/>
 				default:
 					return <View key="invalid"/>
 			}

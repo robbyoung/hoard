@@ -13,7 +13,7 @@ export default {
 	}, {
 		name: "Page Count",
 		value: "N/A",
-		type: AttributeType.Int,
+		type: AttributeType.Number,
 	}, {
 		name: "Series",
 		value: "N/A",
