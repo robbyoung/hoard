@@ -1,8 +1,8 @@
-import reducer, { AddInventoryAction } from './index';
-import { InventoryState } from '../../state';
 import { Action } from 'redux';
+import { InventoryState } from '../../state';
 import { ActionType } from '../actions';
 import testInventory from './testInventory';
+import reducer, { AddInventoryAction } from './index';
 
 const DEFAULT_TEST_STATE: InventoryState = {
 	inventory: testInventory,

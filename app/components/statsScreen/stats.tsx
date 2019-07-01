@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
-import PieChart from './pieChart';
-import AttributePicker from './attributePicker';
-import Legend from './legend';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Unsubscribe } from 'redux';
 import store from '../../store';
 import { getColourForWedgeIndex } from '../../utils/colourHelpers';
 import { ActionType } from '../../reducers/actions';
-import { Unsubscribe } from 'redux';
+import PieChart from './pieChart';
+import AttributePicker from './attributePicker';
+import Legend from './legend';
 
 function getDataForChart(): StatsState {
 	const state = store.getState();

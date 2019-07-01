@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import FontAwesome from 'react-native-fontawesome';
+import { getCategoryIcon } from '../../utils/iconHelpers';
 import {
 	ItemDetailsNavigationParams,
 	extractItemDetailsParams,
 } from './itemDetails.nav';
 import ItemAttribute from './itemAttribute';
-import { getCategoryIcon } from '../../utils/iconHelpers';
 
 const styles = StyleSheet.create({
 	row: {

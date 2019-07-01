@@ -7,14 +7,14 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
+import { Unsubscribe } from 'redux';
 import store from '../../store';
-import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import { AttributeType } from '../../state';
-import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import { ActionType } from '../../reducers/actions';
 import { AddInventoryAction } from '../../reducers/inventory';
 import { SetNewItemNameAction } from '../../reducers/newItem';
-import { Unsubscribe } from 'redux';
+import BoolAttributeInput from './attributeInputs/boolAttributeInput';
+import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
 import NumberAttributeInput from './attributeInputs/numberAttributeInput';
 

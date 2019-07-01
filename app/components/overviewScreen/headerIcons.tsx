@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
-import { NavigateToStats } from '../statsScreen/stats.nav';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
+import { NavigateToStats } from '../statsScreen/stats.nav';
 import { NavigateToNewItem } from '../newItemScreen/newItem.nav';
 
 const styles = StyleSheet.create({

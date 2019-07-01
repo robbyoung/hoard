@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { NewItemState, Attribute } from '../../state';
 import { cloneDeep } from 'lodash';
+import { NewItemState, Attribute } from '../../state';
 import { ActionType } from '../actions';
 
 const defaultState: NewItemState = {

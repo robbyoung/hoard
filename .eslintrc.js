@@ -21,7 +21,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "import"
 	],
 	"settings": {
 		"react": {
@@ -30,6 +31,7 @@ module.exports = {
 	},
     "rules": {
 		"@typescript-eslint/indent": "off",
-		"indent": [2, "tab", {"SwitchCase": 1}]
+        "indent": [2, "tab", {"SwitchCase": 1}],
+        "import/order": "error"
     }
 };

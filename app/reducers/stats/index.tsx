@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { StatsState } from '../../state';
 import { cloneDeep } from 'lodash';
+import { StatsState } from '../../state';
 import { ActionType } from '../actions';
 
 const defaultState: StatsState = {

@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { CategoriesState } from '../../state';
 import { cloneDeep } from 'lodash';
+import { CategoriesState } from '../../state';
 import { ActionType } from '../actions';
 import testCategories from './testCategories';
 

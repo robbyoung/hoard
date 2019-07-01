@@ -1,7 +1,7 @@
-import reducer, { SetCategoryAction, SetAttributeAction } from './index';
-import { StatsState } from '../../state';
 import { Action } from 'redux';
+import { StatsState } from '../../state';
 import { ActionType } from '../actions';
+import reducer, { SetCategoryAction, SetAttributeAction } from './index';
 
 const DEFAULT_TEST_STATE = {
 	attribute: 'default',

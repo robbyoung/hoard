@@ -1,11 +1,11 @@
+import { Action } from 'redux';
+import { NewItemState, AttributeType } from '../../state';
+import { ActionType } from '../actions';
 import reducer, {
 	SetNewItemNameAction,
 	SetNewItemCategoryAction,
 	SetNewItemAttributeAction,
 } from './index';
-import { NewItemState, AttributeType } from '../../state';
-import { Action } from 'redux';
-import { ActionType } from '../actions';
 
 const DEFAULT_TEST_STATE: NewItemState = {
 	item: {

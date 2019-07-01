@@ -1,9 +1,9 @@
-import { Inventory } from '../../state';
 import {
 	NavigationScreenProp,
 	NavigationRoute,
 	NavigationParams,
 } from 'react-navigation';
+import { Inventory } from '../../state';
 
 export interface ItemDetailsNavigationParams {
 	item: Inventory;

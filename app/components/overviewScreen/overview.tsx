@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import OverviewItem from './overviewItem';
 import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
 } from 'react-navigation';
-import HeaderIcons from './headerIcons';
-import store from '../../store';
 import { Unsubscribe } from 'redux';
+import store from '../../store';
+import OverviewItem from './overviewItem';
+import HeaderIcons from './headerIcons';
 
 const styles = StyleSheet.create({
 	overview: {
