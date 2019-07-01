@@ -3,9 +3,9 @@ const DARK_RED = '#cc0000';
 
 export function getCategoryColour(category: string): string {
 	switch (category) {
-		case "Book":
+		case 'Book':
 			return DARK_GREEN;
-		case "Game":
+		case 'Game':
 			return DARK_RED;
 		default:
 			throw new Error('Unknown category');

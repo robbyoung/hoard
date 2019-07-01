@@ -16,10 +16,13 @@ const styles = StyleSheet.create({
 });
 
 interface OverviewState {
-	inventoryList: JSX.Element[],
+	inventoryList: JSX.Element[];
 }
-export default class Overview extends Component<NavigationInjectedProps, OverviewState> {
-	private unsubscribe: Unsubscribe = () => undefined;
+export default class Overview extends Component<
+	NavigationInjectedProps,
+	OverviewState
+> {
+	private unsubscribe: Unsubscribe = (): void => undefined;
 
 	public static navigationOptions = (
 		props: NavigationInjectedProps,
@@ -32,18 +35,21 @@ export default class Overview extends Component<NavigationInjectedProps, Overvie
 
 	public state = {
 		inventoryList: this.getInventoryList(),
+	};
+
+	public componentWillMount(): void {
+		this.unsubscribe = store.subscribe(
+			(): void =>
+				this.setState({
+					inventoryList: this.getInventoryList(),
+				}),
+		);
 	}
 
-	public componentWillMount() {
-		this.unsubscribe = store.subscribe(() => this.setState({
-			inventoryList: this.getInventoryList(),
-		}));
-	}
-
-	public componentWillUnmount() {
+	public componentWillUnmount(): void {
 		this.unsubscribe();
 	}
-	
+
 	public render(): JSX.Element {
 		return (
 			<View style={styles.overview}>
@@ -53,14 +59,16 @@ export default class Overview extends Component<NavigationInjectedProps, Overvie
 	}
 
 	private getInventoryList(): JSX.Element[] {
-		return store.getState().inventory.inventory.map(
-			(inventory): JSX.Element => (
-				<OverviewItem
-					key={inventory.id}
-					item={inventory}
-					navigation={this.props.navigation}
-				/>
-			),
-		);
+		return store
+			.getState()
+			.inventory.inventory.map(
+				(inventory): JSX.Element => (
+					<OverviewItem
+						key={inventory.id}
+						item={inventory}
+						navigation={this.props.navigation}
+					/>
+				),
+			);
 	}
 }

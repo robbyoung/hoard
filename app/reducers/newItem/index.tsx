@@ -5,9 +5,9 @@ import { ActionType } from '../actions';
 
 const defaultState: NewItemState = {
 	item: {
-		id: "",
-		name: "",
-		category: "",
+		id: '',
+		name: '',
+		category: '',
 		attributes: [],
 	},
 };
@@ -25,22 +25,33 @@ export interface SetNewItemAttributeAction extends Action {
 	attribute: Attribute;
 }
 
-function setName(oldState: NewItemState, action: SetNewItemNameAction): NewItemState {
+function setName(
+	oldState: NewItemState,
+	action: SetNewItemNameAction,
+): NewItemState {
 	const newState = cloneDeep(oldState);
 	newState.item.name = action.name;
 	return newState;
 }
 
-function setCategory(oldState: NewItemState, action: SetNewItemCategoryAction): NewItemState {
+function setCategory(
+	oldState: NewItemState,
+	action: SetNewItemCategoryAction,
+): NewItemState {
 	const newState = cloneDeep(oldState);
 	newState.item.category = action.categoryName;
 	newState.item.attributes = cloneDeep(action.attributes);
 	return newState;
 }
 
-function setAttribute(oldState: NewItemState, action: SetNewItemAttributeAction): NewItemState {
+function setAttribute(
+	oldState: NewItemState,
+	action: SetNewItemAttributeAction,
+): NewItemState {
 	const newState = cloneDeep(oldState);
-	const match = newState.item.attributes.find((attr): boolean => attr.name === action.attribute.name);
+	const match = newState.item.attributes.find(
+		(attr): boolean => attr.name === action.attribute.name,
+	);
 	if (match) {
 		match.value = action.attribute.value;
 	}

@@ -13,7 +13,10 @@ export interface AddInventoryAction extends Action {
 	newItem: Inventory;
 }
 
-function addInventory(oldState: InventoryState, action: AddInventoryAction): InventoryState {
+function addInventory(
+	oldState: InventoryState,
+	action: AddInventoryAction,
+): InventoryState {
 	const newState = cloneDeep(oldState);
 	newState.inventory.push(action.newItem);
 	return newState;
@@ -27,7 +30,7 @@ export default function inventoryReducer(
 		case ActionType.AddInventory:
 			return addInventory(state, action as AddInventoryAction);
 		case ActionType.RemoveInventory:
-			throw Error("Not implemented yet");
+			throw Error('Not implemented yet');
 		default:
 			return cloneDeep(state);
 	}

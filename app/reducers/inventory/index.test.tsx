@@ -40,10 +40,10 @@ describe('Inventory Reducer', (): void => {
 		const addInventoryAction: AddInventoryAction = {
 			type: ActionType.AddInventory,
 			newItem: testInventory[2],
-		}
+		};
 		const newState = reducer(state, addInventoryAction);
 		expect(newState).toEqual({
-			inventory: [ ...testInventory, testInventory[2]],
+			inventory: [...testInventory, testInventory[2]],
 			filteredInventory: DEFAULT_TEST_STATE.filteredInventory,
 		});
 	});

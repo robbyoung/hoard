@@ -4,24 +4,18 @@ import {
 	NavigationParams,
 } from 'react-navigation';
 
-export interface NewItemNavigationParams {
-	// empty
-}
-
 export function NavigateToNewItem(
 	navigation: NavigationScreenProp<
 		NavigationRoute<NavigationParams>,
 		NavigationParams
 	>,
-	params: NewItemNavigationParams,
+	params: {},
 ): void {
 	navigation.navigate('NewItem', params);
 }
 
-function checkParams(
-	params: NavigationParams | undefined,
-): params is NewItemNavigationParams {
-	return true;
+function checkParams(params: NavigationParams | undefined): params is {} {
+	return params === {};
 }
 
 export function extractNewItemParams(
@@ -29,7 +23,7 @@ export function extractNewItemParams(
 		NavigationRoute<NavigationParams>,
 		NavigationParams
 	>,
-): NewItemNavigationParams {
+): {} {
 	const params = navigation.state.params;
 	if (checkParams(params)) {
 		return params;

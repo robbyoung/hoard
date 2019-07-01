@@ -1,4 +1,4 @@
-import { Attribute, Inventory, AttributeType } from "../../state";
+import { Attribute, Inventory, AttributeType } from '../../state';
 
 const bookNames = [
 	'Gardens of the Moon',
@@ -24,7 +24,7 @@ const testBooks: Inventory[] = bookNames.map(
 		const attributes: Attribute[] = [
 			{
 				name: 'Completed',
-				value: `${i < 8 ? "T" : "F"}`,
+				value: `${i < 8 ? 'T' : 'F'}`,
 				type: AttributeType.Bool,
 			},
 			{
@@ -41,7 +41,7 @@ const testBooks: Inventory[] = bookNames.map(
 		return {
 			name,
 			id: `idb${i}`,
-			category: "Book",
+			category: 'Book',
 			attributes,
 		};
 	},
@@ -52,14 +52,14 @@ const testGames: Inventory[] = gameNames.map(
 		const attributes: Attribute[] = [
 			{
 				name: 'Completed',
-				value: `${i < 2 ? "T" : "F"}`,
+				value: `${i < 2 ? 'T' : 'F'}`,
 				type: AttributeType.Bool,
 			},
 		];
 		return {
 			name,
 			id: `idg${i}`,
-			category: "Game",
+			category: 'Game',
 			attributes,
 		};
 	},

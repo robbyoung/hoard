@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Picker, Text, Button, TextInput, TouchableOpacity } from 'react-native';
+import {
+	View,
+	StyleSheet,
+	Text,
+	TextInput,
+	TouchableOpacity,
+} from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import store from '../../store';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
@@ -12,7 +18,7 @@ import { Unsubscribe } from 'redux';
 import CategoryPicker from './categoryPicker';
 import NumberAttributeInput from './attributeInputs/numberAttributeInput';
 
-const SELECT_CATEGORY_TEXT = "Pick One"
+const SELECT_CATEGORY_TEXT = 'Pick One';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -25,7 +31,7 @@ export const styles = StyleSheet.create({
 	},
 	textField: {
 		width: 200,
-		backgroundColor: "#eee",
+		backgroundColor: '#eee',
 	},
 	heading: {
 		fontWeight: 'bold',
@@ -37,64 +43,66 @@ export const styles = StyleSheet.create({
 	button: {
 		width: 80,
 		height: 40,
-		backgroundColor: "#bbb",
+		backgroundColor: '#bbb',
 		margin: 10,
-		alignContent: "center",
+		alignContent: 'center',
 	},
 	buttonText: {
 		fontSize: 20,
 		padding: 10,
-		color: "#fff"
-	}
+		color: '#fff',
+	},
 });
 
 interface NewItemState {
-	itemName: string,
+	itemName: string;
 	categoryName: string;
 	attributeFields: JSX.Element[];
 }
-export default class NewItem extends Component<NavigationInjectedProps, NewItemState> {
-	private unsubscribe: Unsubscribe = () => undefined;
+export default class NewItem extends Component<
+	NavigationInjectedProps,
+	NewItemState
+> {
+	private unsubscribe: Unsubscribe = (): void => undefined;
 
 	public static navigationOptions = {
 		title: 'New Item',
 	};
 
 	public state = {
-		itemName: "",
+		itemName: '',
 		categoryName: SELECT_CATEGORY_TEXT,
 		attributeFields: [],
 	};
 
-	public componentWillMount() {
-		this.unsubscribe = store.subscribe((): void => this.setAttributeFields());
+	public componentWillMount(): void {
+		this.unsubscribe = store.subscribe(
+			(): void => this.setAttributeFields(),
+		);
 	}
 
-	public componentWillUnmount() {
+	public componentWillUnmount(): void {
 		this.unsubscribe();
 	}
 
 	public render(): JSX.Element {
-		const categories = store.getState().categories;
-		const categoryPickerItems = Object.keys(categories).map((name, i) => (
-			<Picker.Item label={name} value={name} key={i}></Picker.Item>
-		));
 		return (
 			<View>
 				<View style={styles.row}>
 					<TextInput
 						value={this.state.itemName}
-						onChangeText={(value: string) => this.setItemName(value)}
+						onChangeText={(value: string): void =>
+							this.setItemName(value)
+						}
 						placeholder="Name"
 						style={styles.textField}
 					/>
 				</View>
-				<CategoryPicker chosenCategory={this.state.categoryName}/>
+				<CategoryPicker chosenCategory={this.state.categoryName} />
 				{this.state.attributeFields}
 				<TouchableOpacity
-					onPress={() => this.submitItem()}
-					style={styles.button}
-				>
+					onPress={(): void => this.submitItem()}
+					style={styles.button}>
 					<Text style={styles.buttonText}>Submit</Text>
 				</TouchableOpacity>
 			</View>
@@ -103,18 +111,35 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 
 	private setAttributeFields(): void {
 		const newItem = store.getState().newItem.item;
-		const attributeFields = newItem.attributes.map((attribute): JSX.Element => {
-			switch(attribute.type) {
-				case AttributeType.String:
-					return <StringAttributeInput attribute={attribute} key={attribute.name}/>
-				case AttributeType.Bool:
-					return <BoolAttributeInput attribute={attribute} key={attribute.name}/>
-				case AttributeType.Number:
-					return <NumberAttributeInput attribute={attribute} key={attribute.name}/>
-				default:
-					return <View key="invalid"/>
-			}
-		});
+		const attributeFields = newItem.attributes.map(
+			(attribute): JSX.Element => {
+				switch (attribute.type) {
+					case AttributeType.String:
+						return (
+							<StringAttributeInput
+								attribute={attribute}
+								key={attribute.name}
+							/>
+						);
+					case AttributeType.Bool:
+						return (
+							<BoolAttributeInput
+								attribute={attribute}
+								key={attribute.name}
+							/>
+						);
+					case AttributeType.Number:
+						return (
+							<NumberAttributeInput
+								attribute={attribute}
+								key={attribute.name}
+							/>
+						);
+					default:
+						return <View key="invalid" />;
+				}
+			},
+		);
 		this.setState({
 			itemName: newItem.name,
 			categoryName: newItem.category,
@@ -122,7 +147,7 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 		});
 	}
 
-	private setItemName(name: string) {
+	private setItemName(name: string): void {
 		const setNameAction: SetNewItemNameAction = {
 			type: ActionType.SetNewItemName,
 			name,
@@ -130,7 +155,7 @@ export default class NewItem extends Component<NavigationInjectedProps, NewItemS
 		store.dispatch(setNameAction);
 	}
 
-	private submitItem() {
+	private submitItem(): void {
 		const addInventoryAction: AddInventoryAction = {
 			type: ActionType.AddInventory,
 			newItem: store.getState().newItem.item,

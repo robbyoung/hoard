@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
-import { StatsNavigationParams, extractStatsParams } from './stats.nav';
 import PieChart from './pieChart';
 import AttributePicker from './attributePicker';
 import Legend from './legend';
@@ -9,6 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import store from '../../store';
 import { getColourForWedgeIndex } from '../../utils/colourHelpers';
 import { ActionType } from '../../reducers/actions';
+import { Unsubscribe } from 'redux';
 
 function getDataForChart(): StatsState {
 	const state = store.getState();
@@ -20,7 +20,9 @@ function getDataForChart(): StatsState {
 	);
 	const tally: { [id: string]: number } = {};
 	for (const item of items) {
-		const match = item.attributes.find((a): boolean => a.name === attribute);
+		const match = item.attributes.find(
+			(a): boolean => a.name === attribute,
+		);
 		const value = match ? match.value : 'Unknown';
 		if (tally[value]) {
 			tally[value]++;
@@ -64,13 +66,24 @@ export default class Stats extends Component<
 	NavigationInjectedProps,
 	StatsState
 > {
+	private unsubscribe: Unsubscribe = (): void => undefined;
+
 	public state = getDataForChart();
 	public static navigationOptions = {
 		title: 'Stats',
 	};
 
+	public componentWillMount(): void {
+		this.unsubscribe = store.subscribe(
+			(): void => this.setState(getDataForChart()),
+		);
+	}
+
+	public componentWillUnmount(): void {
+		this.unsubscribe();
+	}
+
 	public render(): JSX.Element {
-		store.subscribe((): void => this.setState(getDataForChart()));
 		return (
 			<View>
 				<ScrollView>

@@ -1,26 +1,34 @@
-import reducer, { SetNewItemNameAction, SetNewItemCategoryAction, SetNewItemAttributeAction } from './index';
+import reducer, {
+	SetNewItemNameAction,
+	SetNewItemCategoryAction,
+	SetNewItemAttributeAction,
+} from './index';
 import { NewItemState, AttributeType } from '../../state';
 import { Action } from 'redux';
 import { ActionType } from '../actions';
 
 const DEFAULT_TEST_STATE: NewItemState = {
 	item: {
-		id: "testId",
-		name: "American Gods",
-		category: "Book",
-		attributes: [{
-			name: "Completed",
-			value: "F",
-			type: AttributeType.Bool,
-		}, {
-			name: "Page Count",
-			value: "750",
-			type: AttributeType.Number,
-		}, {
-			name: "Series",
-			value: "N/A",
-			type: AttributeType.String,
-		}],
+		id: 'testId',
+		name: 'American Gods',
+		category: 'Book',
+		attributes: [
+			{
+				name: 'Completed',
+				value: 'F',
+				type: AttributeType.Bool,
+			},
+			{
+				name: 'Page Count',
+				value: '750',
+				type: AttributeType.Number,
+			},
+			{
+				name: 'Series',
+				value: 'N/A',
+				type: AttributeType.String,
+			},
+		],
 	},
 };
 
@@ -42,9 +50,9 @@ describe('New Item Reducer', (): void => {
 		const newState = reducer(state, action);
 		expect(newState).toEqual({
 			item: {
-				id: "",
-				name: "",
-				category: "",
+				id: '',
+				name: '',
+				category: '',
 				attributes: [],
 			},
 		});
@@ -56,7 +64,7 @@ describe('New Item Reducer', (): void => {
 	});
 
 	it('can update the new item name', (): void => {
-		const newName = "American Gods (Gaiman)";
+		const newName = 'American Gods (Gaiman)';
 		const setNameAction: SetNewItemNameAction = {
 			type: ActionType.SetNewItemName,
 			name: newName,
@@ -67,12 +75,14 @@ describe('New Item Reducer', (): void => {
 
 	it('can update the new item category', (): void => {
 		const newCategory = {
-			name: "Fiction",
-			attributes: [{
-				name: "Author",
-				value: "Neil Gaiman",
-				type: AttributeType.Number,
-			}],
+			name: 'Fiction',
+			attributes: [
+				{
+					name: 'Author',
+					value: 'Neil Gaiman',
+					type: AttributeType.Number,
+				},
+			],
 		};
 		const setCategoryAction: SetNewItemCategoryAction = {
 			type: ActionType.SetNewItemCategory,
@@ -86,8 +96,8 @@ describe('New Item Reducer', (): void => {
 
 	it('can update a new item attribute', (): void => {
 		const updatedAttribute = {
-			name: "Completed",
-			value: "T",
+			name: 'Completed',
+			value: 'T',
 			type: AttributeType.Bool,
 		};
 		const setAttributeAction: SetNewItemAttributeAction = {
@@ -95,29 +105,33 @@ describe('New Item Reducer', (): void => {
 			attribute: updatedAttribute,
 		};
 		const newState = reducer(DEFAULT_TEST_STATE, setAttributeAction);
-		expect(newState.item.attributes).toEqual([{
-			name: "Completed",
-			value: "T",
-			type: AttributeType.Bool,
-		}, {
-			name: "Page Count",
-			value: "750",
-			type: AttributeType.Number,
-		}, {
-			name: "Series",
-			value: "N/A",
-			type: AttributeType.String,
-		}]);
+		expect(newState.item.attributes).toEqual([
+			{
+				name: 'Completed',
+				value: 'T',
+				type: AttributeType.Bool,
+			},
+			{
+				name: 'Page Count',
+				value: '750',
+				type: AttributeType.Number,
+			},
+			{
+				name: 'Series',
+				value: 'N/A',
+				type: AttributeType.String,
+			},
+		]);
 	});
 
 	it('will reset the state if instructed to', (): void => {
 		action.type = ActionType.ResetNewItem;
 		const newState = reducer(DEFAULT_TEST_STATE, action);
-		expect(newState).toEqual( {
+		expect(newState).toEqual({
 			item: {
-				id: "",
-				name: "",
-				category: "",
+				id: '',
+				name: '',
+				category: '',
 				attributes: [],
 			},
 		});
