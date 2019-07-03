@@ -18,11 +18,13 @@ module.exports = {
             "jsx": true
         },
         "ecmaVersion": 2018,
-        "sourceType": "module"
+		"sourceType": "module",
+		"project": "./tsconfig.json",
     },
     "plugins": [
         "react",
-        "import"
+		"import",
+		"@typescript-eslint",
 	],
 	"settings": {
 		"react": {
@@ -32,6 +34,11 @@ module.exports = {
     "rules": {
 		"@typescript-eslint/indent": "off",
         "indent": [2, "tab", {"SwitchCase": 1}],
-        "import/order": "error"
+		"import/order": "error",
+		"func-call-spacing": "off",
+		"@typescript-eslint/func-call-spacing": "error",
+		"@typescript-eslint/no-floating-promises": "error",
+		"@typescript-eslint/no-for-in-array": "error",
+		"@typescript-eslint/prefer-for-of": "error",
     }
 };
