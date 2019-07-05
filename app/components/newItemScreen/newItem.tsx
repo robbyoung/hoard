@@ -79,6 +79,7 @@ export default class NewItem extends Component<
 		this.unsubscribe = store.subscribe(
 			(): void => this.setAttributeFields(),
 		);
+		this.setAttributeFields();
 	}
 
 	public componentWillUnmount(): void {
@@ -161,9 +162,6 @@ export default class NewItem extends Component<
 			newItem: store.getState().newItem.item,
 		};
 		store.dispatch(addInventoryAction);
-		store.dispatch({
-			type: ActionType.ResetNewItem,
-		});
 		this.props.navigation.goBack();
 	}
 }

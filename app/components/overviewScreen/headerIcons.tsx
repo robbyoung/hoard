@@ -4,6 +4,8 @@ import { NavigationInjectedProps } from 'react-navigation';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { NavigateToStats } from '../statsScreen/stats.nav';
 import { NavigateToNewItem } from '../newItemScreen/newItem.nav';
+import { ActionType } from '../../reducers/actions';
+import store from '../../store';
 
 const styles = StyleSheet.create({
 	headerButtonList: {
@@ -30,9 +32,12 @@ export default class HeaderIcons extends Component<NavigationInjectedProps> {
 					</FontAwesome>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={(): void =>
+					onPress={(): void => {
+						store.dispatch({
+							type: ActionType.ResetNewItem,
+						});
 						NavigateToNewItem(this.props.navigation, {})
-					}>
+					}}>
 					<FontAwesome style={styles.headerButton}>
 						{Icons.plusCircle}
 					</FontAwesome>

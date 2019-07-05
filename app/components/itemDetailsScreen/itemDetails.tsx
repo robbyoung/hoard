@@ -8,6 +8,11 @@ import {
 	extractItemDetailsParams,
 } from './itemDetails.nav';
 import ItemAttribute from './itemAttribute';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import store from '../../store';
+import { ActionType } from '../../reducers/actions';
+import { ResetNewItemAction } from '../../reducers/newItem';
+import { NavigateToNewItem } from '../newItemScreen/newItem.nav';
 
 const styles = StyleSheet.create({
 	row: {
@@ -61,6 +66,17 @@ export default class ItemDetails extends Component<NavigationInjectedProps> {
 					</Text>
 				</View>
 				<View style={styles.attributes}>{this.attributeList}</View>
+				<TouchableOpacity
+					onPress={() => {
+						const editItem: ResetNewItemAction = {
+							type: ActionType.ResetNewItem,
+							newItem: this.params.item, 
+						};
+						store.dispatch(editItem);
+						NavigateToNewItem(this.props.navigation, {});
+					}}>
+					<Text>Edit</Text>
+				</TouchableOpacity>
 			</View>
 		);
 	}
