@@ -918,6 +918,11 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.133.tgz#430721c96da22dd1694443e68e6cec7ba1c1003d"
   integrity sha512-/3JqnvPnY58GLzG3Y7fpphOhATV1DDZ/Ak3DQufjlRK5E4u+s0CfClfNFtAGBabw+jDGtRFbOZe+Z02ZMWCBNQ==
 
+"@types/node@*":
+  version "12.0.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.12.tgz#cc791b402360db1eaf7176479072f91ee6c6c7ca"
+  integrity sha512-Uy0PN4R5vgBUXFoJrKryf5aTk3kJ8Rv3PdlHjl6UaX+Cqp1QE0yPQ68MPXGrZOfG7gZVNDIJZYyot0B9ubXUrQ==
+
 "@types/prop-types@*":
   version "15.7.0"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.0.tgz#4c48fed958d6dcf9487195a0ef6456d5f6e0163a"
@@ -957,6 +962,13 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+
+"@types/uuid@^3.4.5":
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-3.4.5.tgz#d4dc10785b497a1474eae0ba7f0cb09c0ddfd6eb"
+  integrity sha512-MNL15wC3EKyw1VLF+RoVO4hJJdk9t/Hlv3rt1OL65Qvuadm4BYo6g9ZJQqoq7X8NBFSsQXgAujWciovh2lpVjA==
+  dependencies:
+    "@types/node" "*"
 
 "@types/yargs@^12.0.2", "@types/yargs@^12.0.9":
   version "12.0.11"

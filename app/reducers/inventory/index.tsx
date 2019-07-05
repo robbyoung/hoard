@@ -1,5 +1,6 @@
 import { Action } from 'redux';
 import { cloneDeep } from 'lodash';
+import * as uuid from 'uuid';
 import { InventoryState, Inventory } from '../../state';
 import { ActionType } from '../actions';
 import testInventory from './testInventory';
@@ -21,6 +22,7 @@ function addInventory(
 	const newItem = cloneDeep(action.newItem);
 	const matchingIndex = oldState.inventory.findIndex((item) => newItem.id === item.id);
 	if (matchingIndex === -1) {
+		newItem.id = uuid.v4();
 		newState.inventory.push(newItem);
 	} else {
 		newState.inventory[matchingIndex] = newItem;

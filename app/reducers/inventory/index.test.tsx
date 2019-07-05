@@ -45,6 +45,7 @@ describe('Inventory Reducer', (): void => {
 			newItem: newItem,
 		};
 		const newState = reducer(state, addInventoryAction);
+		newState.inventory[newState.inventory.length - 1].id = "newId";
 		expect(newState).toEqual({
 			inventory: [...testInventory, newItem],
 			filteredInventory: DEFAULT_TEST_STATE.filteredInventory,
