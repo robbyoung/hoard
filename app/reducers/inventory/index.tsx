@@ -18,7 +18,13 @@ function addInventory(
 	action: AddInventoryAction,
 ): InventoryState {
 	const newState = cloneDeep(oldState);
-	newState.inventory.push(action.newItem);
+	const newItem = cloneDeep(action.newItem);
+	const matchingIndex = oldState.inventory.findIndex((item) => newItem.id === item.id);
+	if (matchingIndex === -1) {
+		newState.inventory.push(newItem);
+	} else {
+		newState.inventory[matchingIndex] = newItem;
+	}
 	return newState;
 }
 
