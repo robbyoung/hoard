@@ -5,6 +5,7 @@ import reducer, {
 	SetNewItemNameAction,
 	SetNewItemCategoryAction,
 	SetNewItemAttributeAction,
+	ResetNewItemAction,
 } from './index';
 
 const DEFAULT_TEST_STATE: NewItemState = {
@@ -134,6 +135,29 @@ describe('New Item Reducer', (): void => {
 				category: '',
 				attributes: [],
 			},
+		});
+	});
+
+	it('can reset the state to edit inventory', (): void => {
+		const itemToEdit = {
+			id: 'testId2',
+			name: 'Dark Souls',
+			category: 'Game',
+			attributes: [
+				{
+					name: 'Completed',
+					value: 'F',
+					type: AttributeType.Bool,
+				},
+			],
+		};
+		const resetAction: ResetNewItemAction = {
+			type: ActionType.ResetNewItem,
+			newItem: itemToEdit,
+		}
+		const newState = reducer(DEFAULT_TEST_STATE, resetAction);
+		expect(newState).toEqual({
+			item: itemToEdit,
 		});
 	});
 });

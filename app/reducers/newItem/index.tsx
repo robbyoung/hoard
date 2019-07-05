@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { cloneDeep } from 'lodash';
-import { NewItemState, Attribute } from '../../state';
+import { NewItemState, Attribute, Inventory } from '../../state';
 import { ActionType } from '../actions';
 
 const defaultState: NewItemState = {
@@ -11,6 +11,10 @@ const defaultState: NewItemState = {
 		attributes: [],
 	},
 };
+
+export interface ResetNewItemAction extends Action {
+	newItem?: Inventory;
+}
 
 export interface SetNewItemNameAction extends Action {
 	name: string;
@@ -58,6 +62,19 @@ function setAttribute(
 	return newState;
 }
 
+export function resetNewItem(
+	oldState: NewItemState,
+	action: ResetNewItemAction,
+): NewItemState {
+	if (action.newItem !== undefined) {
+		return {
+			item: cloneDeep(action.newItem),
+		};
+	} else {
+		return cloneDeep(defaultState);
+	}
+}
+
 export default function inventoryReducer(
 	state: NewItemState = defaultState,
 	action: Action,
@@ -70,7 +87,7 @@ export default function inventoryReducer(
 		case ActionType.SetNewItemAttribute:
 			return setAttribute(state, action as SetNewItemAttributeAction);
 		case ActionType.ResetNewItem:
-			return cloneDeep(defaultState);
+			return resetNewItem(state, action as ResetNewItemAction);
 		default:
 			return cloneDeep(state);
 	}
