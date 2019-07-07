@@ -30,7 +30,7 @@ const testBooks: Inventory[] = bookNames.map(
 			{
 				name: 'Page Count',
 				value: `${i * 100}`,
-				type: AttributeType.Bool,
+				type: AttributeType.Number,
 			},
 			{
 				name: 'Series',
