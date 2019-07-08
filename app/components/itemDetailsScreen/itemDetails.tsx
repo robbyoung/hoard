@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Unsubscribe } from 'redux';
 import { Text, View, StyleSheet } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import FontAwesome from 'react-native-fontawesome';
@@ -8,6 +9,7 @@ import store from '../../store';
 import { ActionType } from '../../reducers/actions';
 import { SetItemToEditAction } from '../../reducers/editItem';
 import { NavigateToEditItem } from '../editItemScreen/editItem.nav';
+import { Inventory } from '../../state';
 import ItemAttribute from './itemAttribute';
 import {
 	ItemDetailsNavigationParams,
@@ -40,13 +42,29 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default class ItemDetails extends Component<NavigationInjectedProps> {
+interface ItemDetailsState {
+	item: Inventory;
+}
+export default class ItemDetails extends Component<
+	NavigationInjectedProps,
+	ItemDetailsState
+> {
+	private unsubscribe: Unsubscribe = (): void => undefined;
 	private params: ItemDetailsNavigationParams = extractItemDetailsParams(
 		this.props.navigation,
 	);
 	public static navigationOptions = {
 		title: 'Details',
 	};
+
+	public componentWillMount(): void {
+		this.unsubscribe = store.subscribe((): void => this.refreshState());
+		this.refreshState();
+	}
+
+	public componentWillUnmount(): void {
+		this.unsubscribe();
+	}
 
 	private attributeList = this.params.item.attributes.map(
 		(attribute): JSX.Element => (
@@ -79,5 +97,9 @@ export default class ItemDetails extends Component<NavigationInjectedProps> {
 				</TouchableOpacity>
 			</View>
 		);
+	}
+
+	private refreshState(): void {
+		this.setState(store.getState().editItem);
 	}
 }
