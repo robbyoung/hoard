@@ -5,8 +5,11 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationInjectedProps } from 'react-navigation';
 import { getCategoryIcon } from '../../utils/iconHelpers';
 import { getCategoryColour } from '../../utils/colourHelpers';
-import { NavigateToItemDetails } from '../itemDetailsScreen/itemDetails.nav';
 import { Inventory } from '../../state';
+import { Screens } from '../../screens';
+import store from '../../store';
+import { ActionType } from '../../reducers/actions';
+import { SetItemToEditAction } from '../../reducers/editItem';
 
 const styles = StyleSheet.create({
 	container: {
@@ -39,11 +42,14 @@ export default class OverviewItem extends Component<Props> {
 	public render(): JSX.Element {
 		return (
 			<TouchableOpacity
-				onPress={(): void =>
-					NavigateToItemDetails(this.props.navigation, {
-						item: this.props.item,
-					})
-				}>
+				onPress={(): void => {
+					const editItem: SetItemToEditAction = {
+						type: ActionType.SetItemToEdit,
+						newItem: this.props.item,
+					};
+					store.dispatch(editItem);
+					this.props.navigation.navigate(Screens.ItemDetails);
+				}}>
 				<View style={[this.containerColour, styles.container]}>
 					<FontAwesome style={styles.icon}>
 						{getCategoryIcon(this.props.item.category)}

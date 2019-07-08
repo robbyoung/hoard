@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
-import { NavigateToStats } from '../statsScreen/stats.nav';
-import { NavigateToEditItem } from '../editItemScreen/editItem.nav';
 import { ActionType } from '../../reducers/actions';
 import store from '../../store';
+import { Screens } from '../../screens';
 
 const styles = StyleSheet.create({
 	headerButtonList: {
@@ -22,10 +21,8 @@ export default class HeaderIcons extends Component<NavigationInjectedProps> {
 		return (
 			<View style={styles.headerButtonList}>
 				<TouchableOpacity
-					onPress={(): void =>
-						NavigateToStats(this.props.navigation, {
-							category: 'Book',
-						})
+					onPress={(): boolean =>
+						this.props.navigation.navigate(Screens.Stats)
 					}>
 					<FontAwesome style={styles.headerButton}>
 						{Icons.chartPie}
@@ -36,7 +33,7 @@ export default class HeaderIcons extends Component<NavigationInjectedProps> {
 						store.dispatch({
 							type: ActionType.SetItemToEdit,
 						});
-						NavigateToEditItem(this.props.navigation, {});
+						this.props.navigation.navigate(Screens.EditItem);
 					}}>
 					<FontAwesome style={styles.headerButton}>
 						{Icons.plusCircle}

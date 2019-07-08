@@ -6,15 +6,9 @@ import FontAwesome from 'react-native-fontawesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { getCategoryIcon } from '../../utils/iconHelpers';
 import store from '../../store';
-import { ActionType } from '../../reducers/actions';
-import { SetItemToEditAction } from '../../reducers/editItem';
-import { NavigateToEditItem } from '../editItemScreen/editItem.nav';
+import { Screens } from '../../screens';
 import { Inventory } from '../../state';
 import ItemAttribute from './itemAttribute';
-import {
-	ItemDetailsNavigationParams,
-	extractItemDetailsParams,
-} from './itemDetails.nav';
 
 const styles = StyleSheet.create({
 	row: {
@@ -44,15 +38,13 @@ const styles = StyleSheet.create({
 
 interface ItemDetailsState {
 	item: Inventory;
+	attributeList: JSX.Element[];
 }
 export default class ItemDetails extends Component<
 	NavigationInjectedProps,
 	ItemDetailsState
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
-	private params: ItemDetailsNavigationParams = extractItemDetailsParams(
-		this.props.navigation,
-	);
 	public static navigationOptions = {
 		title: 'Details',
 	};
@@ -66,33 +58,25 @@ export default class ItemDetails extends Component<
 		this.unsubscribe();
 	}
 
-	private attributeList = this.params.item.attributes.map(
-		(attribute): JSX.Element => (
-			<ItemAttribute attribute={attribute} key={attribute.name} />
-		),
-	);
 	public render(): JSX.Element {
 		return (
 			<View>
-				<Text style={styles.title}>{this.params.item.name}</Text>
+				<Text style={styles.title}>{this.state.item.name}</Text>
 				<View style={styles.row}>
 					<FontAwesome style={styles.icon}>
-						{getCategoryIcon(this.params.item.category)}
+						{getCategoryIcon(this.state.item.category)}
 					</FontAwesome>
 					<Text style={styles.category}>
-						{this.params.item.category}
+						{this.state.item.category}
 					</Text>
 				</View>
-				<View style={styles.attributes}>{this.attributeList}</View>
+				<View style={styles.attributes}>
+					{this.state.attributeList}
+				</View>
 				<TouchableOpacity
-					onPress={(): void => {
-						const editItem: SetItemToEditAction = {
-							type: ActionType.SetItemToEdit,
-							newItem: this.params.item,
-						};
-						store.dispatch(editItem);
-						NavigateToEditItem(this.props.navigation, {});
-					}}>
+					onPress={(): boolean =>
+						this.props.navigation.navigate(Screens.EditItem)
+					}>
 					<Text>Edit</Text>
 				</TouchableOpacity>
 			</View>
@@ -100,6 +84,14 @@ export default class ItemDetails extends Component<
 	}
 
 	private refreshState(): void {
-		this.setState(store.getState().editItem);
+		const item = store.getState().editItem.item;
+		this.setState({
+			item,
+			attributeList: item.attributes.map(
+				(attribute): JSX.Element => (
+					<ItemAttribute attribute={attribute} key={attribute.name} />
+				),
+			),
+		});
 	}
 }
