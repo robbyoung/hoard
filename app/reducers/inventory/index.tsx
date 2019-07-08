@@ -20,7 +20,9 @@ function addInventory(
 ): InventoryState {
 	const newState = cloneDeep(oldState);
 	const newItem = cloneDeep(action.newItem);
-	const matchingIndex = oldState.inventory.findIndex((item) => newItem.id === item.id);
+	const matchingIndex = oldState.inventory.findIndex(
+		(item): boolean => newItem.id === item.id,
+	);
 	if (matchingIndex === -1) {
 		newItem.id = uuid.v4();
 		newState.inventory.push(newItem);

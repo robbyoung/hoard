@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import FontAwesome from 'react-native-fontawesome';
-import { getCategoryIcon } from '../../utils/iconHelpers';
-import {
-	ItemDetailsNavigationParams,
-	extractItemDetailsParams,
-} from './itemDetails.nav';
-import ItemAttribute from './itemAttribute';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { getCategoryIcon } from '../../utils/iconHelpers';
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
 import { ResetNewItemAction } from '../../reducers/newItem';
 import { NavigateToNewItem } from '../newItemScreen/newItem.nav';
+import ItemAttribute from './itemAttribute';
+import {
+	ItemDetailsNavigationParams,
+	extractItemDetailsParams,
+} from './itemDetails.nav';
 
 const styles = StyleSheet.create({
 	row: {
@@ -67,10 +67,10 @@ export default class ItemDetails extends Component<NavigationInjectedProps> {
 				</View>
 				<View style={styles.attributes}>{this.attributeList}</View>
 				<TouchableOpacity
-					onPress={() => {
+					onPress={(): void => {
 						const editItem: ResetNewItemAction = {
 							type: ActionType.ResetNewItem,
-							newItem: this.params.item, 
+							newItem: this.params.item,
 						};
 						store.dispatch(editItem);
 						NavigateToNewItem(this.props.navigation, {});

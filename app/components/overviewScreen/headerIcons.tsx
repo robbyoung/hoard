@@ -36,7 +36,7 @@ export default class HeaderIcons extends Component<NavigationInjectedProps> {
 						store.dispatch({
 							type: ActionType.ResetNewItem,
 						});
-						NavigateToNewItem(this.props.navigation, {})
+						NavigateToNewItem(this.props.navigation, {});
 					}}>
 					<FontAwesome style={styles.headerButton}>
 						{Icons.plusCircle}

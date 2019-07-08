@@ -1,9 +1,9 @@
 import { Action } from 'redux';
+import { cloneDeep } from 'lodash';
 import { InventoryState } from '../../state';
 import { ActionType } from '../actions';
 import testInventory from './testInventory';
 import reducer, { AddInventoryAction } from './index';
-import { cloneDeep } from 'lodash';
 
 const DEFAULT_TEST_STATE: InventoryState = {
 	inventory: testInventory,
@@ -39,13 +39,13 @@ describe('Inventory Reducer', (): void => {
 
 	it('can add a new inventory item', (): void => {
 		const newItem = cloneDeep(testInventory[2]);
-		newItem.id = "newId";
+		newItem.id = 'newId';
 		const addInventoryAction: AddInventoryAction = {
 			type: ActionType.AddInventory,
 			newItem: newItem,
 		};
 		const newState = reducer(state, addInventoryAction);
-		newState.inventory[newState.inventory.length - 1].id = "newId";
+		newState.inventory[newState.inventory.length - 1].id = 'newId';
 		expect(newState).toEqual({
 			inventory: [...testInventory, newItem],
 			filteredInventory: DEFAULT_TEST_STATE.filteredInventory,
@@ -54,8 +54,8 @@ describe('Inventory Reducer', (): void => {
 
 	it('can update an existing inventory item', (): void => {
 		const editedItem = cloneDeep(testInventory)[2];
-		editedItem.name = "Edited";
-		editedItem.attributes[0].value = "F";
+		editedItem.name = 'Edited';
+		editedItem.attributes[0].value = 'F';
 		const addInventoryAction: AddInventoryAction = {
 			type: ActionType.AddInventory,
 			newItem: editedItem,

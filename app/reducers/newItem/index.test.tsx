@@ -154,7 +154,7 @@ describe('New Item Reducer', (): void => {
 		const resetAction: ResetNewItemAction = {
 			type: ActionType.ResetNewItem,
 			newItem: itemToEdit,
-		}
+		};
 		const newState = reducer(DEFAULT_TEST_STATE, resetAction);
 		expect(newState).toEqual({
 			item: itemToEdit,
