@@ -33,7 +33,7 @@ export interface StatsState {
 	attribute: string;
 }
 
-export interface NewItemState {
+export interface EditItemState {
 	item: Inventory;
 }
 
@@ -41,5 +41,5 @@ export interface HoardState {
 	inventory: InventoryState;
 	categories: CategoriesState;
 	stats: StatsState;
-	newItem: NewItemState;
+	editItem: EditItemState;
 }

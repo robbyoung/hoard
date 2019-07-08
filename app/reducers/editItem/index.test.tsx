@@ -1,14 +1,14 @@
 import { Action } from 'redux';
-import { NewItemState, AttributeType } from '../../state';
+import { EditItemState, AttributeType } from '../../state';
 import { ActionType } from '../actions';
 import reducer, {
-	SetNewItemNameAction,
-	SetNewItemCategoryAction,
-	SetNewItemAttributeAction,
-	ResetNewItemAction,
+	EditItemNameAction,
+	EditItemCategoryAction,
+	EditItemAttributeAction,
+	SetItemToEditAction,
 } from './index';
 
-const DEFAULT_TEST_STATE: NewItemState = {
+const DEFAULT_TEST_STATE: EditItemState = {
 	item: {
 		id: 'testId',
 		name: 'American Gods',
@@ -34,7 +34,7 @@ const DEFAULT_TEST_STATE: NewItemState = {
 };
 
 describe('New Item Reducer', (): void => {
-	let state: NewItemState | undefined;
+	let state: EditItemState | undefined;
 	let action: Action;
 
 	beforeEach(
@@ -66,8 +66,8 @@ describe('New Item Reducer', (): void => {
 
 	it('can update the new item name', (): void => {
 		const newName = 'American Gods (Gaiman)';
-		const setNameAction: SetNewItemNameAction = {
-			type: ActionType.SetNewItemName,
+		const setNameAction: EditItemNameAction = {
+			type: ActionType.EditItemName,
 			name: newName,
 		};
 		const newState = reducer(DEFAULT_TEST_STATE, setNameAction);
@@ -85,8 +85,8 @@ describe('New Item Reducer', (): void => {
 				},
 			],
 		};
-		const setCategoryAction: SetNewItemCategoryAction = {
-			type: ActionType.SetNewItemCategory,
+		const setCategoryAction: EditItemCategoryAction = {
+			type: ActionType.EditItemCategory,
 			categoryName: newCategory.name,
 			attributes: newCategory.attributes,
 		};
@@ -101,8 +101,8 @@ describe('New Item Reducer', (): void => {
 			value: 'T',
 			type: AttributeType.Bool,
 		};
-		const setAttributeAction: SetNewItemAttributeAction = {
-			type: ActionType.SetNewItemAttribute,
+		const setAttributeAction: EditItemAttributeAction = {
+			type: ActionType.EditItemAttribute,
 			attribute: updatedAttribute,
 		};
 		const newState = reducer(DEFAULT_TEST_STATE, setAttributeAction);
@@ -126,7 +126,7 @@ describe('New Item Reducer', (): void => {
 	});
 
 	it('will reset the state if instructed to', (): void => {
-		action.type = ActionType.ResetNewItem;
+		action.type = ActionType.SetItemToEdit;
 		const newState = reducer(DEFAULT_TEST_STATE, action);
 		expect(newState).toEqual({
 			item: {
@@ -151,8 +151,8 @@ describe('New Item Reducer', (): void => {
 				},
 			],
 		};
-		const resetAction: ResetNewItemAction = {
-			type: ActionType.ResetNewItem,
+		const resetAction: SetItemToEditAction = {
+			type: ActionType.SetItemToEdit,
 			newItem: itemToEdit,
 		};
 		const newState = reducer(DEFAULT_TEST_STATE, resetAction);

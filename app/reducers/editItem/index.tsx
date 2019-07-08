@@ -1,9 +1,9 @@
 import { Action } from 'redux';
 import { cloneDeep } from 'lodash';
-import { NewItemState, Attribute, Inventory } from '../../state';
+import { EditItemState, Attribute, Inventory } from '../../state';
 import { ActionType } from '../actions';
 
-const defaultState: NewItemState = {
+const defaultState: EditItemState = {
 	item: {
 		id: '',
 		name: '',
@@ -12,36 +12,36 @@ const defaultState: NewItemState = {
 	},
 };
 
-export interface ResetNewItemAction extends Action {
+export interface SetItemToEditAction extends Action {
 	newItem?: Inventory;
 }
 
-export interface SetNewItemNameAction extends Action {
+export interface EditItemNameAction extends Action {
 	name: string;
 }
 
-export interface SetNewItemCategoryAction extends Action {
+export interface EditItemCategoryAction extends Action {
 	categoryName: string;
 	attributes: Attribute[];
 }
 
-export interface SetNewItemAttributeAction extends Action {
+export interface EditItemAttributeAction extends Action {
 	attribute: Attribute;
 }
 
 function setName(
-	oldState: NewItemState,
-	action: SetNewItemNameAction,
-): NewItemState {
+	oldState: EditItemState,
+	action: EditItemNameAction,
+): EditItemState {
 	const newState = cloneDeep(oldState);
 	newState.item.name = action.name;
 	return newState;
 }
 
 function setCategory(
-	oldState: NewItemState,
-	action: SetNewItemCategoryAction,
-): NewItemState {
+	oldState: EditItemState,
+	action: EditItemCategoryAction,
+): EditItemState {
 	const newState = cloneDeep(oldState);
 	newState.item.category = action.categoryName;
 	newState.item.attributes = cloneDeep(action.attributes);
@@ -49,9 +49,9 @@ function setCategory(
 }
 
 function setAttribute(
-	oldState: NewItemState,
-	action: SetNewItemAttributeAction,
-): NewItemState {
+	oldState: EditItemState,
+	action: EditItemAttributeAction,
+): EditItemState {
 	const newState = cloneDeep(oldState);
 	const match = newState.item.attributes.find(
 		(attr): boolean => attr.name === action.attribute.name,
@@ -62,10 +62,10 @@ function setAttribute(
 	return newState;
 }
 
-export function resetNewItem(
-	oldState: NewItemState,
-	action: ResetNewItemAction,
-): NewItemState {
+export function resetEditItem(
+	oldState: EditItemState,
+	action: SetItemToEditAction,
+): EditItemState {
 	if (action.newItem !== undefined) {
 		return {
 			item: cloneDeep(action.newItem),
@@ -76,18 +76,18 @@ export function resetNewItem(
 }
 
 export default function inventoryReducer(
-	state: NewItemState = defaultState,
+	state: EditItemState = defaultState,
 	action: Action,
-): NewItemState {
+): EditItemState {
 	switch (action.type) {
-		case ActionType.SetNewItemName:
-			return setName(state, action as SetNewItemNameAction);
-		case ActionType.SetNewItemCategory:
-			return setCategory(state, action as SetNewItemCategoryAction);
-		case ActionType.SetNewItemAttribute:
-			return setAttribute(state, action as SetNewItemAttributeAction);
-		case ActionType.ResetNewItem:
-			return resetNewItem(state, action as ResetNewItemAction);
+		case ActionType.EditItemName:
+			return setName(state, action as EditItemNameAction);
+		case ActionType.EditItemCategory:
+			return setCategory(state, action as EditItemCategoryAction);
+		case ActionType.EditItemAttribute:
+			return setAttribute(state, action as EditItemAttributeAction);
+		case ActionType.SetItemToEdit:
+			return resetEditItem(state, action as SetItemToEditAction);
 		default:
 			return cloneDeep(state);
 	}

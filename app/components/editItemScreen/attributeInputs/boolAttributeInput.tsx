@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, Switch } from 'react-native';
 import { Attribute } from '../../../state';
-import { styles } from '../newItem';
+import { styles } from '../editItem';
 import store from '../../../store';
 import { ActionType } from '../../../reducers/actions';
-import { SetNewItemAttributeAction } from '../../../reducers/newItem';
+import { EditItemAttributeAction } from '../../../reducers/editItem';
 
 function setBoolAttributeValue(value: boolean, attribute: Attribute): void {
-	const action: SetNewItemAttributeAction = {
-		type: ActionType.SetNewItemAttribute,
+	const action: EditItemAttributeAction = {
+		type: ActionType.EditItemAttribute,
 		attribute: {
 			name: attribute.name,
 			type: attribute.type,

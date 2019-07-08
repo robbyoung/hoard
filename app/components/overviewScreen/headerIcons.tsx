@@ -3,7 +3,7 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { NavigateToStats } from '../statsScreen/stats.nav';
-import { NavigateToNewItem } from '../newItemScreen/newItem.nav';
+import { NavigateToEditItem } from '../editItemScreen/editItem.nav';
 import { ActionType } from '../../reducers/actions';
 import store from '../../store';
 
@@ -34,9 +34,9 @@ export default class HeaderIcons extends Component<NavigationInjectedProps> {
 				<TouchableOpacity
 					onPress={(): void => {
 						store.dispatch({
-							type: ActionType.ResetNewItem,
+							type: ActionType.SetItemToEdit,
 						});
-						NavigateToNewItem(this.props.navigation, {});
+						NavigateToEditItem(this.props.navigation, {});
 					}}>
 					<FontAwesome style={styles.headerButton}>
 						{Icons.plusCircle}

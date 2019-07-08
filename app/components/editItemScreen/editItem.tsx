@@ -12,7 +12,7 @@ import store from '../../store';
 import { AttributeType } from '../../state';
 import { ActionType } from '../../reducers/actions';
 import { AddInventoryAction } from '../../reducers/inventory';
-import { SetNewItemNameAction } from '../../reducers/newItem';
+import { EditItemNameAction } from '../../reducers/editItem';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
@@ -54,14 +54,14 @@ export const styles = StyleSheet.create({
 	},
 });
 
-interface NewItemState {
+interface EditItemState {
 	itemName: string;
 	categoryName: string;
 	attributeFields: JSX.Element[];
 }
-export default class NewItem extends Component<
+export default class EditItem extends Component<
 	NavigationInjectedProps,
-	NewItemState
+	EditItemState
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
@@ -111,7 +111,7 @@ export default class NewItem extends Component<
 	}
 
 	private setAttributeFields(): void {
-		const newItem = store.getState().newItem.item;
+		const newItem = store.getState().editItem.item;
 		const attributeFields = newItem.attributes.map(
 			(attribute): JSX.Element => {
 				switch (attribute.type) {
@@ -149,8 +149,8 @@ export default class NewItem extends Component<
 	}
 
 	private setItemName(name: string): void {
-		const setNameAction: SetNewItemNameAction = {
-			type: ActionType.SetNewItemName,
+		const setNameAction: EditItemNameAction = {
+			type: ActionType.EditItemName,
 			name,
 		};
 		store.dispatch(setNameAction);
@@ -159,7 +159,7 @@ export default class NewItem extends Component<
 	private submitItem(): void {
 		const addInventoryAction: AddInventoryAction = {
 			type: ActionType.AddInventory,
-			newItem: store.getState().newItem.item,
+			newItem: store.getState().editItem.item,
 		};
 		store.dispatch(addInventoryAction);
 		this.props.navigation.goBack();

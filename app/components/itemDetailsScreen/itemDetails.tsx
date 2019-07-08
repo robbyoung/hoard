@@ -6,8 +6,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { getCategoryIcon } from '../../utils/iconHelpers';
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
-import { ResetNewItemAction } from '../../reducers/newItem';
-import { NavigateToNewItem } from '../newItemScreen/newItem.nav';
+import { SetItemToEditAction } from '../../reducers/editItem';
+import { NavigateToEditItem } from '../editItemScreen/editItem.nav';
 import ItemAttribute from './itemAttribute';
 import {
 	ItemDetailsNavigationParams,
@@ -68,12 +68,12 @@ export default class ItemDetails extends Component<NavigationInjectedProps> {
 				<View style={styles.attributes}>{this.attributeList}</View>
 				<TouchableOpacity
 					onPress={(): void => {
-						const editItem: ResetNewItemAction = {
-							type: ActionType.ResetNewItem,
+						const editItem: SetItemToEditAction = {
+							type: ActionType.SetItemToEdit,
 							newItem: this.params.item,
 						};
 						store.dispatch(editItem);
-						NavigateToNewItem(this.props.navigation, {});
+						NavigateToEditItem(this.props.navigation, {});
 					}}>
 					<Text>Edit</Text>
 				</TouchableOpacity>

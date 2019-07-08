@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import inventory from './inventory';
 import categories from './categories';
 import stats from './stats';
-import newItem from './newItem';
+import editItem from './editItem';
 
 export default combineReducers({
 	inventory,
 	categories,
 	stats,
-	newItem,
+	editItem,
 });

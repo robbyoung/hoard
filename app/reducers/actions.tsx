@@ -5,8 +5,8 @@ export enum ActionType {
 	RemoveInventory,
 	SetStatsCategory,
 	SetStatsAttribute,
-	SetNewItemName,
-	SetNewItemCategory,
-	SetNewItemAttribute,
-	ResetNewItem,
+	EditItemName,
+	EditItemCategory,
+	EditItemAttribute,
+	SetItemToEdit,
 }

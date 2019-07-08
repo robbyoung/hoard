@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Attribute } from '../../../state';
-import { styles } from '../newItem';
-import { SetNewItemAttributeAction } from '../../../reducers/newItem';
+import { styles } from '../editItem';
+import { EditItemAttributeAction } from '../../../reducers/editItem';
 import { ActionType } from '../../../reducers/actions';
 import store from '../../../store';
 
-function setNumberAttributeValue(value: string, attribute: Attribute): void {
-	const action: SetNewItemAttributeAction = {
-		type: ActionType.SetNewItemAttribute,
+function setStringAttributeValue(value: string, attribute: Attribute): void {
+	const action: EditItemAttributeAction = {
+		type: ActionType.EditItemAttribute,
 		attribute: {
 			name: attribute.name,
 			type: attribute.type,
@@ -18,7 +18,7 @@ function setNumberAttributeValue(value: string, attribute: Attribute): void {
 	store.dispatch(action);
 }
 
-export default class NumberAttributeInput extends Component<{
+export default class StringAttributeInput extends Component<{
 	attribute: Attribute;
 }> {
 	public render(): JSX.Element {
@@ -30,9 +30,8 @@ export default class NumberAttributeInput extends Component<{
 				<TextInput
 					value={this.props.attribute.value}
 					onChangeText={(value: string): void =>
-						setNumberAttributeValue(value, this.props.attribute)
+						setStringAttributeValue(value, this.props.attribute)
 					}
-					keyboardType="numeric"
 					style={styles.textField}
 				/>
 			</View>
