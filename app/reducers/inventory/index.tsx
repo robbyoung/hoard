@@ -23,6 +23,7 @@ function addInventory(
 	const matchingIndex = oldState.inventory.findIndex(
 		(item): boolean => newItem.id === item.id,
 	);
+
 	if (matchingIndex === -1) {
 		newItem.id = uuid.v4();
 		newState.inventory.push(newItem);

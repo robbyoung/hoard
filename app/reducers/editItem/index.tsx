@@ -1,6 +1,12 @@
 import { Action } from 'redux';
 import { cloneDeep } from 'lodash';
-import { EditItemState, Attribute, Inventory } from '../../state';
+import {
+	EditItemState,
+	Attribute,
+	Inventory,
+	CategoriesState,
+	InventoryState,
+} from '../../state';
 import { ActionType } from '../actions';
 
 const defaultState: EditItemState = {
@@ -10,6 +16,7 @@ const defaultState: EditItemState = {
 		category: '',
 		attributes: [],
 	},
+	errorMessage: '',
 };
 
 export interface SetItemToEditAction extends Action {
@@ -27,6 +34,11 @@ export interface EditItemCategoryAction extends Action {
 
 export interface EditItemAttributeAction extends Action {
 	attribute: Attribute;
+}
+
+export interface ValidateEditAction extends Action {
+	inventory: InventoryState;
+	categories: CategoriesState;
 }
 
 function setName(
@@ -62,17 +74,42 @@ function setAttribute(
 	return newState;
 }
 
-export function resetEditItem(
+function resetEditItem(
 	oldState: EditItemState,
 	action: SetItemToEditAction,
 ): EditItemState {
 	if (action.newItem !== undefined) {
 		return {
 			item: cloneDeep(action.newItem),
+			errorMessage: '',
 		};
 	} else {
 		return cloneDeep(defaultState);
 	}
+}
+
+function validateEdit(
+	oldState: EditItemState,
+	action: ValidateEditAction,
+): EditItemState {
+	const newState = cloneDeep(oldState);
+	const item = oldState.item;
+	const categories = action.categories;
+	const inventory = action.inventory.inventory;
+
+	if (
+		inventory.find(
+			(inv): boolean => inv.name === item.name && inv.id !== item.id,
+		)
+	) {
+		newState.errorMessage = 'An item already exists with that name';
+	} else if (categories[item.category] === undefined) {
+		newState.errorMessage = 'Please select a category';
+	} else {
+		newState.errorMessage = '';
+	}
+
+	return newState;
 }
 
 export default function inventoryReducer(
@@ -88,6 +125,8 @@ export default function inventoryReducer(
 			return setAttribute(state, action as EditItemAttributeAction);
 		case ActionType.SetItemToEdit:
 			return resetEditItem(state, action as SetItemToEditAction);
+		case ActionType.ValidateEdit:
+			return validateEdit(state, action as ValidateEditAction);
 		default:
 			return cloneDeep(state);
 	}

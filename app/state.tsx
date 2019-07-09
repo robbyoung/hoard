@@ -35,6 +35,7 @@ export interface StatsState {
 
 export interface EditItemState {
 	item: Inventory;
+	errorMessage: string;
 }
 
 export interface HoardState {

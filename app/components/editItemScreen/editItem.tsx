@@ -12,7 +12,10 @@ import store from '../../store';
 import { AttributeType } from '../../state';
 import { ActionType } from '../../reducers/actions';
 import { AddInventoryAction } from '../../reducers/inventory';
-import { EditItemNameAction } from '../../reducers/editItem';
+import {
+	EditItemNameAction,
+	ValidateEditAction,
+} from '../../reducers/editItem';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
@@ -52,12 +55,16 @@ export const styles = StyleSheet.create({
 		padding: 10,
 		color: '#fff',
 	},
+	errorMessage: {
+		color: '#990000',
+	},
 });
 
 interface EditItemState {
 	itemName: string;
 	categoryName: string;
 	attributeFields: JSX.Element[];
+	errorMessage: string;
 }
 export default class EditItem extends Component<
 	NavigationInjectedProps,
@@ -73,6 +80,7 @@ export default class EditItem extends Component<
 		itemName: '',
 		categoryName: SELECT_CATEGORY_TEXT,
 		attributeFields: [],
+		errorMessage: '',
 	};
 
 	public componentWillMount(): void {
@@ -102,16 +110,20 @@ export default class EditItem extends Component<
 				<CategoryPicker chosenCategory={this.state.categoryName} />
 				{this.state.attributeFields}
 				<TouchableOpacity
-					onPress={(): void => this.submitItem()}
+					onPress={(): void => void this.submitItem()}
 					style={styles.button}>
 					<Text style={styles.buttonText}>Submit</Text>
 				</TouchableOpacity>
+				<Text style={styles.errorMessage}>
+					{this.state.errorMessage}
+				</Text>
 			</View>
 		);
 	}
 
 	private setAttributeFields(): void {
-		const newItem = store.getState().editItem.item;
+		const newState = store.getState().editItem;
+		const newItem = newState.item;
 		const attributeFields = newItem.attributes.map(
 			(attribute): JSX.Element => {
 				switch (attribute.type) {
@@ -145,6 +157,7 @@ export default class EditItem extends Component<
 			itemName: newItem.name,
 			categoryName: newItem.category,
 			attributeFields,
+			errorMessage: newState.errorMessage,
 		});
 	}
 
@@ -156,12 +169,22 @@ export default class EditItem extends Component<
 		store.dispatch(setNameAction);
 	}
 
-	private submitItem(): void {
-		const addInventoryAction: AddInventoryAction = {
-			type: ActionType.AddInventory,
-			newItem: store.getState().editItem.item,
+	private async submitItem(): Promise<void> {
+		const state = store.getState();
+		const validateEditAction: ValidateEditAction = {
+			type: ActionType.ValidateEdit,
+			inventory: state.inventory,
+			categories: state.categories,
 		};
-		store.dispatch(addInventoryAction);
-		this.props.navigation.goBack();
+		await store.dispatch(validateEditAction);
+
+		if (this.state.errorMessage === '') {
+			const addInventoryAction: AddInventoryAction = {
+				type: ActionType.AddInventory,
+				newItem: store.getState().editItem.item,
+			};
+			store.dispatch(addInventoryAction);
+			this.props.navigation.goBack();
+		}
 	}
 }

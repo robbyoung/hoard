@@ -7,6 +7,6 @@ export function getCategoryIcon(category: string): string {
 		case 'Game':
 			return Icons.gamepad;
 		default:
-			throw new Error('Unknown category');
+			return '';
 	}
 }

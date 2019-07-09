@@ -8,7 +8,7 @@ export function getCategoryColour(category: string): string {
 		case 'Game':
 			return DARK_RED;
 		default:
-			throw new Error('Unknown category');
+			return '';
 	}
 }
 

@@ -31,6 +31,7 @@ const DEFAULT_TEST_STATE: EditItemState = {
 			},
 		],
 	},
+	errorMessage: '',
 };
 
 describe('New Item Reducer', (): void => {
@@ -56,6 +57,7 @@ describe('New Item Reducer', (): void => {
 				category: '',
 				attributes: [],
 			},
+			errorMessage: '',
 		});
 	});
 
@@ -135,6 +137,7 @@ describe('New Item Reducer', (): void => {
 				category: '',
 				attributes: [],
 			},
+			errorMessage: '',
 		});
 	});
 
@@ -158,6 +161,7 @@ describe('New Item Reducer', (): void => {
 		const newState = reducer(DEFAULT_TEST_STATE, resetAction);
 		expect(newState).toEqual({
 			item: itemToEdit,
+			errorMessage: '',
 		});
 	});
 });
