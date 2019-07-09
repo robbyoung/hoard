@@ -1,17 +1,3 @@
-const DARK_GREEN = '#009933';
-const DARK_RED = '#cc0000';
-
-export function getCategoryColour(category: string): string {
-	switch (category) {
-		case 'Book':
-			return DARK_GREEN;
-		case 'Game':
-			return DARK_RED;
-		default:
-			return '';
-	}
-}
-
 const CHART_COLOURS: string[] = [
 	'#db5353', // red
 	'#2f69c6', // blue

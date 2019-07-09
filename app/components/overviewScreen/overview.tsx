@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
 	overview: {
 		backgroundColor: '#e6e6e6',
 	},
+	header: {
+		backgroundColor: '#DC143C',
+	},
 });
 
 interface OverviewState {
@@ -29,6 +32,8 @@ export default class Overview extends Component<
 	): NavigationStackScreenOptions => {
 		return {
 			title: 'My Stuff',
+			headerTintColor: '#ffffff',
+			headerStyle: styles.header,
 			headerRight: <HeaderIcons navigation={props.navigation} />,
 		};
 	};

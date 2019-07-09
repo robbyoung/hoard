@@ -4,7 +4,6 @@ import FontAwesome from 'react-native-fontawesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationInjectedProps } from 'react-navigation';
 import { getCategoryIcon } from '../../utils/iconHelpers';
-import { getCategoryColour } from '../../utils/colourHelpers';
 import { Inventory } from '../../state';
 import { Screens } from '../../screens';
 import store from '../../store';
@@ -15,12 +14,13 @@ const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		marginBottom: 1,
+		backgroundColor: '#ffffff',
 	},
 	title: {
 		fontSize: 22,
 		textAlign: 'center',
 		margin: 10,
-		color: 'white',
+		color: '#585858',
 	},
 	icon: {
 		fontSize: 22,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		marginLeft: 10,
 		paddingTop: 3,
-		color: 'white',
+		color: '#DC143C',
 	},
 });
 
@@ -36,9 +36,6 @@ interface Props extends NavigationInjectedProps {
 	item: Inventory;
 }
 export default class OverviewItem extends Component<Props> {
-	private containerColour = {
-		backgroundColor: getCategoryColour(this.props.item.category),
-	};
 	public render(): JSX.Element {
 		return (
 			<TouchableOpacity
@@ -50,7 +47,7 @@ export default class OverviewItem extends Component<Props> {
 					store.dispatch(editItem);
 					this.props.navigation.navigate(Screens.ItemDetails);
 				}}>
-				<View style={[this.containerColour, styles.container]}>
+				<View style={[styles.container]}>
 					<FontAwesome style={styles.icon}>
 						{getCategoryIcon(this.props.item.category)}
 					</FontAwesome>

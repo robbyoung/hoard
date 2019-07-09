@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
 	headerButton: {
 		marginRight: 20,
 		fontSize: 22,
+		color: '#ffffff',
 	},
 });
 
