@@ -8,6 +8,8 @@ import { getCategoryIcon } from '../../utils/iconHelpers';
 import store from '../../store';
 import { Screens } from '../../screens';
 import { Inventory } from '../../state';
+import { SetItemToEditAction } from '../../reducers/editItem';
+import { ActionType } from '../../reducers/actions';
 import ItemAttribute from './itemAttribute';
 
 const styles = StyleSheet.create({
@@ -74,9 +76,14 @@ export default class ItemDetails extends Component<
 					{this.state.attributeList}
 				</View>
 				<TouchableOpacity
-					onPress={(): boolean =>
-						this.props.navigation.navigate(Screens.EditItem)
-					}>
+					onPress={(): void => {
+						const editItem: SetItemToEditAction = {
+							type: ActionType.SetItemToEdit,
+							newItem: this.state.item,
+						};
+						store.dispatch(editItem);
+						this.props.navigation.navigate(Screens.EditItem);
+					}}>
 					<Text>Edit</Text>
 				</TouchableOpacity>
 			</View>
@@ -84,7 +91,16 @@ export default class ItemDetails extends Component<
 	}
 
 	private refreshState(): void {
-		const item = store.getState().editItem.item;
+		const state = store.getState();
+		const itemId = state.editItem.item.id;
+		const item = state.inventory.inventory.find(
+			(inv): boolean => inv.id === itemId,
+		);
+
+		if (item === undefined) {
+			throw new Error(`Selected inventory ${itemId} could not be found`);
+		}
+
 		this.setState({
 			item,
 			attributeList: item.attributes.map(
