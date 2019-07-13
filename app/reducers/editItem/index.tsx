@@ -47,6 +47,7 @@ function setName(
 ): EditItemState {
 	const newState = cloneDeep(oldState);
 	newState.item.name = action.name;
+	newState.errorMessage = '';
 	return newState;
 }
 
@@ -57,6 +58,7 @@ function setCategory(
 	const newState = cloneDeep(oldState);
 	newState.item.category = action.categoryName;
 	newState.item.attributes = cloneDeep(action.attributes);
+	newState.errorMessage = '';
 	return newState;
 }
 
@@ -71,6 +73,7 @@ function setAttribute(
 	if (match) {
 		match.value = action.attribute.value;
 	}
+	newState.errorMessage = '';
 	return newState;
 }
 
@@ -105,6 +108,8 @@ function validateEdit(
 		newState.errorMessage = 'An item already exists with that name';
 	} else if (categories[item.category] === undefined) {
 		newState.errorMessage = 'Please select a category';
+	} else if (item.name === '') {
+		newState.errorMessage = 'Please give your item a name';
 	} else {
 		newState.errorMessage = '';
 	}
