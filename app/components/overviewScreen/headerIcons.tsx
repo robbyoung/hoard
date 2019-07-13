@@ -5,6 +5,7 @@ import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { ActionType } from '../../reducers/actions';
 import store from '../../store';
 import { Screens } from '../../screens';
+import { white } from '../../styles';
 
 const styles = StyleSheet.create({
 	headerButtonList: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
 	headerButton: {
 		marginRight: 20,
 		fontSize: 22,
-		color: '#ffffff',
+		color: white,
 	},
 });
 

@@ -6,15 +6,13 @@ import {
 } from 'react-navigation';
 import { Unsubscribe } from 'redux';
 import store from '../../store';
+import { lightColor, white, headerStyle } from '../../styles';
 import OverviewItem from './overviewItem';
 import HeaderIcons from './headerIcons';
 
 const styles = StyleSheet.create({
 	overview: {
-		backgroundColor: '#e6e6e6',
-	},
-	header: {
-		backgroundColor: '#DC143C',
+		backgroundColor: lightColor,
 	},
 });
 
@@ -32,8 +30,8 @@ export default class Overview extends Component<
 	): NavigationStackScreenOptions => {
 		return {
 			title: 'My Stuff',
-			headerTintColor: '#ffffff',
-			headerStyle: styles.header,
+			headerTintColor: white,
+			headerStyle: headerStyle,
 			headerRight: <HeaderIcons navigation={props.navigation} />,
 		};
 	};

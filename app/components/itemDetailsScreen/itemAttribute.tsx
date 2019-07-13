@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Attribute } from '../../state';
+import { black } from '../../styles';
 
 const styles = StyleSheet.create({
 	container: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 	},
 	value: {
-		color: '#000000',
+		color: black,
 		fontSize: 22,
 	},
 });

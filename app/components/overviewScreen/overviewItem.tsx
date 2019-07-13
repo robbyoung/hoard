@@ -9,18 +9,19 @@ import { Screens } from '../../screens';
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
 import { SetItemToEditAction } from '../../reducers/editItem';
+import { darkColor, black, white } from '../../styles';
 
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		marginBottom: 1,
-		backgroundColor: '#ffffff',
+		backgroundColor: white,
 	},
 	title: {
 		fontSize: 22,
 		textAlign: 'center',
 		margin: 10,
-		color: '#585858',
+		color: black,
 	},
 	icon: {
 		fontSize: 22,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		marginLeft: 10,
 		paddingTop: 3,
-		color: '#DC143C',
+		color: darkColor,
 	},
 });
 

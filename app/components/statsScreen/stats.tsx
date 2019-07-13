@@ -3,12 +3,28 @@ import { View } from 'react-native';
 import { NavigationInjectedProps } from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Unsubscribe } from 'redux';
+import { white, headerStyle } from '../../styles';
 import store from '../../store';
-import { getColourForWedgeIndex } from '../../utils/colourHelpers';
 import { ActionType } from '../../reducers/actions';
 import PieChart from './pieChart';
 import AttributePicker from './attributePicker';
 import Legend from './legend';
+
+const CHART_COLOURS: string[] = [
+	'#db5353', // red
+	'#2f69c6', // blue
+	'#27b239', // green
+	'#dde02f', // yellow
+	'#e2a618', // orange
+	'#b02ab2', // purple
+	'#8e8e8e', // grey
+	'#4ed3d3', // teal
+	'#000000', // black
+];
+
+function getColourForWedgeIndex(index: number): string {
+	return CHART_COLOURS[index % CHART_COLOURS.length];
+}
 
 function getDataForChart(): StatsState {
 	const state = store.getState();
@@ -71,6 +87,8 @@ export default class Stats extends Component<
 	public state = getDataForChart();
 	public static navigationOptions = {
 		title: 'Stats',
+		headerTintColor: white,
+		headerStyle: headerStyle,
 	};
 
 	public componentWillMount(): void {

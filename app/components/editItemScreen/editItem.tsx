@@ -16,6 +16,13 @@ import {
 	EditItemNameAction,
 	ValidateEditAction,
 } from '../../reducers/editItem';
+import {
+	lightColor,
+	darkColor,
+	white,
+	headerStyle,
+	warning,
+} from '../../styles';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
@@ -34,7 +41,7 @@ export const styles = StyleSheet.create({
 	},
 	textField: {
 		width: 200,
-		backgroundColor: '#eee',
+		backgroundColor: lightColor,
 	},
 	heading: {
 		fontWeight: 'bold',
@@ -46,17 +53,17 @@ export const styles = StyleSheet.create({
 	button: {
 		width: 80,
 		height: 40,
-		backgroundColor: '#bbb',
+		backgroundColor: darkColor,
 		margin: 10,
 		alignContent: 'center',
 	},
 	buttonText: {
 		fontSize: 20,
 		padding: 10,
-		color: '#fff',
+		color: white,
 	},
 	errorMessage: {
-		color: '#990000',
+		color: warning,
 	},
 });
 
@@ -74,6 +81,8 @@ export default class EditItem extends Component<
 
 	public static navigationOptions = {
 		title: 'New Item',
+		headerTintColor: white,
+		headerStyle: headerStyle,
 	};
 
 	public state = {

@@ -7,6 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { getCategoryIcon } from '../../utils/iconHelpers';
 import store from '../../store';
 import { Screens } from '../../screens';
+import { lightColor, white, headerStyle, darkColor, black } from '../../styles';
 import { Inventory } from '../../state';
 import { SetItemToEditAction } from '../../reducers/editItem';
 import { ActionType } from '../../reducers/actions';
@@ -21,20 +22,24 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		textAlign: 'center',
 		margin: 10,
+		fontWeight: 'bold',
+		color: black,
 	},
 	attributes: {
 		margin: 10,
 		padding: 5,
 		borderRadius: 5,
-		backgroundColor: '#f2f2f2',
+		backgroundColor: lightColor,
 	},
 	icon: {
 		marginTop: 5,
 		marginRight: 5,
 		fontSize: 22,
+		color: darkColor,
 	},
 	category: {
 		fontSize: 22,
+		color: black,
 	},
 });
 
@@ -49,6 +54,8 @@ export default class ItemDetails extends Component<
 	private unsubscribe: Unsubscribe = (): void => undefined;
 	public static navigationOptions = {
 		title: 'Details',
+		headerTintColor: white,
+		headerStyle: headerStyle,
 	};
 
 	public componentWillMount(): void {
