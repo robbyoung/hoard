@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
-import { NavigationInjectedProps } from 'react-navigation';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
-import { ActionType } from '../../reducers/actions';
-import store from '../../store';
-import { Screens } from '../../screens';
-import { white } from '../../styles';
+import FontAwesome from 'react-native-fontawesome';
+import { white, darkColor } from '../../styles';
 
 const styles = StyleSheet.create({
+	header: {
+		backgroundColor: darkColor,
+	},
 	headerButtonList: {
 		flexDirection: 'row',
 	},
@@ -18,30 +17,46 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default class HeaderIcons extends Component<NavigationInjectedProps> {
+interface HeaderInfo {
+	title: string;
+	headerTintColor: string;
+	headerStyle: { backgroundColor: string };
+	headerRight: JSX.Element;
+}
+
+interface HeaderIconButton {
+	icon: string;
+	callback: () => void;
+}
+
+export default function createHeader(
+	title: string,
+	buttons: HeaderIconButton[],
+): HeaderInfo {
+	return {
+		title,
+		headerTintColor: white,
+		headerStyle: styles.header,
+		headerRight: <HeaderIcons buttons={buttons} />,
+	};
+}
+
+interface HeaderIconProps {
+	buttons: HeaderIconButton[];
+}
+class HeaderIcons extends Component<HeaderIconProps> {
 	public render(): JSX.Element {
-		return (
-			<View style={styles.headerButtonList}>
-				<TouchableOpacity
-					onPress={(): boolean =>
-						this.props.navigation.navigate(Screens.Stats)
-					}>
-					<FontAwesome style={styles.headerButton}>
-						{Icons.chartPie}
-					</FontAwesome>
-				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={(): void => {
-						store.dispatch({
-							type: ActionType.SetItemToEdit,
-						});
-						this.props.navigation.navigate(Screens.EditItem);
-					}}>
-					<FontAwesome style={styles.headerButton}>
-						{Icons.plusCircle}
-					</FontAwesome>
-				</TouchableOpacity>
-			</View>
+		const buttons = this.props.buttons.map(
+			(button, index): JSX.Element => {
+				return (
+					<TouchableOpacity key={index} onPress={button.callback}>
+						<FontAwesome style={styles.headerButton}>
+							{button.icon}
+						</FontAwesome>
+					</TouchableOpacity>
+				);
+			},
 		);
+		return <View style={styles.headerButtonList}>{buttons}</View>;
 	}
 }

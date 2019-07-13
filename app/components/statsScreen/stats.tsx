@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { NavigationInjectedProps } from 'react-navigation';
+import {
+	NavigationInjectedProps,
+	NavigationStackScreenOptions,
+} from 'react-navigation';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Unsubscribe } from 'redux';
-import { white, headerStyle } from '../../styles';
+import createHeader from '../overviewScreen/headerIcons';
+
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
 import PieChart from './pieChart';
@@ -85,10 +89,8 @@ export default class Stats extends Component<
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
 	public state = getDataForChart();
-	public static navigationOptions = {
-		title: 'Stats',
-		headerTintColor: white,
-		headerStyle: headerStyle,
+	public static navigationOptions = (): NavigationStackScreenOptions => {
+		return createHeader('Stats', []);
 	};
 
 	public componentWillMount(): void {

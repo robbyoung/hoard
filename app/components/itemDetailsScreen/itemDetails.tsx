@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { Unsubscribe } from 'redux';
 import { Text, View, StyleSheet } from 'react-native';
-import { NavigationInjectedProps } from 'react-navigation';
-import FontAwesome from 'react-native-fontawesome';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {
+	NavigationInjectedProps,
+	NavigationStackScreenOptions,
+} from 'react-navigation';
+import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { getCategoryIcon } from '../../utils/iconHelpers';
 import store from '../../store';
 import { Screens } from '../../screens';
-import { lightColor, white, headerStyle, darkColor, black } from '../../styles';
+import { lightColor, darkColor, black } from '../../styles';
 import { Inventory } from '../../state';
 import { SetItemToEditAction } from '../../reducers/editItem';
 import { ActionType } from '../../reducers/actions';
+import createHeader from '../overviewScreen/headerIcons';
 import ItemAttribute from './itemAttribute';
 
 const styles = StyleSheet.create({
@@ -52,10 +55,28 @@ export default class ItemDetails extends Component<
 	ItemDetailsState
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
-	public static navigationOptions = {
-		title: 'Details',
-		headerTintColor: white,
-		headerStyle: headerStyle,
+	public static navigationOptions = (
+		props: NavigationInjectedProps,
+	): NavigationStackScreenOptions => {
+		return createHeader('Details', [
+			{
+				icon: Icons.pencilAlt,
+				callback: (): void => {
+					const editItem: SetItemToEditAction = {
+						type: ActionType.SetItemToEdit,
+						newItem: store.getState().editItem.item,
+					};
+					store.dispatch(editItem);
+					props.navigation.navigate(Screens.EditItem);
+				},
+			},
+			{
+				icon: Icons.trash,
+				callback: (): void => {
+					console.error('Not implemented yet');
+				},
+			},
+		]);
 	};
 
 	public componentWillMount(): void {
@@ -82,17 +103,6 @@ export default class ItemDetails extends Component<
 				<View style={styles.attributes}>
 					{this.state.attributeList}
 				</View>
-				<TouchableOpacity
-					onPress={(): void => {
-						const editItem: SetItemToEditAction = {
-							type: ActionType.SetItemToEdit,
-							newItem: this.state.item,
-						};
-						store.dispatch(editItem);
-						this.props.navigation.navigate(Screens.EditItem);
-					}}>
-					<Text>Edit</Text>
-				</TouchableOpacity>
 			</View>
 		);
 	}

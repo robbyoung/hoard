@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Picker, Text } from 'react-native';
-import { headerStyle, white } from '../../styles';
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
 import { styles } from './editItem';
@@ -17,12 +16,6 @@ export default class CategoryPicker extends Component<
 	CategoryPickerProps,
 	CategoryPickerState
 > {
-	public static navigationOptions = {
-		title: 'New Item',
-		headerTintColor: white,
-		headerStyle: headerStyle,
-	};
-
 	public state = {
 		pickerItems: this.getCategoryPickerItems(),
 	};

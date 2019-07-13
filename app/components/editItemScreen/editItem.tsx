@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
+import { View, StyleSheet, Text, TextInput } from 'react-native';
 import {
-	View,
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-} from 'react-native';
-import { NavigationInjectedProps } from 'react-navigation';
+	NavigationInjectedProps,
+	NavigationStackScreenOptions,
+} from 'react-navigation';
+import { Icons } from 'react-native-fontawesome';
 import { Unsubscribe } from 'redux';
 import store from '../../store';
 import { AttributeType } from '../../state';
@@ -16,13 +14,8 @@ import {
 	EditItemNameAction,
 	ValidateEditAction,
 } from '../../reducers/editItem';
-import {
-	lightColor,
-	darkColor,
-	white,
-	headerStyle,
-	warning,
-} from '../../styles';
+import { lightColor, darkColor, white, warning } from '../../styles';
+import createHeader from '../overviewScreen/headerIcons';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
@@ -79,10 +72,19 @@ export default class EditItem extends Component<
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
-	public static navigationOptions = {
-		title: 'New Item',
-		headerTintColor: white,
-		headerStyle: headerStyle,
+	public static navigationOptions = (
+		props: NavigationInjectedProps,
+	): NavigationStackScreenOptions => {
+		const emptyName = store.getState().editItem.item.name === '';
+		const title = emptyName ? 'New Item' : 'Edit Item';
+		return createHeader(title, [
+			{
+				icon: Icons.check,
+				callback: async (): Promise<void> => {
+					await EditItem.submitItem(props);
+				},
+			},
+		]);
 	};
 
 	public state = {
@@ -118,11 +120,6 @@ export default class EditItem extends Component<
 				</View>
 				<CategoryPicker chosenCategory={this.state.categoryName} />
 				{this.state.attributeFields}
-				<TouchableOpacity
-					onPress={(): void => void this.submitItem()}
-					style={styles.button}>
-					<Text style={styles.buttonText}>Submit</Text>
-				</TouchableOpacity>
 				<Text style={styles.errorMessage}>
 					{this.state.errorMessage}
 				</Text>
@@ -178,7 +175,9 @@ export default class EditItem extends Component<
 		store.dispatch(setNameAction);
 	}
 
-	private async submitItem(): Promise<void> {
+	private static async submitItem(
+		navigator: NavigationInjectedProps,
+	): Promise<void> {
 		const state = store.getState();
 		const validateEditAction: ValidateEditAction = {
 			type: ActionType.ValidateEdit,
@@ -187,13 +186,14 @@ export default class EditItem extends Component<
 		};
 		await store.dispatch(validateEditAction);
 
-		if (this.state.errorMessage === '') {
+		const errorMessage = store.getState().editItem.errorMessage;
+		if (errorMessage === '') {
 			const addInventoryAction: AddInventoryAction = {
 				type: ActionType.AddInventory,
 				newItem: store.getState().editItem.item,
 			};
 			store.dispatch(addInventoryAction);
-			this.props.navigation.goBack();
+			navigator.navigation.goBack();
 		}
 	}
 }

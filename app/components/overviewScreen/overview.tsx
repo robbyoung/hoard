@@ -5,10 +5,13 @@ import {
 	NavigationStackScreenOptions,
 } from 'react-navigation';
 import { Unsubscribe } from 'redux';
+import { Icons } from 'react-native-fontawesome';
+import { Screens } from '../../screens';
+import { ActionType } from '../../reducers/actions';
 import store from '../../store';
-import { lightColor, white, headerStyle } from '../../styles';
+import { lightColor } from '../../styles';
 import OverviewItem from './overviewItem';
-import HeaderIcons from './headerIcons';
+import createHeader from './headerIcons';
 
 const styles = StyleSheet.create({
 	overview: {
@@ -28,13 +31,39 @@ export default class Overview extends Component<
 	public static navigationOptions = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
-		return {
-			title: 'My Stuff',
-			headerTintColor: white,
-			headerStyle: headerStyle,
-			headerRight: <HeaderIcons navigation={props.navigation} />,
-		};
+		return createHeader('My Stuff', [
+			{
+				icon: Icons.chartPie,
+				callback: (): void => {
+					props.navigation.navigate(Screens.Stats);
+				},
+			},
+			{
+				icon: Icons.plusCircle,
+				callback: (): void => {
+					store.dispatch({
+						type: ActionType.SetItemToEdit,
+					});
+					props.navigation.navigate(Screens.EditItem);
+				},
+			},
+		]);
 	};
+
+	/* <TouchableOpacity key={index}
+					onPress={>
+					<FontAwesome style={styles.headerButton}>
+						{Icons.chartPie}
+					</FontAwesome>
+				</TouchableOpacity>
+<TouchableOpacity
+					onPress={(): void => {
+						
+					}}>
+					<FontAwesome style={styles.headerButton}>
+						{Icons.plusCircle}
+					</FontAwesome>
+				</TouchableOpacity> */
 
 	public state = {
 		inventoryList: this.getInventoryList(),
