@@ -23,9 +23,9 @@ export default class CategoryPicker extends Component<
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
-				<Text style={styles.heading}>Category:</Text>
+				<Text style={styles.key}>Category</Text>
 				<Picker
-					style={styles.inputField}
+					style={styles.categoryPicker}
 					selectedValue={this.props.chosenCategory}
 					onValueChange={(categoryName): void => {
 						const attributes =

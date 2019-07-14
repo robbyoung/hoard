@@ -24,9 +24,7 @@ export default class NumberAttributeInput extends Component<{
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
-				<Text style={styles.heading}>
-					{this.props.attribute.name}:{' '}
-				</Text>
+				<Text style={styles.key}>{this.props.attribute.name}</Text>
 				<TextInput
 					value={this.props.attribute.value}
 					onChangeText={(value: string): void =>

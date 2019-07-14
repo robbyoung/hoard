@@ -64,7 +64,7 @@ export default class ItemDetails extends Component<
 				callback: (): void => {
 					const editItem: SetItemToEditAction = {
 						type: ActionType.SetItemToEdit,
-						newItem: store.getState().editItem.item,
+						newItem: ItemDetails.getSavedItemFromState(),
 					};
 					store.dispatch(editItem);
 					props.navigation.navigate(Screens.EditItem);
@@ -108,6 +108,19 @@ export default class ItemDetails extends Component<
 	}
 
 	private refreshState(): void {
+		const item = ItemDetails.getSavedItemFromState();
+
+		this.setState({
+			item,
+			attributeList: item.attributes.map(
+				(attribute): JSX.Element => (
+					<ItemAttribute attribute={attribute} key={attribute.name} />
+				),
+			),
+		});
+	}
+
+	private static getSavedItemFromState(): Inventory {
 		const state = store.getState();
 		const itemId = state.editItem.item.id;
 		const item = state.inventory.inventory.find(
@@ -118,13 +131,6 @@ export default class ItemDetails extends Component<
 			throw new Error(`Selected inventory ${itemId} could not be found`);
 		}
 
-		this.setState({
-			item,
-			attributeList: item.attributes.map(
-				(attribute): JSX.Element => (
-					<ItemAttribute attribute={attribute} key={attribute.name} />
-				),
-			),
-		});
+		return item;
 	}
 }

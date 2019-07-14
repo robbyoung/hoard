@@ -14,7 +14,7 @@ import {
 	EditItemNameAction,
 	ValidateEditAction,
 } from '../../reducers/editItem';
-import { lightColor, darkColor, white, warning } from '../../styles';
+import { lightColor, darkColor, white, warning, black } from '../../styles';
 import createHeader from '../overviewScreen/headerIcons';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
@@ -26,35 +26,55 @@ const SELECT_CATEGORY_TEXT = 'Pick One';
 export const styles = StyleSheet.create({
 	row: {
 		flexDirection: 'row',
+		margin: 5,
+	},
+	attributes: {
 		margin: 10,
-	},
-	inputField: {
-		width: 200,
-		height: 30,
-	},
-	textField: {
-		width: 200,
+		padding: 5,
+		borderRadius: 5,
 		backgroundColor: lightColor,
 	},
-	heading: {
+	textField: {
+		paddingTop: 1,
+		paddingBottom: 1,
+		fontSize: 20,
+		color: black,
+		backgroundColor: white,
+		borderRadius: 5,
+		marginLeft: 5,
+		width: '48%',
+	},
+	title: {
+		width: '90%',
+		fontSize: 30,
+		textAlign: 'center',
+		margin: '5%',
+		marginTop: 10,
+		marginBottom: 0,
 		fontWeight: 'bold',
+		color: black,
+		backgroundColor: lightColor,
+	},
+	key: {
+		textAlign: 'right',
 		fontSize: 22,
+		fontWeight: 'bold',
+		width: '50%',
+		marginRight: 3,
+		color: darkColor,
+	},
+	categoryPicker: {
+		width: '49%',
+		height: 30,
+		fontSize: 22,
+		marginLeft: 3,
+		backgroundColor: white,
 	},
 	text: {
 		fontSize: 22,
+		color: black,
 	},
-	button: {
-		width: 80,
-		height: 40,
-		backgroundColor: darkColor,
-		margin: 10,
-		alignContent: 'center',
-	},
-	buttonText: {
-		fontSize: 20,
-		padding: 10,
-		color: white,
-	},
+
 	errorMessage: {
 		color: warning,
 	},
@@ -115,11 +135,13 @@ export default class EditItem extends Component<
 							this.setItemName(value)
 						}
 						placeholder="Name"
-						style={styles.textField}
+						style={styles.title}
 					/>
 				</View>
-				<CategoryPicker chosenCategory={this.state.categoryName} />
-				{this.state.attributeFields}
+				<View style={styles.attributes}>
+					<CategoryPicker chosenCategory={this.state.categoryName} />
+					{this.state.attributeFields}
+				</View>
 				<Text style={styles.errorMessage}>
 					{this.state.errorMessage}
 				</Text>

@@ -5,6 +5,7 @@ import { styles } from '../editItem';
 import store from '../../../store';
 import { ActionType } from '../../../reducers/actions';
 import { EditItemAttributeAction } from '../../../reducers/editItem';
+import { darkColor, white } from '../../../styles';
 
 function setBoolAttributeValue(value: boolean, attribute: Attribute): void {
 	const action: EditItemAttributeAction = {
@@ -24,10 +25,10 @@ export default class BoolAttributeInput extends Component<{
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
-				<Text style={styles.heading}>
-					{this.props.attribute.name}:{' '}
-				</Text>
+				<Text style={styles.key}>{this.props.attribute.name}</Text>
 				<Switch
+					thumbColor={white}
+					trackColor={{ true: darkColor, false: '#ccc' }}
 					onValueChange={(value: boolean): void =>
 						setBoolAttributeValue(value, this.props.attribute)
 					}
