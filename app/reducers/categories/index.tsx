@@ -1,7 +1,5 @@
 import { Action } from 'redux';
-import { cloneDeep } from 'lodash';
 import { CategoriesState } from '../../state';
-import { ActionType } from '../actions';
 import testCategories from './testCategories';
 
 const defaultCategories = testCategories;
@@ -11,9 +9,7 @@ export default function categoriesReducer(
 	action: Action,
 ): CategoriesState {
 	switch (action.type) {
-		case ActionType.AddCategory:
-		case ActionType.RemoveCategory:
 		default:
-			return cloneDeep(state);
+			return state;
 	}
 }
