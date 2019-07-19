@@ -1,12 +1,11 @@
 import { Action } from 'redux';
 import { EditItemState, AttributeType } from '../../state';
 import { ActionType } from '../actions';
-import reducer, {
-	EditItemNameAction,
-	EditItemCategoryAction,
-	EditItemAttributeAction,
-	SetItemToEditAction,
-} from './index';
+import { EditItemNameAction } from '../../actions/editItemName';
+import { EditItemAttributeAction } from '../../actions/editItemAttribute';
+import { EditItemCategoryAction } from '../../actions/editItemCategory';
+import { SetItemToEditAction } from '../../actions/setItemToEdit';
+import reducer from './index';
 
 const DEFAULT_TEST_STATE: EditItemState = {
 	item: {

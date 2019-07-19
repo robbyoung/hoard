@@ -8,8 +8,8 @@ import { Inventory } from '../../state';
 import { Screens } from '../../screens';
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
-import { SetItemToEditAction } from '../../reducers/editItem';
 import { darkColor, black, white } from '../../styles';
+import { SetItemToEditAction } from '../../actions/setItemToEdit';
 
 const styles = StyleSheet.create({
 	container: {

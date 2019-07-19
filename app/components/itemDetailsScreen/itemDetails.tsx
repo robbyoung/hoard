@@ -11,7 +11,7 @@ import store from '../../store';
 import { Screens } from '../../screens';
 import { lightColor, darkColor, black } from '../../styles';
 import { Inventory } from '../../state';
-import { SetItemToEditAction } from '../../reducers/editItem';
+import { SetItemToEditAction } from '../../actions/SetItemToEdit';
 import { ActionType } from '../../reducers/actions';
 import createHeader from '../overviewScreen/headerIcons';
 import ItemAttribute from './itemAttribute';

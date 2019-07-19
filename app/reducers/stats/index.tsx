@@ -2,39 +2,19 @@ import { Action } from 'redux';
 import { cloneDeep } from 'lodash';
 import { StatsState } from '../../state';
 import { ActionType } from '../actions';
+import {
+	setStatsAttribute,
+	SetAttributeAction,
+} from '../../actions/setStatsAttribute';
+import {
+	setStatsCategory,
+	SetCategoryAction,
+} from '../../actions/setStatsCategory';
 
 const defaultState: StatsState = {
 	category: 'Book',
 	attribute: 'Completed',
 };
-
-export interface SetCategoryAction extends Action {
-	category: string;
-}
-
-export interface SetAttributeAction extends Action {
-	attribute: string;
-}
-
-function setCategory(
-	action: SetCategoryAction,
-	oldState: StatsState,
-): StatsState {
-	return {
-		category: action.category,
-		attribute: oldState.attribute,
-	};
-}
-
-function SetAttribute(
-	action: SetAttributeAction,
-	oldState: StatsState,
-): StatsState {
-	return {
-		category: oldState.category,
-		attribute: action.attribute,
-	};
-}
 
 export default function statsReducer(
 	state: StatsState = defaultState,
@@ -42,9 +22,9 @@ export default function statsReducer(
 ): StatsState {
 	switch (action.type) {
 		case ActionType.SetStatsCategory:
-			return setCategory(action as SetCategoryAction, state);
+			return setStatsCategory(action as SetCategoryAction, state);
 		case ActionType.SetStatsAttribute:
-			return SetAttribute(action as SetAttributeAction, state);
+			return setStatsAttribute(action as SetAttributeAction, state);
 		default:
 			return cloneDeep(state);
 	}

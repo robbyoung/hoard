@@ -1,10 +1,7 @@
 import { Action } from 'redux';
 import { InventoryState } from '../../state';
 import { ActionType } from '../actions';
-import {
-	addInventory,
-	AddInventoryAction,
-} from '../../actions/addInventory/addInventory';
+import { addInventory, AddInventoryAction } from '../../actions/addInventory';
 import testInventory from './testInventory';
 
 const defaultState: InventoryState = {

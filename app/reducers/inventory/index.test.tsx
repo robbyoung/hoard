@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { cloneDeep } from 'lodash';
 import { InventoryState } from '../../state';
 import { ActionType } from '../actions';
-import { AddInventoryAction } from '../../actions/addInventory/addInventory';
+import { AddInventoryAction } from '../../actions/addInventory';
 import testInventory from './testInventory';
 import reducer from './index';
 

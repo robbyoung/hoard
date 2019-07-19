@@ -4,7 +4,7 @@ import { Attribute } from '../../../state';
 import { styles } from '../editItem';
 import store from '../../../store';
 import { ActionType } from '../../../reducers/actions';
-import { EditItemAttributeAction } from '../../../reducers/editItem';
+import { EditItemAttributeAction } from '../../../actions/editItemAttribute';
 import { darkColor, white } from '../../../styles';
 
 function setBoolAttributeValue(value: boolean, attribute: Attribute): void {

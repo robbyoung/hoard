@@ -9,13 +9,11 @@ import { Unsubscribe } from 'redux';
 import store from '../../store';
 import { AttributeType } from '../../state';
 import { ActionType } from '../../reducers/actions';
-import { AddInventoryAction } from '../../reducers/inventory';
-import {
-	EditItemNameAction,
-	ValidateEditAction,
-} from '../../reducers/editItem';
 import { lightColor, darkColor, white, warning, black } from '../../styles';
 import createHeader from '../overviewScreen/headerIcons';
+import { ValidateEditAction } from '../../actions/validateEditAction';
+import { EditItemNameAction } from '../../actions/editItemName';
+import { AddInventoryAction } from '../../actions/addInventory';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
