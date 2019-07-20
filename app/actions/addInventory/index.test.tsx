@@ -9,12 +9,10 @@ describe('Add Inventory Action', (): void => {
 
 	beforeEach(
 		(): void => {
-			state = {
-				inventory: testStates.defaultInventory,
-			};
+			state = testStates.defaultState;
 			action = {
 				type: ActionType.AddInventory,
-				newItem: testStates.extraItem,
+				newItem: testStates.newItem,
 			};
 		},
 	);
@@ -22,16 +20,14 @@ describe('Add Inventory Action', (): void => {
 	it('can add a new inventory item', (): void => {
 		const newState = addInventory(state, action);
 		newState.inventory[newState.inventory.length - 1].id = 'newId';
-		expect(newState).toEqual({
-			inventory: [...testStates.defaultInventory, testStates.extraItem],
-		});
+		expect(newState).toEqual(testStates.newItemState);
+		expect(state).toEqual(testStates.defaultState);
 	});
 
 	it('can update an existing inventory item', (): void => {
 		action.newItem = testStates.editedItem;
 		const newState = addInventory(state, action);
-		expect(newState).toEqual({
-			inventory: [...testStates.editedInventory],
-		});
+		expect(newState).toEqual(testStates.editedInvState);
+		expect(state).toEqual(testStates.defaultState);
 	});
 });

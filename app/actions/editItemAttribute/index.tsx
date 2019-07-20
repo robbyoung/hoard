@@ -6,17 +6,18 @@ export interface EditItemAttributeAction extends Action {
 	attribute: Attribute;
 }
 
-export function setAttribute(
+export function editItemAttribute(
 	oldState: EditItemState,
 	action: EditItemAttributeAction,
 ): EditItemState {
-	const newState = cloneDeep(oldState);
-	const match = newState.item.attributes.find(
+	const newState: EditItemState = {
+		item: cloneDeep(oldState.item),
+		errorMessage: '',
+	};
+
+	const matchIndex = newState.item.attributes.findIndex(
 		(attr): boolean => attr.name === action.attribute.name,
 	);
-	if (match) {
-		match.value = action.attribute.value;
-	}
-	newState.errorMessage = '';
+	newState.item.attributes[matchIndex] = action.attribute;
 	return newState;
 }

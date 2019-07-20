@@ -2,7 +2,6 @@ import { Action } from 'redux';
 import { EditItemState, AttributeType } from '../../state';
 import { ActionType } from '../actions';
 import { EditItemNameAction } from '../../actions/editItemName';
-import { EditItemAttributeAction } from '../../actions/editItemAttribute';
 import { EditItemCategoryAction } from '../../actions/editItemCategory';
 import { SetItemToEditAction } from '../../actions/setItemToEdit';
 import reducer from './index';
@@ -94,36 +93,6 @@ describe('New Item Reducer', (): void => {
 		const newState = reducer(DEFAULT_TEST_STATE, setCategoryAction);
 		expect(newState.item.category).toEqual(newCategory.name);
 		expect(newState.item.attributes).toEqual(newCategory.attributes);
-	});
-
-	it('can update a new item attribute', (): void => {
-		const updatedAttribute = {
-			name: 'Completed',
-			value: 'T',
-			type: AttributeType.Bool,
-		};
-		const setAttributeAction: EditItemAttributeAction = {
-			type: ActionType.EditItemAttribute,
-			attribute: updatedAttribute,
-		};
-		const newState = reducer(DEFAULT_TEST_STATE, setAttributeAction);
-		expect(newState.item.attributes).toEqual([
-			{
-				name: 'Completed',
-				value: 'T',
-				type: AttributeType.Bool,
-			},
-			{
-				name: 'Page Count',
-				value: '750',
-				type: AttributeType.Number,
-			},
-			{
-				name: 'Series',
-				value: 'N/A',
-				type: AttributeType.String,
-			},
-		]);
 	});
 
 	it('will reset the state if instructed to', (): void => {
