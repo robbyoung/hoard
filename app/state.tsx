@@ -21,7 +21,6 @@ export interface Inventory {
 
 export interface InventoryState {
 	inventory: Inventory[];
-	filteredInventory: Inventory[];
 }
 
 export interface CategoriesState {

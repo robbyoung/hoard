@@ -8,7 +8,6 @@ import reducer from './index';
 
 const DEFAULT_TEST_STATE: InventoryState = {
 	inventory: testInventory,
-	filteredInventory: [testInventory[0], testInventory[2]],
 };
 
 describe('Inventory Reducer', (): void => {
@@ -29,7 +28,6 @@ describe('Inventory Reducer', (): void => {
 		const newState = reducer(state, action);
 		expect(newState).toEqual({
 			inventory: testInventory,
-			filteredInventory: testInventory,
 		});
 	});
 
@@ -49,7 +47,6 @@ describe('Inventory Reducer', (): void => {
 		newState.inventory[newState.inventory.length - 1].id = 'newId';
 		expect(newState).toEqual({
 			inventory: [...testInventory, newItem],
-			filteredInventory: DEFAULT_TEST_STATE.filteredInventory,
 		});
 	});
 

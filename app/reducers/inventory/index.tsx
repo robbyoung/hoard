@@ -6,7 +6,6 @@ import testInventory from './testInventory';
 
 const defaultState: InventoryState = {
 	inventory: testInventory,
-	filteredInventory: testInventory,
 };
 
 export default function inventoryReducer(

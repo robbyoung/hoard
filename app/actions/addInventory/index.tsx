@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { cloneDeep } from 'lodash';
 import * as uuid from 'uuid';
 import { Inventory, InventoryState } from '../../state';
 
@@ -11,8 +10,10 @@ export function addInventory(
 	oldState: InventoryState,
 	action: AddInventoryAction,
 ): InventoryState {
-	const newState = cloneDeep(oldState);
-	const newItem = cloneDeep(action.newItem);
+	const newState = {
+		inventory: [...oldState.inventory],
+	};
+	const newItem = action.newItem;
 	const matchingIndex = oldState.inventory.findIndex(
 		(item): boolean => newItem.id === item.id,
 	);
