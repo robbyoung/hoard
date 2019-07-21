@@ -2,13 +2,10 @@ import { AttributeType, EditItemState, Attribute } from '../../state';
 
 export function createState(attributes: Attribute[]): EditItemState {
 	return {
-		item: {
-			name: 'Test Inventory',
-			id: 'id',
-			category: 'Test Category',
-			attributes,
-		},
-		errorMessage: '',
+		name: 'Test Inventory',
+		id: 'id',
+		category: 'Test Category',
+		attributes,
 	};
 }
 

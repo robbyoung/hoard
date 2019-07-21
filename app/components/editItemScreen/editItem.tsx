@@ -11,7 +11,7 @@ import { AttributeType } from '../../state';
 import { ActionType } from '../../reducers/actions';
 import { lightColor, darkColor, white, warning, black } from '../../styles';
 import createHeader from '../overviewScreen/headerIcons';
-import { ValidateEditAction } from '../../actions/validateEditAction';
+import { ValidateEditItemAction } from '../../actions/validateEditAction';
 import { EditItemNameAction } from '../../actions/editItemName';
 import { AddInventoryAction } from '../../actions/addInventory';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
@@ -93,7 +93,7 @@ export default class EditItem extends Component<
 	public static navigationOptions = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
-		const emptyName = store.getState().editItem.item.name === '';
+		const emptyName = store.getState().editItem.name === '';
 		const title = emptyName ? 'New Item' : 'Edit Item';
 		return createHeader(title, [
 			{
@@ -149,8 +149,7 @@ export default class EditItem extends Component<
 
 	private setAttributeFields(): void {
 		const newState = store.getState().editItem;
-		const newItem = newState.item;
-		const attributeFields = newItem.attributes.map(
+		const attributeFields = newState.attributes.map(
 			(attribute): JSX.Element => {
 				switch (attribute.type) {
 					case AttributeType.String:
@@ -175,15 +174,15 @@ export default class EditItem extends Component<
 							/>
 						);
 					default:
-						return <View key="invalid" />;
+						throw new Error('Invalid attribute type');
 				}
 			},
 		);
 		this.setState({
-			itemName: newItem.name,
-			categoryName: newItem.category,
+			itemName: newState.name,
+			categoryName: newState.category,
 			attributeFields,
-			errorMessage: newState.errorMessage,
+			errorMessage: store.getState().validation,
 		});
 	}
 
@@ -199,18 +198,19 @@ export default class EditItem extends Component<
 		navigator: NavigationInjectedProps,
 	): Promise<void> {
 		const state = store.getState();
-		const validateEditAction: ValidateEditAction = {
-			type: ActionType.ValidateEdit,
+		const validateEditAction: ValidateEditItemAction = {
+			type: ActionType.ValidateEditItem,
 			inventory: state.inventory,
 			categories: state.categories,
+			editItem: state.editItem,
 		};
 		await store.dispatch(validateEditAction);
 
-		const errorMessage = store.getState().editItem.errorMessage;
+		const errorMessage = store.getState().validation;
 		if (errorMessage === '') {
 			const addInventoryAction: AddInventoryAction = {
 				type: ActionType.AddInventory,
-				newItem: store.getState().editItem.item,
+				newItem: store.getState().editItem,
 			};
 			store.dispatch(addInventoryAction);
 			navigator.navigation.goBack();

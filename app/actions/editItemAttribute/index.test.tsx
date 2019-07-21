@@ -16,7 +16,7 @@ describe('Edit Item Attribute', (): void => {
 
 		const newState = editItemAttribute(state, action);
 		const expectedState = createState(createAttributes(1));
-		expectedState.item.attributes[0] = action.attribute;
+		expectedState.attributes[0] = action.attribute;
 		expect(newState).toEqual(expectedState);
 		expect(state).toEqual(createState(createAttributes(1)));
 	});
@@ -27,7 +27,7 @@ describe('Edit Item Attribute', (): void => {
 
 		const newState = editItemAttribute(state, action);
 		const expectedState = createState(createAttributes(10));
-		expectedState.item.attributes[2] = action.attribute;
+		expectedState.attributes[2] = action.attribute;
 		expect(newState).toEqual(expectedState);
 		expect(state).toEqual(createState(createAttributes(10)));
 	});

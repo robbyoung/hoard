@@ -6,29 +6,26 @@ import { SetItemToEditAction } from '../../actions/setItemToEdit';
 import reducer from './index';
 
 const DEFAULT_TEST_STATE: EditItemState = {
-	item: {
-		id: 'testId',
-		name: 'American Gods',
-		category: 'Book',
-		attributes: [
-			{
-				name: 'Completed',
-				value: 'F',
-				type: AttributeType.Bool,
-			},
-			{
-				name: 'Page Count',
-				value: '750',
-				type: AttributeType.Number,
-			},
-			{
-				name: 'Series',
-				value: 'N/A',
-				type: AttributeType.String,
-			},
-		],
-	},
-	errorMessage: '',
+	id: 'testId',
+	name: 'American Gods',
+	category: 'Book',
+	attributes: [
+		{
+			name: 'Completed',
+			value: 'F',
+			type: AttributeType.Bool,
+		},
+		{
+			name: 'Page Count',
+			value: '750',
+			type: AttributeType.Number,
+		},
+		{
+			name: 'Series',
+			value: 'N/A',
+			type: AttributeType.String,
+		},
+	],
 };
 
 describe('New Item Reducer', (): void => {
@@ -48,14 +45,11 @@ describe('New Item Reducer', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
 		expect(newState).toEqual({
-			item: {
 				id: '',
 				name: '',
 				category: '',
 				attributes: [],
-			},
-			errorMessage: '',
-		});
+			});
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {
@@ -70,20 +64,17 @@ describe('New Item Reducer', (): void => {
 			name: newName,
 		};
 		const newState = reducer(DEFAULT_TEST_STATE, setNameAction);
-		expect(newState.item.name).toEqual(newName);
+		expect(newState.name).toEqual(newName);
 	});
 
 	it('will reset the state if instructed to', (): void => {
 		action.type = ActionType.SetItemToEdit;
 		const newState = reducer(DEFAULT_TEST_STATE, action);
 		expect(newState).toEqual({
-			item: {
-				id: '',
-				name: '',
-				category: '',
-				attributes: [],
-			},
-			errorMessage: '',
+			id: '',
+			name: '',
+			category: '',
+			attributes: [],
 		});
 	});
 
@@ -105,9 +96,6 @@ describe('New Item Reducer', (): void => {
 			newItem: itemToEdit,
 		};
 		const newState = reducer(DEFAULT_TEST_STATE, resetAction);
-		expect(newState).toEqual({
-			item: itemToEdit,
-			errorMessage: '',
-		});
+		expect(newState).toEqual(itemToEdit);
 	});
 });

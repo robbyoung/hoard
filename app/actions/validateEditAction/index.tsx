@@ -1,33 +1,36 @@
 import { Action } from 'redux';
-import { cloneDeep } from 'lodash';
-import { EditItemState, CategoriesState, InventoryState } from '../../state';
+import {
+	EditItemState,
+	CategoriesState,
+	InventoryState,
+	ValidationState,
+} from '../../state';
 
-export interface ValidateEditAction extends Action {
+export interface ValidateEditItemAction extends Action {
 	inventory: InventoryState;
 	categories: CategoriesState;
+	editItem: EditItemState;
 }
 
 export function validateEdit(
-	oldState: EditItemState,
-	action: ValidateEditAction,
-): EditItemState {
-	const newState = cloneDeep(oldState);
-	const item = oldState.item;
+	oldState: ValidationState,
+	action: ValidateEditItemAction,
+): ValidationState {
+	let newState = '';
+	const item = action.editItem;
 	const categories = action.categories;
-	const inventory = action.inventory.inventory;
+	const inventory = action.inventory;
 
 	if (
 		inventory.find(
 			(inv): boolean => inv.name === item.name && inv.id !== item.id,
 		)
 	) {
-		newState.errorMessage = 'An item already exists with that name';
+		newState = 'An item already exists with that name';
 	} else if (categories[item.category] === undefined) {
-		newState.errorMessage = 'Please select a category';
+		newState = 'Please select a category';
 	} else if (item.name === '') {
-		newState.errorMessage = 'Please give your item a name';
-	} else {
-		newState.errorMessage = '';
+		newState = 'Please give your item a name';
 	}
 
 	return newState;

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import FontAwesome from 'react-native-fontawesome';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationInjectedProps } from 'react-navigation';
-import { getCategoryIcon } from '../../utils/iconHelpers';
 import { Inventory } from '../../state';
 import { Screens } from '../../screens';
 import store from '../../store';
@@ -50,7 +49,11 @@ export default class OverviewItem extends Component<Props> {
 				}}>
 				<View style={[styles.container]}>
 					<FontAwesome style={styles.icon}>
-						{getCategoryIcon(this.props.item.category)}
+						{
+							store.getState().categories[
+								this.props.item.category
+							].icon
+						}
 					</FontAwesome>
 					<Text style={styles.title}>{this.props.item.name}</Text>
 				</View>

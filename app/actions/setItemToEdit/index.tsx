@@ -7,15 +7,12 @@ export interface SetItemToEditAction extends Action {
 	newItem?: Inventory;
 }
 
-export function resetEditItem(
+export function setItemToEdit(
 	oldState: EditItemState,
 	action: SetItemToEditAction,
 ): EditItemState {
 	if (action.newItem !== undefined) {
-		return {
-			item: cloneDeep(action.newItem),
-			errorMessage: '',
-		};
+		return cloneDeep(action.newItem);
 	} else {
 		return cloneDeep(defaultState);
 	}

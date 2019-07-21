@@ -19,7 +19,7 @@ describe('Add Inventory Action', (): void => {
 
 	it('can add a new inventory item', (): void => {
 		const newState = addInventory(state, action);
-		newState.inventory[newState.inventory.length - 1].id = 'newId';
+		newState[newState.length - 1].id = 'newId';
 		expect(newState).toEqual(testStates.newItemState);
 		expect(state).toEqual(testStates.defaultState);
 	});

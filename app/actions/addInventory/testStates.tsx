@@ -21,23 +21,17 @@ function createInventory(id: string): Inventory {
 	};
 }
 
-export const defaultState: InventoryState = {
-	inventory: [
-		createInventory('id1'),
-		createInventory('id2'),
-		createInventory('id3'),
-		createInventory('id4'),
-		createInventory('id5'),
-	],
-};
+export const defaultState: InventoryState = [
+	createInventory('id1'),
+	createInventory('id2'),
+	createInventory('id3'),
+	createInventory('id4'),
+	createInventory('id5'),
+];
 
 export const newItem = createInventory('id6');
-export const newItemState: InventoryState = {
-	inventory: [...defaultState.inventory, newItem],
-};
+export const newItemState: InventoryState = [...defaultState, newItem];
 
 export const editedItem = createInventory('id3');
-export const editedInvState: InventoryState = {
-	inventory: [...defaultState.inventory],
-};
-editedInvState.inventory[2] = editedItem;
+export const editedInvState: InventoryState = [...defaultState];
+editedInvState[2] = editedItem;

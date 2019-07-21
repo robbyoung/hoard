@@ -10,19 +10,17 @@ export function addInventory(
 	oldState: InventoryState,
 	action: AddInventoryAction,
 ): InventoryState {
-	const newState = {
-		inventory: [...oldState.inventory],
-	};
+	const newState = [...oldState];
 	const newItem = action.newItem;
-	const matchingIndex = oldState.inventory.findIndex(
+	const matchingIndex = oldState.findIndex(
 		(item): boolean => newItem.id === item.id,
 	);
 
 	if (matchingIndex === -1) {
 		newItem.id = uuid.v4();
-		newState.inventory.push(newItem);
+		newState.push(newItem);
 	} else {
-		newState.inventory[matchingIndex] = newItem;
+		newState[matchingIndex] = newItem;
 	}
 	return newState;
 }

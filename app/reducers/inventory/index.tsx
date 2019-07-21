@@ -4,9 +4,7 @@ import { ActionType } from '../actions';
 import { addInventory, AddInventoryAction } from '../../actions/addInventory';
 import testInventory from './testInventory';
 
-const defaultState: InventoryState = {
-	inventory: testInventory,
-};
+const defaultState: InventoryState = testInventory;
 
 export default function inventoryReducer(
 	state: InventoryState = defaultState,

@@ -6,7 +6,7 @@ function runTest(oldCategory: string, newCategory: string): void {
 	const state = createTestState(oldCategory);
 	const action: EditItemCategoryAction = {
 		type: ActionType.EditItemAttribute,
-		attributes: testCategories[newCategory],
+		attributes: testCategories[newCategory].attributes,
 		categoryName: newCategory,
 	};
 

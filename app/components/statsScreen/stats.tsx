@@ -35,7 +35,7 @@ function getDataForChart(): StatsState {
 	const category = state.stats.category;
 	const attribute = state.stats.attribute;
 
-	const items = state.inventory.inventory.filter(
+	const items = state.inventory.filter(
 		(item): boolean => category === item.category,
 	);
 	const tally: { [id: string]: number } = {};

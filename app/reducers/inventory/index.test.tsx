@@ -3,9 +3,7 @@ import { InventoryState } from '../../state';
 import testInventory from './testInventory';
 import reducer from './index';
 
-const DEFAULT_TEST_STATE: InventoryState = {
-	inventory: testInventory,
-};
+const DEFAULT_TEST_STATE: InventoryState = testInventory;
 
 describe('Inventory Reducer', (): void => {
 	let state: InventoryState | undefined;
@@ -23,9 +21,7 @@ describe('Inventory Reducer', (): void => {
 	it('has a default state if none is passed in', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
-		expect(newState).toEqual({
-			inventory: testInventory,
-		});
+		expect(newState).toEqual(testInventory);
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {

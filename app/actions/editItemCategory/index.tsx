@@ -11,13 +11,10 @@ export function editItemCategory(
 	action: EditItemCategoryAction,
 ): EditItemState {
 	const newState: EditItemState = {
-		item: {
-			name: oldState.item.name,
-			id: oldState.item.id,
-			category: action.categoryName,
-			attributes: action.attributes,
-		},
-		errorMessage: '',
+		name: oldState.name,
+		id: oldState.id,
+		category: action.categoryName,
+		attributes: action.attributes,
 	};
 	return newState;
 }

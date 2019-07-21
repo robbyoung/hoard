@@ -10,18 +10,15 @@ export function editItemAttribute(
 	action: EditItemAttributeAction,
 ): EditItemState {
 	const newState: EditItemState = {
-		item: {
-			name: oldState.item.name,
-			id: oldState.item.id,
-			category: oldState.item.category,
-			attributes: [...oldState.item.attributes],
-		},
-		errorMessage: '',
+		name: oldState.name,
+		id: oldState.id,
+		category: oldState.category,
+		attributes: [...oldState.attributes],
 	};
 
-	const matchIndex = newState.item.attributes.findIndex(
+	const matchIndex = newState.attributes.findIndex(
 		(attr): boolean => attr.name === action.attribute.name,
 	);
-	newState.item.attributes[matchIndex] = action.attribute;
+	newState.attributes[matchIndex] = action.attribute;
 	return newState;
 }

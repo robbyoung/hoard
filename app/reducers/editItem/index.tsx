@@ -12,25 +12,18 @@ import {
 	EditItemAttributeAction,
 } from '../../actions/editItemAttribute';
 import {
-	resetEditItem,
+	setItemToEdit,
 	SetItemToEditAction,
 } from '../../actions/setItemToEdit';
-import {
-	validateEdit,
-	ValidateEditAction,
-} from '../../actions/validateEditAction';
 
 export const defaultState: EditItemState = {
-	item: {
-		id: '',
-		name: '',
-		category: '',
-		attributes: [],
-	},
-	errorMessage: '',
+	id: '',
+	name: '',
+	category: '',
+	attributes: [],
 };
 
-export default function inventoryReducer(
+export default function editItemReducer(
 	state: EditItemState = defaultState,
 	action: Action,
 ): EditItemState {
@@ -42,9 +35,7 @@ export default function inventoryReducer(
 		case ActionType.EditItemAttribute:
 			return editItemAttribute(state, action as EditItemAttributeAction);
 		case ActionType.SetItemToEdit:
-			return resetEditItem(state, action as SetItemToEditAction);
-		case ActionType.ValidateEdit:
-			return validateEdit(state, action as ValidateEditAction);
+			return setItemToEdit(state, action as SetItemToEditAction);
 		default:
 			return cloneDeep(state);
 	}

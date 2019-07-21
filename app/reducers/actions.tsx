@@ -6,5 +6,5 @@ export enum ActionType {
 	EditItemCategory,
 	EditItemAttribute,
 	SetItemToEdit,
-	ValidateEdit,
+	ValidateEditItem,
 }

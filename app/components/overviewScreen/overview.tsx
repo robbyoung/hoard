@@ -93,7 +93,7 @@ export default class Overview extends Component<
 	private getInventoryList(): JSX.Element[] {
 		return store
 			.getState()
-			.inventory.inventory.map(
+			.inventory.map(
 				(inventory): JSX.Element => (
 					<OverviewItem
 						key={inventory.id}

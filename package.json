@@ -1,14 +1,14 @@
 {
-	"name": "Hoard",
+	"name": "hoard",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
 		"start": "react-native run-android",
 		"tsc": "tsc -p tsconfig.json",
 		"prettier": "prettier --write app/**/*.tsx",
-		"eslint": "eslint -c .eslintrc.js app/**/*.tsx",
+		"eslint": "eslint -c .eslintrc.js --fix app/**/*.tsx",
 		"jest": "jest",
-		"check": "npm run prettier && npm run tsc && npm run eslint && npm run jest && echo Passed!"
+		"check": "npm run tsc && npm run eslint && npm run jest && echo Passed!"
 	},
 	"dependencies": {
 		"@types/lodash": "^4.14.133",

@@ -6,7 +6,6 @@ import {
 	NavigationStackScreenOptions,
 } from 'react-navigation';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
-import { getCategoryIcon } from '../../utils/iconHelpers';
 import store from '../../store';
 import { Screens } from '../../screens';
 import { lightColor, darkColor, black } from '../../styles';
@@ -94,7 +93,11 @@ export default class ItemDetails extends Component<
 				<Text style={styles.title}>{this.state.item.name}</Text>
 				<View style={styles.row}>
 					<FontAwesome style={styles.icon}>
-						{getCategoryIcon(this.state.item.category)}
+						{
+							store.getState().categories[
+								this.state.item.category
+							].icon
+						}
 					</FontAwesome>
 					<Text style={styles.category}>
 						{this.state.item.category}
@@ -122,10 +125,8 @@ export default class ItemDetails extends Component<
 
 	private static getSavedItemFromState(): Inventory {
 		const state = store.getState();
-		const itemId = state.editItem.item.id;
-		const item = state.inventory.inventory.find(
-			(inv): boolean => inv.id === itemId,
-		);
+		const itemId = state.editItem.id;
+		const item = state.inventory.find((inv): boolean => inv.id === itemId);
 
 		if (item === undefined) {
 			throw new Error(`Selected inventory ${itemId} could not be found`);
