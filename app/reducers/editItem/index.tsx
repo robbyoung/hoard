@@ -4,7 +4,7 @@ import { EditItemState } from '../../state';
 import { ActionType } from '../actions';
 import { setName, EditItemNameAction } from '../../actions/editItemName';
 import {
-	setCategory,
+	editItemCategory,
 	EditItemCategoryAction,
 } from '../../actions/editItemCategory';
 import {
@@ -38,7 +38,7 @@ export default function inventoryReducer(
 		case ActionType.EditItemName:
 			return setName(state, action as EditItemNameAction);
 		case ActionType.EditItemCategory:
-			return setCategory(state, action as EditItemCategoryAction);
+			return editItemCategory(state, action as EditItemCategoryAction);
 		case ActionType.EditItemAttribute:
 			return editItemAttribute(state, action as EditItemAttributeAction);
 		case ActionType.SetItemToEdit:

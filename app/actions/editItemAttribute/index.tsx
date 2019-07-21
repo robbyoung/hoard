@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { cloneDeep } from 'lodash';
 import { EditItemState, Attribute } from '../../state';
 
 export interface EditItemAttributeAction extends Action {
@@ -11,7 +10,12 @@ export function editItemAttribute(
 	action: EditItemAttributeAction,
 ): EditItemState {
 	const newState: EditItemState = {
-		item: cloneDeep(oldState.item),
+		item: {
+			name: oldState.item.name,
+			id: oldState.item.id,
+			category: oldState.item.category,
+			attributes: [...oldState.item.attributes],
+		},
 		errorMessage: '',
 	};
 

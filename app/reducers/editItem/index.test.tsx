@@ -2,7 +2,6 @@ import { Action } from 'redux';
 import { EditItemState, AttributeType } from '../../state';
 import { ActionType } from '../actions';
 import { EditItemNameAction } from '../../actions/editItemName';
-import { EditItemCategoryAction } from '../../actions/editItemCategory';
 import { SetItemToEditAction } from '../../actions/setItemToEdit';
 import reducer from './index';
 
@@ -72,27 +71,6 @@ describe('New Item Reducer', (): void => {
 		};
 		const newState = reducer(DEFAULT_TEST_STATE, setNameAction);
 		expect(newState.item.name).toEqual(newName);
-	});
-
-	it('can update the new item category', (): void => {
-		const newCategory = {
-			name: 'Fiction',
-			attributes: [
-				{
-					name: 'Author',
-					value: 'Neil Gaiman',
-					type: AttributeType.Number,
-				},
-			],
-		};
-		const setCategoryAction: EditItemCategoryAction = {
-			type: ActionType.EditItemCategory,
-			categoryName: newCategory.name,
-			attributes: newCategory.attributes,
-		};
-		const newState = reducer(DEFAULT_TEST_STATE, setCategoryAction);
-		expect(newState.item.category).toEqual(newCategory.name);
-		expect(newState.item.attributes).toEqual(newCategory.attributes);
 	});
 
 	it('will reset the state if instructed to', (): void => {
