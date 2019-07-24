@@ -12,8 +12,10 @@ import {
 } from '../../actions/setStatsCategory';
 
 const defaultState: StatsState = {
+	data: [],
 	category: 'Book',
-	attribute: 'Completed',
+	attribute: 'Pick One',
+	attributeList: ['Pick One', 'Completed', 'Page Count', 'Series'],
 };
 
 export default function statsReducer(
@@ -26,6 +28,6 @@ export default function statsReducer(
 		case ActionType.SetStatsAttribute:
 			return setStatsAttribute(action as SetAttributeAction, state);
 		default:
-			return cloneDeep(state);
+			return state;
 	}
 }

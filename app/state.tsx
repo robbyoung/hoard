@@ -30,9 +30,18 @@ export interface CategoriesState {
 	[categoryName: string]: Category;
 }
 
+export interface ChartData {
+	key: string;
+	count: number;
+	percentage: number;
+	colour: string;
+}
+
 export interface StatsState {
+	data: ChartData[];
 	category: string;
 	attribute: string;
+	attributeList: string[];
 }
 
 export type EditItemState = Inventory;

@@ -45,11 +45,11 @@ describe('New Item Reducer', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
 		expect(newState).toEqual({
-				id: '',
-				name: '',
-				category: '',
-				attributes: [],
-			});
+			id: '',
+			name: '',
+			category: '',
+			attributes: [],
+		});
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {

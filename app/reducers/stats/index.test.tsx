@@ -1,13 +1,12 @@
 import { Action } from 'redux';
 import { StatsState } from '../../state';
-import { ActionType } from '../actions';
-import { SetCategoryAction } from '../../actions/setStatsCategory';
-import { SetAttributeAction } from '../../actions/setStatsAttribute';
 import reducer from './index';
 
 const DEFAULT_TEST_STATE = {
-	attribute: 'default',
+	data: [],
 	category: 'default',
+	attribute: 'default',
+	attributeList: [],
 };
 
 describe('Stats Reducer', (): void => {
@@ -27,39 +26,15 @@ describe('Stats Reducer', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
 		expect(newState).toEqual({
-			attribute: 'Completed',
+			data: [],
 			category: 'Book',
+			attribute: 'Pick One',
+			attributeList: ['Completed', 'Page Count', 'Series'],
 		});
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {
 		const newState = reducer(state, action);
 		expect(newState).toEqual(DEFAULT_TEST_STATE);
-	});
-
-	it('can update the stats category', (): void => {
-		const newCategory = 'new category';
-		const setCategoryAction: SetCategoryAction = {
-			type: ActionType.SetStatsCategory,
-			category: newCategory,
-		};
-		const newState = reducer(state, setCategoryAction);
-		expect(newState).toEqual({
-			attribute: DEFAULT_TEST_STATE.attribute,
-			category: newCategory,
-		});
-	});
-
-	it('can update the stats attribute', (): void => {
-		const newAttribute = 'new attribute';
-		const setAttributeAction: SetAttributeAction = {
-			type: ActionType.SetStatsAttribute,
-			attribute: newAttribute,
-		};
-		const newState = reducer(state, setAttributeAction);
-		expect(newState).toEqual({
-			attribute: newAttribute,
-			category: DEFAULT_TEST_STATE.category,
-		});
 	});
 });

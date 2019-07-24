@@ -50,21 +50,6 @@ export default class Overview extends Component<
 		]);
 	};
 
-	/* <TouchableOpacity key={index}
-					onPress={>
-					<FontAwesome style={styles.headerButton}>
-						{Icons.chartPie}
-					</FontAwesome>
-				</TouchableOpacity>
-<TouchableOpacity
-					onPress={(): void => {
-						
-					}}>
-					<FontAwesome style={styles.headerButton}>
-						{Icons.plusCircle}
-					</FontAwesome>
-				</TouchableOpacity> */
-
 	public state = {
 		inventoryList: this.getInventoryList(),
 	};

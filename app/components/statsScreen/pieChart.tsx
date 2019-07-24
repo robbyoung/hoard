@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Pie from 'react-native-pie';
-import { ChartData } from './stats';
+import { ChartData } from '../../state';
 
 const CHART_MARGINS = 40;
 const styles = StyleSheet.create({
