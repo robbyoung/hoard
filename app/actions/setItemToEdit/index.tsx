@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { cloneDeep } from 'lodash';
 import { EditItemState, Inventory } from '../../state';
 import { defaultState } from '../../reducers/editItem';
 
@@ -12,8 +11,8 @@ export function setItemToEdit(
 	action: SetItemToEditAction,
 ): EditItemState {
 	if (action.newItem !== undefined) {
-		return cloneDeep(action.newItem);
+		return action.newItem;
 	} else {
-		return cloneDeep(defaultState);
+		return defaultState;
 	}
 }

@@ -29,7 +29,7 @@ describe('Stats Reducer', (): void => {
 			data: [],
 			category: 'Book',
 			attribute: 'Pick One',
-			attributeList: ['Completed', 'Page Count', 'Series'],
+			attributeList: ['Pick One', 'Completed', 'Page Count', 'Series'],
 		});
 	});
 

@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { cloneDeep } from 'lodash';
 import { EditItemState } from '../../state';
 import { ActionType } from '../actions';
 import { setName, EditItemNameAction } from '../../actions/editItemName';
@@ -37,6 +36,6 @@ export default function editItemReducer(
 		case ActionType.SetItemToEdit:
 			return setItemToEdit(state, action as SetItemToEditAction);
 		default:
-			return cloneDeep(state);
+			return state;
 	}
 }

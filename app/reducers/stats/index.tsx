@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-import { cloneDeep } from 'lodash';
 import { StatsState } from '../../state';
 import { ActionType } from '../actions';
 import {

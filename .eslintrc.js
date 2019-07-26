@@ -25,6 +25,7 @@ module.exports = {
         "react",
 		"import",
 		"@typescript-eslint",
+		"ban",
 	],
 	"settings": {
 		"react": {
@@ -40,5 +41,9 @@ module.exports = {
 		"@typescript-eslint/no-floating-promises": "error",
 		"@typescript-eslint/no-for-in-array": "error",
 		"@typescript-eslint/prefer-for-of": "error",
+		"ban/ban": [
+            "error",
+            {"name": "cloneDeep", "message": "Don't use cloneDeep"}
+        ]
     }
 };
