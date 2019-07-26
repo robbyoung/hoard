@@ -6,13 +6,19 @@ import {
 	ValidationState,
 } from '../../state';
 
+export enum EditItemErrors {
+	DuplicateName = 'An item already exists with that name',
+	InvalidCategory = 'Please select a category',
+	InvalidName = 'Please give your item a name',
+}
+
 export interface ValidateEditItemAction extends Action {
 	inventory: InventoryState;
 	categories: CategoriesState;
 	editItem: EditItemState;
 }
 
-export function validateEdit(
+export function validateEditItem(
 	oldState: ValidationState,
 	action: ValidateEditItemAction,
 ): ValidationState {
@@ -26,11 +32,11 @@ export function validateEdit(
 			(inv): boolean => inv.name === item.name && inv.id !== item.id,
 		)
 	) {
-		newState = 'An item already exists with that name';
+		newState = EditItemErrors.DuplicateName;
 	} else if (categories[item.category] === undefined) {
-		newState = 'Please select a category';
+		newState = EditItemErrors.InvalidCategory;
 	} else if (item.name === '') {
-		newState = 'Please give your item a name';
+		newState = EditItemErrors.InvalidName;
 	}
 
 	return newState;

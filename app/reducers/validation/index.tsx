@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { ValidationState } from '../../state';
 import { ActionType } from '../actions';
 import {
-	validateEdit,
+	validateEditItem,
 	ValidateEditItemAction,
 } from '../../actions/validateEditAction';
 
@@ -14,7 +14,7 @@ export default function validationReducer(
 ): ValidationState {
 	switch (action.type) {
 		case ActionType.ValidateEditItem:
-			return validateEdit(state, action as ValidateEditItemAction);
+			return validateEditItem(state, action as ValidateEditItemAction);
 		default:
 			return defaultState;
 	}
