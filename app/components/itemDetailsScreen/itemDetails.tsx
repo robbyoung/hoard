@@ -14,6 +14,7 @@ import { SetItemToEditAction } from '../../actions/SetItemToEdit';
 import { ActionType } from '../../reducers/actions';
 import createHeader from '../overviewScreen/headerIcons';
 import ItemAttribute from './itemAttribute';
+import { DeleteInventoryAction } from '../../actions/deleteInventory';
 
 const styles = StyleSheet.create({
 	row: {
@@ -72,7 +73,15 @@ export default class ItemDetails extends Component<
 			{
 				icon: Icons.trash,
 				callback: (): void => {
-					console.error('Not implemented yet');
+					const item = ItemDetails.getSavedItemFromState();
+					if (item !== undefined) {
+						const deleteItem: DeleteInventoryAction = {
+							type: ActionType.DeleteInventory,
+							itemId: item.id,
+						};
+						props.navigation.goBack();
+						store.dispatch(deleteItem);
+					}
 				},
 			},
 		]);
@@ -112,26 +121,22 @@ export default class ItemDetails extends Component<
 
 	private refreshState(): void {
 		const item = ItemDetails.getSavedItemFromState();
-
-		this.setState({
-			item,
-			attributeList: item.attributes.map(
-				(attribute): JSX.Element => (
-					<ItemAttribute attribute={attribute} key={attribute.name} />
+		if (item) {
+			this.setState({
+				item,
+				attributeList: item.attributes.map(
+					(attribute): JSX.Element => (
+						<ItemAttribute attribute={attribute} key={attribute.name} />
+					),
 				),
-			),
-		});
+			});
+		}
 	}
 
-	private static getSavedItemFromState(): Inventory {
+	private static getSavedItemFromState(): Inventory | undefined {
 		const state = store.getState();
 		const itemId = state.editItem.id;
 		const item = state.inventory.find((inv): boolean => inv.id === itemId);
-
-		if (item === undefined) {
-			throw new Error(`Selected inventory ${itemId} could not be found`);
-		}
-
 		return item;
 	}
 }
