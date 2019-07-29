@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { EditItemState } from '../../state';
 import { ActionType } from '../actions';
-import { setName, EditItemNameAction } from '../../actions/editItemName';
+import { editItemName, EditItemNameAction } from '../../actions/editItemName';
 import {
 	editItemCategory,
 	EditItemCategoryAction,
@@ -28,7 +28,7 @@ export default function editItemReducer(
 ): EditItemState {
 	switch (action.type) {
 		case ActionType.EditItemName:
-			return setName(state, action as EditItemNameAction);
+			return editItemName(state, action as EditItemNameAction);
 		case ActionType.EditItemCategory:
 			return editItemCategory(state, action as EditItemCategoryAction);
 		case ActionType.EditItemAttribute:

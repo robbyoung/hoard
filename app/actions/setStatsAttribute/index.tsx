@@ -28,9 +28,11 @@ export function setStatsAttribute(
 	oldState: StatsState,
 ): StatsState {
 	if (action.attribute == NO_ATTRIBUTE_SELECTED_TEXT) {
-		const newState: StatsState = Object.assign(oldState);
-		newState.attribute = NO_ATTRIBUTE_SELECTED_TEXT;
-		newState.data = [];
+		const newState: StatsState = {
+			...oldState,
+			attribute: NO_ATTRIBUTE_SELECTED_TEXT,
+			data: [],
+		};
 		return newState;
 	}
 
