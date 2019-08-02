@@ -13,7 +13,7 @@ import { ActionType } from '../../reducers/actions';
 import { StatsState } from '../../state';
 import { SetAttributeAction } from '../../actions/setStatsAttribute';
 import PieChart from './pieChart';
-import AttributePicker from './attributePicker';
+import StatsPicker from './statsPicker';
 import Legend from './legend';
 
 export default class Stats extends Component<
@@ -42,7 +42,8 @@ export default class Stats extends Component<
 		return (
 			<View>
 				<ScrollView>
-					<AttributePicker
+					<StatsPicker
+						title={"Attribute:"}
 						selected={this.state.attribute}
 						attributeList={this.state.attributeList}
 						onSelect={(attribute: string): void => {
