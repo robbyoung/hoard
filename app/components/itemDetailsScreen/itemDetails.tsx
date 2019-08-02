@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Unsubscribe } from 'redux';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Alert } from 'react-native';
 import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
@@ -72,9 +72,9 @@ export default class ItemDetails extends Component<
 			},
 			{
 				icon: Icons.trash,
-				callback: (): void => {
+				callback: async (): Promise<void> => {
 					const item = ItemDetails.getSavedItemFromState();
-					if (item !== undefined) {
+					if (item !== undefined && await ItemDetails.confirmDeletion()) {
 						const deleteItem: DeleteInventoryAction = {
 							type: ActionType.DeleteInventory,
 							itemId: item.id,
@@ -138,5 +138,17 @@ export default class ItemDetails extends Component<
 		const itemId = state.editItem.id;
 		const item = state.inventory.find((inv): boolean => inv.id === itemId);
 		return item;
+	}
+
+	private static confirmDeletion(): Promise<boolean> {
+		return new Promise<boolean>((resolve, reject) => {
+			Alert.alert(
+				'Delete Inventory',
+				'This item will be permanently deleted.',
+				[{ text: 'Cancel', onPress: () => resolve(false)},
+				{text: 'OK', onPress: () => resolve(true)}],
+				{cancelable: true},
+			);
+		});
 	}
 }
