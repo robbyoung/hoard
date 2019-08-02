@@ -42,10 +42,36 @@ export default class Stats extends Component<
 		return (
 			<View>
 				<ScrollView>
+				<StatsPicker
+						title={"Category:"}
+						selected={this.state.category}
+						attributeList={this.state.categoryList}
+						onSelect={(attribute: string): void => {
+							const action: SetAttributeAction = {
+								type: ActionType.SetStatsAttribute,
+								attribute,
+								inventory: store.getState().inventory,
+							};
+							store.dispatch(action);
+						}}
+					/>
 					<StatsPicker
 						title={"Attribute:"}
 						selected={this.state.attribute}
 						attributeList={this.state.attributeList}
+						onSelect={(attribute: string): void => {
+							const action: SetAttributeAction = {
+								type: ActionType.SetStatsAttribute,
+								attribute,
+								inventory: store.getState().inventory,
+							};
+							store.dispatch(action);
+						}}
+					/>
+					<StatsPicker
+						title={"Group By:"}
+						selected={this.state.grouper}
+						attributeList={this.state.grouperList}
 						onSelect={(attribute: string): void => {
 							const action: SetAttributeAction = {
 								type: ActionType.SetStatsAttribute,

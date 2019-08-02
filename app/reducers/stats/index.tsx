@@ -9,12 +9,16 @@ import {
 	setStatsCategory,
 	SetCategoryAction,
 } from '../../actions/setStatsCategory';
+import { setStatsGrouper, SetGrouperAction } from '../../actions/setStatsGrouper';
 
 const defaultState: StatsState = {
 	data: [],
-	category: 'Book',
+	category: 'Pick One',
+	categoryList: ['Pick One', 'Book', 'Game'],
 	attribute: 'Pick One',
-	attributeList: ['Pick One', 'Completed', 'Page Count', 'Series'],
+	attributeList: ['Pick One'],
+	grouper: 'None',
+	grouperList: ['None']
 };
 
 export default function statsReducer(
@@ -26,6 +30,8 @@ export default function statsReducer(
 			return setStatsCategory(action as SetCategoryAction, state);
 		case ActionType.SetStatsAttribute:
 			return setStatsAttribute(action as SetAttributeAction, state);
+		case ActionType.SetStatsAttribute:
+			return setStatsGrouper(action as SetGrouperAction, state);
 		default:
 			return state;
 	}

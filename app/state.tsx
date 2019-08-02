@@ -40,8 +40,11 @@ export interface ChartData {
 export interface StatsState {
 	data: ChartData[];
 	category: string;
+	categoryList: string[];
 	attribute: string;
 	attributeList: string[];
+	grouper: string;
+	grouperList: string[];
 }
 
 export type EditItemState = Inventory;

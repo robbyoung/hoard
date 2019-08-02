@@ -5,8 +5,11 @@ import reducer from './index';
 const DEFAULT_TEST_STATE = {
 	data: [],
 	category: 'default',
+	categoryList: [],
 	attribute: 'default',
 	attributeList: [],
+	grouper: 'None',
+	grouperList: [],
 };
 
 describe('Stats Reducer', (): void => {
@@ -28,8 +31,11 @@ describe('Stats Reducer', (): void => {
 		expect(newState).toEqual({
 			data: [],
 			category: 'Book',
+			categoryList: [],
 			attribute: 'Pick One',
 			attributeList: ['Pick One', 'Completed', 'Page Count', 'Series'],
+			grouper: 'None',
+			grouperList: [],
 		});
 	});
 
