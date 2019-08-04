@@ -1,12 +1,10 @@
 import { Action } from 'redux';
-import { StatsState, Attribute } from '../../state';
+import { StatsState, Attribute, AttributeType } from '../../state';
 
 export interface SetCategoryAction extends Action {
 	category: string;
 	attributes: Attribute[];
 }
-
-export const NO_ATTRIBUTE_SELECTED_TEXT = 'Pick One';
 
 export function setStatsCategory(
 	action: SetCategoryAction,
@@ -16,14 +14,26 @@ export function setStatsCategory(
 		return oldState;
 	}
 
-	const attributeList = [
-		NO_ATTRIBUTE_SELECTED_TEXT,
-		...action.attributes.map((a): string => a.name),
-	];
+	const groupers = action.attributes.filter((a) => {
+		return a.type === AttributeType.Number;
+	});
+	const attributes = action.attributes.filter((a) => {
+		return a.type === AttributeType.Bool || a.type === AttributeType.Combo;
+	});
+
 	return {
+		...oldState,
 		data: [],
 		category: action.category,
-		attribute: NO_ATTRIBUTE_SELECTED_TEXT,
-		attributeList,
+		attribute: 'Pick One',
+		attributeList: [
+			'Pick One',
+			...attributes.map((a): string => a.name),
+		],
+		grouper: 'Pick One',
+		grouperList: [
+			'Pick One',
+			...groupers.map((a): string => a.name),
+		],
 	};
 }

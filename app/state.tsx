@@ -4,6 +4,7 @@ export enum AttributeType {
 	Number,
 	Percent,
 	Rating,
+	Combo,
 }
 
 export interface Attribute {

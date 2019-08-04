@@ -26,12 +26,17 @@ export const styles = StyleSheet.create({
 interface StatsPickerProps {
 	title: string;
 	selected: string;
-	attributeList: string[];
+	choices: string[];
+	enabled: boolean;
 	onSelect: (attribute: string) => void;
 }
 export default class StatsPicker extends Component<StatsPickerProps> {
 	public render(): JSX.Element {
-		const attributes = this.props.attributeList.map(
+		if (!this.props.enabled) {
+			return <View></View>;
+		}
+
+		const attributes = this.props.choices.map(
 			(attr: string): Element => (
 				<Picker.Item label={attr} value={attr} key={attr} />
 			),

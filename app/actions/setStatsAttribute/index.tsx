@@ -1,6 +1,5 @@
 import { Action } from 'redux';
 import { StatsState, Inventory, ChartData } from '../../state';
-import { NO_ATTRIBUTE_SELECTED_TEXT } from '../setStatsCategory';
 
 export interface SetAttributeAction extends Action {
 	inventory: Inventory[];
@@ -27,10 +26,11 @@ export function setStatsAttribute(
 	action: SetAttributeAction,
 	oldState: StatsState,
 ): StatsState {
-	if (action.attribute == NO_ATTRIBUTE_SELECTED_TEXT) {
+	if (action.attribute == 'Pick One') {
 		const newState: StatsState = {
 			...oldState,
-			attribute: NO_ATTRIBUTE_SELECTED_TEXT,
+			attribute: 'Pick One',
+			grouper: 'Pick One',
 			data: [],
 		};
 		return newState;
@@ -64,9 +64,9 @@ export function setStatsAttribute(
 		wedgeIndex++;
 	}
 	return {
+		...oldState,
 		data,
-		category: oldState.category,
 		attribute: action.attribute,
-		attributeList: oldState.attributeList,
+		grouper: 'None',
 	};
 }

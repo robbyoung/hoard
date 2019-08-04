@@ -15,6 +15,8 @@ import { SetAttributeAction } from '../../actions/setStatsAttribute';
 import PieChart from './pieChart';
 import StatsPicker from './statsPicker';
 import Legend from './legend';
+import { SetCategoryAction } from '../../actions/setStatsCategory';
+import { SetGrouperAction } from '../../actions/setStatsGrouper';
 
 export default class Stats extends Component<
 	NavigationInjectedProps,
@@ -44,21 +46,23 @@ export default class Stats extends Component<
 				<ScrollView>
 				<StatsPicker
 						title={"Category:"}
+						enabled={true}
 						selected={this.state.category}
-						attributeList={this.state.categoryList}
-						onSelect={(attribute: string): void => {
-							const action: SetAttributeAction = {
-								type: ActionType.SetStatsAttribute,
-								attribute,
-								inventory: store.getState().inventory,
+						choices={this.state.categoryList}
+						onSelect={(category: string): void => {
+							const action: SetCategoryAction = {
+								type: ActionType.SetStatsCategory,
+								category,
+								attributes: store.getState().categories[category].attributes,
 							};
 							store.dispatch(action);
 						}}
 					/>
 					<StatsPicker
 						title={"Attribute:"}
+						enabled={this.state.attributeList.length > 1}
 						selected={this.state.attribute}
-						attributeList={this.state.attributeList}
+						choices={this.state.attributeList}
 						onSelect={(attribute: string): void => {
 							const action: SetAttributeAction = {
 								type: ActionType.SetStatsAttribute,
@@ -70,12 +74,13 @@ export default class Stats extends Component<
 					/>
 					<StatsPicker
 						title={"Group By:"}
+						enabled={this.state.attribute != 'Pick One'}						
 						selected={this.state.grouper}
-						attributeList={this.state.grouperList}
-						onSelect={(attribute: string): void => {
-							const action: SetAttributeAction = {
-								type: ActionType.SetStatsAttribute,
-								attribute,
+						choices={this.state.grouperList}
+						onSelect={(grouper: string): void => {
+							const action: SetGrouperAction = {
+								type: ActionType.SetStatsGrouper,
+								grouper,
 								inventory: store.getState().inventory,
 							};
 							store.dispatch(action);
