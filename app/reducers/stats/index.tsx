@@ -2,14 +2,13 @@ import { Action } from 'redux';
 import { StatsState } from '../../state';
 import { ActionType } from '../actions';
 import {
+	SetStatsAttributeAction,
 	setStatsAttribute,
-	SetAttributeAction,
 } from '../../actions/setStatsAttribute';
 import {
 	setStatsCategory,
-	SetCategoryAction,
+	SetStatsCategoryAction,
 } from '../../actions/setStatsCategory';
-import { setStatsGrouper, SetGrouperAction } from '../../actions/setStatsGrouper';
 
 const defaultState: StatsState = {
 	data: [],
@@ -27,11 +26,10 @@ export default function statsReducer(
 ): StatsState {
 	switch (action.type) {
 		case ActionType.SetStatsCategory:
-			return setStatsCategory(action as SetCategoryAction, state);
+			return setStatsCategory(action as SetStatsCategoryAction, state);
 		case ActionType.SetStatsAttribute:
-			return setStatsAttribute(action as SetAttributeAction, state);
+			return setStatsAttribute(action as SetStatsAttributeAction, state);
 		case ActionType.SetStatsAttribute:
-			return setStatsGrouper(action as SetGrouperAction, state);
 		default:
 			return state;
 	}

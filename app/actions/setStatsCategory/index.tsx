@@ -1,13 +1,13 @@
 import { Action } from 'redux';
 import { StatsState, Attribute, AttributeType } from '../../state';
 
-export interface SetCategoryAction extends Action {
+export interface SetStatsCategoryAction extends Action {
 	category: string;
 	attributes: Attribute[];
 }
 
 export function setStatsCategory(
-	action: SetCategoryAction,
+	action: SetStatsCategoryAction,
 	oldState: StatsState,
 ): StatsState {
 	if (oldState.category == action.category) {
@@ -30,9 +30,9 @@ export function setStatsCategory(
 			'Pick One',
 			...attributes.map((a): string => a.name),
 		],
-		grouper: 'Pick One',
+		grouper: 'None',
 		grouperList: [
-			'Pick One',
+			'None',
 			...groupers.map((a): string => a.name),
 		],
 	};

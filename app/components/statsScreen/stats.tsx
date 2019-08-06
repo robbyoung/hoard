@@ -11,12 +11,11 @@ import createHeader from '../overviewScreen/headerIcons';
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
 import { StatsState } from '../../state';
-import { SetAttributeAction } from '../../actions/setStatsAttribute';
+import { SetStatsAttributeAction } from '../../actions/setStatsAttribute';
 import PieChart from './pieChart';
 import StatsPicker from './statsPicker';
 import Legend from './legend';
-import { SetCategoryAction } from '../../actions/setStatsCategory';
-import { SetGrouperAction } from '../../actions/setStatsGrouper';
+import { SetStatsCategoryAction } from '../../actions/setStatsCategory';
 
 export default class Stats extends Component<
 	NavigationInjectedProps,
@@ -50,7 +49,7 @@ export default class Stats extends Component<
 						selected={this.state.category}
 						choices={this.state.categoryList}
 						onSelect={(category: string): void => {
-							const action: SetCategoryAction = {
+							const action: SetStatsCategoryAction = {
 								type: ActionType.SetStatsCategory,
 								category,
 								attributes: store.getState().categories[category].attributes,
@@ -64,9 +63,10 @@ export default class Stats extends Component<
 						selected={this.state.attribute}
 						choices={this.state.attributeList}
 						onSelect={(attribute: string): void => {
-							const action: SetAttributeAction = {
+							const action: SetStatsAttributeAction = {
 								type: ActionType.SetStatsAttribute,
 								attribute,
+								grouper: 'None',
 								inventory: store.getState().inventory,
 							};
 							store.dispatch(action);
@@ -78,8 +78,9 @@ export default class Stats extends Component<
 						selected={this.state.grouper}
 						choices={this.state.grouperList}
 						onSelect={(grouper: string): void => {
-							const action: SetGrouperAction = {
+							const action: SetStatsAttributeAction = {
 								type: ActionType.SetStatsGrouper,
+								attribute: this.state.attribute,
 								grouper,
 								inventory: store.getState().inventory,
 							};

@@ -1,9 +1,10 @@
 import { Action } from 'redux';
 import { StatsState, Inventory, ChartData } from '../../state';
 
-export interface SetAttributeAction extends Action {
+export interface SetStatsAttributeAction extends Action {
 	inventory: Inventory[];
 	attribute: string;
+	grouper: string;
 }
 
 const CHART_COLOURS: string[] = [
@@ -23,14 +24,14 @@ function getColourForWedgeIndex(index: number): string {
 }
 
 export function setStatsAttribute(
-	action: SetAttributeAction,
+	action: SetStatsAttributeAction,
 	oldState: StatsState,
 ): StatsState {
 	if (action.attribute == 'Pick One') {
 		const newState: StatsState = {
 			...oldState,
 			attribute: 'Pick One',
-			grouper: 'Pick One',
+			grouper: 'None',
 			data: [],
 		};
 		return newState;
@@ -39,17 +40,32 @@ export function setStatsAttribute(
 	const items = action.inventory.filter(
 		(item): boolean => oldState.category === item.category,
 	);
+	let totalGrouper = 0;
 	const tally: { [id: string]: number } = {};
 	for (const item of items) {
 		const match = item.attributes.find(
 			(a): boolean => a.name === action.attribute,
 		);
 		const value = match ? match.value : 'Unknown';
-		if (tally[value]) {
-			tally[value]++;
-		} else {
-			tally[value] = 1;
+		let amountToAdd = 1;
+		if (action.grouper !== 'None') {
+			const result = item.attributes.find(
+				(a): boolean => a.name === action.grouper,
+			);
+			if (result !== undefined) {
+				amountToAdd = parseInt(result.value);
+				totalGrouper += amountToAdd;
+			}
 		}
+		if (tally[value]) {
+			tally[value] += amountToAdd;
+		} else {
+			tally[value] = amountToAdd;
+		}
+	}
+
+	if (action.grouper === 'None') {
+		totalGrouper = items.length;
 	}
 
 	const data: ChartData[] = [];
@@ -58,7 +74,7 @@ export function setStatsAttribute(
 		data.push({
 			key,
 			count: tally[key],
-			percentage: (tally[key] / items.length) * 100,
+			percentage: (tally[key] / totalGrouper) * 100,
 			colour: getColourForWedgeIndex(wedgeIndex),
 		});
 		wedgeIndex++;
@@ -67,6 +83,6 @@ export function setStatsAttribute(
 		...oldState,
 		data,
 		attribute: action.attribute,
-		grouper: 'None',
+		grouper: action.grouper,
 	};
 }
