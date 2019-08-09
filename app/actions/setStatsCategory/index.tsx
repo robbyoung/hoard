@@ -14,20 +14,33 @@ export function setStatsCategory(
 		return oldState;
 	}
 
-	const groupers = action.attributes.filter((a) => {
-		return a.type === AttributeType.Number;
-	});
+	if(action.category == 'Pick One') {
+		return {
+			data: [],
+			category: action.category,
+			categoryList: oldState.categoryList,
+			attribute: 'Pick One',
+			attributeList: ['Pick One'],
+			grouper: 'None',
+			grouperList: ['None'],
+		}
+	}
+
 	const attributes = action.attributes.filter((a) => {
 		return a.type === AttributeType.Bool || a.type === AttributeType.Combo;
-	});
+	}).map((a): string => a.name);
+	const groupers = action.attributes.filter((a) => {
+		return a.type === AttributeType.Number;
+	}).map((a): string => a.name);
+	
 
 	return {
 		...oldState,
 		data: [],
 		category: action.category,
 		attribute: 'Pick One',
-		attributeList: ['Pick One', ...attributes.map((a): string => a.name)],
+		attributeList: ['Pick One', ...attributes],
 		grouper: 'None',
-		grouperList: ['None', ...groupers.map((a): string => a.name)],
+		grouperList: ['None', ...groupers],
 	};
 }
