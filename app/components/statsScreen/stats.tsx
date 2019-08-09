@@ -12,10 +12,10 @@ import store from '../../store';
 import { ActionType } from '../../reducers/actions';
 import { StatsState } from '../../state';
 import { SetStatsAttributeAction } from '../../actions/setStatsAttribute';
+import { SetStatsCategoryAction } from '../../actions/setStatsCategory';
 import PieChart from './pieChart';
 import StatsPicker from './statsPicker';
 import Legend from './legend';
-import { SetStatsCategoryAction } from '../../actions/setStatsCategory';
 
 export default class Stats extends Component<
 	NavigationInjectedProps,
@@ -81,7 +81,7 @@ export default class Stats extends Component<
 						choices={this.state.grouperList}
 						onSelect={(grouper: string): void => {
 							const action: SetStatsAttributeAction = {
-								type: ActionType.SetStatsGrouper,
+								type: ActionType.SetStatsAttribute,
 								attribute: this.state.attribute,
 								grouper,
 								inventory: store.getState().inventory,

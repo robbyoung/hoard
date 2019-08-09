@@ -14,7 +14,7 @@ export function setStatsCategory(
 		return oldState;
 	}
 
-	if(action.category == 'Pick One') {
+	if (action.category == 'Pick One') {
 		return {
 			data: [],
 			category: action.category,
@@ -23,16 +23,26 @@ export function setStatsCategory(
 			attributeList: ['Pick One'],
 			grouper: 'None',
 			grouperList: ['None'],
-		}
+		};
 	}
 
-	const attributes = action.attributes.filter((a) => {
-		return a.type === AttributeType.Bool || a.type === AttributeType.Combo;
-	}).map((a): string => a.name);
-	const groupers = action.attributes.filter((a) => {
-		return a.type === AttributeType.Number;
-	}).map((a): string => a.name);
-	
+	const attributes = action.attributes
+		.filter(
+			(a): boolean => {
+				return (
+					a.type === AttributeType.Bool ||
+					a.type === AttributeType.Combo
+				);
+			},
+		)
+		.map((a): string => a.name);
+	const groupers = action.attributes
+		.filter(
+			(a): boolean => {
+				return a.type === AttributeType.Number;
+			},
+		)
+		.map((a): string => a.name);
 
 	return {
 		...oldState,

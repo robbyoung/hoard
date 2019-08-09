@@ -1,12 +1,12 @@
 import { StatsState } from '../../state';
 import { ActionType } from '../../reducers/actions';
-import { SetStatsAttributeAction, setStatsAttribute } from '.';
 import {
 	createTestInventory,
 	attributeState,
 	grouperState,
 	blankState,
 } from './testStates';
+import { SetStatsAttributeAction, setStatsAttribute } from '.';
 
 describe('Set Stats Attribute', (): void => {
 	let state: StatsState = blankState;

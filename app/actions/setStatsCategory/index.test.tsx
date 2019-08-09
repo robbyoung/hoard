@@ -1,7 +1,7 @@
 import { StatsState } from '../../state';
 import { ActionType } from '../../reducers/actions';
-import { SetStatsCategoryAction, setStatsCategory } from '.';
 import { blankState, testAttributes, categoryState } from './testStates';
+import { SetStatsCategoryAction, setStatsCategory } from '.';
 
 describe('Set Stats Category', (): void => {
 	let state: StatsState = blankState;

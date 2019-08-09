@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Picker, View, Text, StyleSheet } from 'react-native';
-import { white, darkColor, black } from '../../styles';
+import { darkColor } from '../../styles';
 
 export const styles = StyleSheet.create({
 	row: {

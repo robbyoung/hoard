@@ -13,8 +13,8 @@ import { Inventory } from '../../state';
 import { SetItemToEditAction } from '../../actions/SetItemToEdit';
 import { ActionType } from '../../reducers/actions';
 import createHeader from '../overviewScreen/headerIcons';
-import ItemAttribute from './itemAttribute';
 import { DeleteInventoryAction } from '../../actions/deleteInventory';
+import ItemAttribute from './itemAttribute';
 
 const styles = StyleSheet.create({
 	row: {
@@ -147,16 +147,18 @@ export default class ItemDetails extends Component<
 	}
 
 	private static confirmDeletion(): Promise<boolean> {
-		return new Promise<boolean>((resolve, reject) => {
-			Alert.alert(
-				'Delete Inventory',
-				'This item will be permanently deleted.',
-				[
-					{ text: 'Cancel', onPress: () => resolve(false) },
-					{ text: 'OK', onPress: () => resolve(true) },
-				],
-				{ cancelable: true },
-			);
-		});
+		return new Promise<boolean>(
+			(resolve): void => {
+				Alert.alert(
+					'Delete Inventory',
+					'This item will be permanently deleted.',
+					[
+						{ text: 'Cancel', onPress: (): void => resolve(false) },
+						{ text: 'OK', onPress: (): void => resolve(true) },
+					],
+					{ cancelable: true },
+				);
+			},
+		);
 	}
 }

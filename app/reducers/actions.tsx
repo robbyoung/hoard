@@ -3,7 +3,6 @@ export enum ActionType {
 	DeleteInventory,
 	SetStatsCategory,
 	SetStatsAttribute,
-	SetStatsGrouper,
 	EditItemName,
 	EditItemCategory,
 	EditItemAttribute,

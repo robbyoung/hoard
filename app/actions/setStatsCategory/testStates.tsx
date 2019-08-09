@@ -16,7 +16,7 @@ export const testAttributes: Attribute[] = [
 		value: '',
 		type: AttributeType.Combo,
 	},
-]
+];
 
 export const blankState = {
 	data: [],
