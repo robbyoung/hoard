@@ -3,7 +3,7 @@ import { ActionType } from '../../reducers/actions';
 import { createTestItem } from './testStates';
 import { EditItemNameAction, editItemName } from '.';
 
-describe('Edit Item Attribute', (): void => {
+describe('Edit Item Name', (): void => {
 	let state: EditItemState;
 	let action: EditItemNameAction = {
 		type: ActionType.EditItemName,

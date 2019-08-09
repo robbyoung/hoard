@@ -17,7 +17,7 @@ const defaultState: StatsState = {
 	attribute: 'Pick One',
 	attributeList: ['Pick One'],
 	grouper: 'None',
-	grouperList: ['None']
+	grouperList: ['None'],
 };
 
 export default function statsReducer(

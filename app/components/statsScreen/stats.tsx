@@ -43,8 +43,8 @@ export default class Stats extends Component<
 		return (
 			<View>
 				<ScrollView>
-				<StatsPicker
-						title={"Category:"}
+					<StatsPicker
+						title={'Category:'}
 						enabled={true}
 						selected={this.state.category}
 						choices={this.state.categoryList}
@@ -52,13 +52,15 @@ export default class Stats extends Component<
 							const action: SetStatsCategoryAction = {
 								type: ActionType.SetStatsCategory,
 								category,
-								attributes: store.getState().categories[category].attributes,
+								attributes: store.getState().categories[
+									category
+								].attributes,
 							};
 							store.dispatch(action);
 						}}
 					/>
 					<StatsPicker
-						title={"Attribute:"}
+						title={'Attribute:'}
 						enabled={this.state.attributeList.length > 1}
 						selected={this.state.attribute}
 						choices={this.state.attributeList}
@@ -73,8 +75,8 @@ export default class Stats extends Component<
 						}}
 					/>
 					<StatsPicker
-						title={"Group By:"}
-						enabled={this.state.attribute != 'Pick One'}						
+						title={'Group By:'}
+						enabled={this.state.attribute != 'Pick One'}
 						selected={this.state.grouper}
 						choices={this.state.grouperList}
 						onSelect={(grouper: string): void => {

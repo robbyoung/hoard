@@ -30,12 +30,12 @@ describe('Stats Reducer', (): void => {
 		const newState = reducer(state, action);
 		expect(newState).toEqual({
 			data: [],
-			category: 'Book',
-			categoryList: [],
+			category: 'Pick One',
+			categoryList: ['Pick One', 'Book', 'Game'],
 			attribute: 'Pick One',
-			attributeList: ['Pick One', 'Completed', 'Page Count', 'Series'],
+			attributeList: ['Pick One'],
 			grouper: 'None',
-			grouperList: [],
+			grouperList: ['None'],
 		});
 	});
 

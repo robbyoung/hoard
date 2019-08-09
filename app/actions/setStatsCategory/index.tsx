@@ -26,14 +26,8 @@ export function setStatsCategory(
 		data: [],
 		category: action.category,
 		attribute: 'Pick One',
-		attributeList: [
-			'Pick One',
-			...attributes.map((a): string => a.name),
-		],
+		attributeList: ['Pick One', ...attributes.map((a): string => a.name)],
 		grouper: 'None',
-		grouperList: [
-			'None',
-			...groupers.map((a): string => a.name),
-		],
+		grouperList: ['None', ...groupers.map((a): string => a.name)],
 	};
 }

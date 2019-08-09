@@ -74,7 +74,7 @@ export function setStatsAttribute(
 		data.push({
 			key,
 			count: tally[key],
-			percentage: (tally[key] / totalGrouper) * 100,
+			percentage: Math.round((tally[key] / totalGrouper) * 10000) / 100,
 			colour: getColourForWedgeIndex(wedgeIndex),
 		});
 		wedgeIndex++;

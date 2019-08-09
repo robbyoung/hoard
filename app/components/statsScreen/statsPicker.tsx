@@ -33,7 +33,7 @@ interface StatsPickerProps {
 export default class StatsPicker extends Component<StatsPickerProps> {
 	public render(): JSX.Element {
 		if (!this.props.enabled) {
-			return <View></View>;
+			return <View />;
 		}
 
 		const attributes = this.props.choices.map(

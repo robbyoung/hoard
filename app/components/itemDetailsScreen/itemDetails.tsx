@@ -74,7 +74,10 @@ export default class ItemDetails extends Component<
 				icon: Icons.trash,
 				callback: async (): Promise<void> => {
 					const item = ItemDetails.getSavedItemFromState();
-					if (item !== undefined && await ItemDetails.confirmDeletion()) {
+					if (
+						item !== undefined &&
+						(await ItemDetails.confirmDeletion())
+					) {
 						const deleteItem: DeleteInventoryAction = {
 							type: ActionType.DeleteInventory,
 							itemId: item.id,
@@ -126,7 +129,10 @@ export default class ItemDetails extends Component<
 				item,
 				attributeList: item.attributes.map(
 					(attribute): JSX.Element => (
-						<ItemAttribute attribute={attribute} key={attribute.name} />
+						<ItemAttribute
+							attribute={attribute}
+							key={attribute.name}
+						/>
 					),
 				),
 			});
@@ -145,9 +151,11 @@ export default class ItemDetails extends Component<
 			Alert.alert(
 				'Delete Inventory',
 				'This item will be permanently deleted.',
-				[{ text: 'Cancel', onPress: () => resolve(false)},
-				{text: 'OK', onPress: () => resolve(true)}],
-				{cancelable: true},
+				[
+					{ text: 'Cancel', onPress: () => resolve(false) },
+					{ text: 'OK', onPress: () => resolve(true) },
+				],
+				{ cancelable: true },
 			);
 		});
 	}
