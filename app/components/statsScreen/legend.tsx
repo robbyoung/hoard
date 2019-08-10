@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Alert, TouchableOpacity } from 'react-native';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
+import store from '../../store';
+import { black } from '../../styles';
 
 const styles = StyleSheet.create({
 	legend: {
-		margin: 20,
+		width: '50%',
+		justifyContent: 'center',
 	},
 	legendItem: {
 		flexDirection: 'row',
-		justifyContent: 'space-around',
-		margin: 2,
+		marginBottom: 5,
 	},
 	legendText: {
-		fontSize: 25,
-		marginRight: 2,
+		fontSize: 22,
+		marginLeft: 2,
+		color: black,
+		flexWrap: 'wrap',
 	},
 });
 
@@ -30,27 +34,43 @@ export interface LegendProps {
 export default class Legend extends Component<LegendProps> {
 	public render(): JSX.Element {
 		return (
-			<View>
+			<View style={styles.legend}>
 				{this.props.data.map(
 					(data): JSX.Element => (
-						<View key={data.key} style={styles.legendItem}>
-							<FontAwesome
-								style={{
-									color: data.colour,
-									fontSize: 24,
-									paddingTop: 5,
-								}}>
-								{Icons.circle}
-							</FontAwesome>
-							<Text style={styles.legendText}>{data.key}</Text>
-							<Text style={styles.legendText}>{data.count}</Text>
-							<Text style={styles.legendText}>
-								({Math.round(data.percentage)}%)
-							</Text>
-						</View>
+						<TouchableOpacity
+							key={data.key}
+							onPress={(): void => this.showDetails(data)}>
+							<View style={styles.legendItem}>
+								<FontAwesome
+									style={{
+										color: data.colour,
+										fontSize: 22,
+										paddingTop: 5,
+									}}>
+									{Icons.circle}
+								</FontAwesome>
+								<Text style={styles.legendText}>
+									{data.key}
+								</Text>
+							</View>
+						</TouchableOpacity>
 					),
 				)}
 			</View>
+		);
+	}
+
+	private showDetails(data: PieChartData): void {
+		const state = store.getState().stats;
+		const category = state.category;
+		const attribute = state.attribute;
+		const grouper = state.grouper;
+		const units = grouper === 'None' ? 'Items' : grouper;
+		Alert.alert(
+			`${attribute} = ${data.key}`,
+			`${data.count} ${units}\n${data.percentage}% of ${category}s`,
+			[{ text: 'OK' }],
+			{ cancelable: true },
 		);
 	}
 }

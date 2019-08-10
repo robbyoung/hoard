@@ -8,7 +8,7 @@ export function createTestItem(name: string): Inventory {
 		attributes: [
 			{
 				name: 'Completed',
-				value: 'T',
+				value: 'True',
 				type: AttributeType.Bool,
 			},
 			{

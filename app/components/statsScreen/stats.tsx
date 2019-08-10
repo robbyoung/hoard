@@ -76,7 +76,10 @@ export default class Stats extends Component<
 					/>
 					<StatsPicker
 						title={'Group By:'}
-						enabled={this.state.attribute != 'Pick One'}
+						enabled={
+							this.state.attribute != 'Pick One' &&
+							this.state.grouperList.length > 1
+						}
 						selected={this.state.grouper}
 						choices={this.state.grouperList}
 						onSelect={(grouper: string): void => {
@@ -89,8 +92,10 @@ export default class Stats extends Component<
 							store.dispatch(action);
 						}}
 					/>
-					<PieChart data={this.state.data} />
-					<Legend data={this.state.data} />
+					<View style={{ flexDirection: 'row' }}>
+						<PieChart data={this.state.data} />
+						<Legend data={this.state.data} />
+					</View>
 				</ScrollView>
 			</View>
 		);

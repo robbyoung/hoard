@@ -11,7 +11,7 @@ export function createTestInventory(): Inventory[] {
 				attributes: [
 					{
 						name: 'bool',
-						value: i % 2 == 0 ? 'T' : 'F',
+						value: i % 2 == 0 ? 'True' : 'False',
 						type: AttributeType.Bool,
 					},
 					{
@@ -37,8 +37,8 @@ export const blankState = {
 
 export const attributeState = {
 	data: [
-		{ key: 'T', count: 5, percentage: 50, colour: '#db5353' },
-		{ key: 'F', count: 5, percentage: 50, colour: '#2f69c6' },
+		{ key: 'True', count: 5, percentage: 50, colour: '#db5353' },
+		{ key: 'False', count: 5, percentage: 50, colour: '#2f69c6' },
 	],
 	category: 'category',
 	categoryList: ['Pick One', 'category'],
@@ -50,8 +50,8 @@ export const attributeState = {
 
 export const grouperState = {
 	data: [
-		{ key: 'T', count: 5, percentage: 33.33, colour: '#db5353' },
-		{ key: 'F', count: 10, percentage: 66.67, colour: '#2f69c6' },
+		{ key: 'True', count: 5, percentage: 33.33, colour: '#db5353' },
+		{ key: 'False', count: 10, percentage: 66.67, colour: '#2f69c6' },
 	],
 	category: 'category',
 	categoryList: ['Pick One', 'category'],

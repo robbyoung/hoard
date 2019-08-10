@@ -14,7 +14,7 @@ export function createInventory(
 				attributes: [
 					{
 						name: 'Completed',
-						value: 'T',
+						value: 'True',
 						type: AttributeType.Bool,
 					},
 					{

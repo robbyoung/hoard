@@ -41,7 +41,7 @@ export default class ItemAttribute extends Component<Props> {
 		let value: JSX.Element;
 		const attr = this.props.attribute;
 		if (this.props.attribute.type === AttributeType.Bool) {
-			const icon = attr.value === 'T' ? Icons.check : Icons.times;
+			const icon = attr.value === 'True' ? Icons.check : Icons.times;
 			value = <FontAwesome style={styles.valueIcon}>{icon}</FontAwesome>;
 		} else {
 			value = <Text style={styles.value}>{attr.value}</Text>;

@@ -7,7 +7,7 @@ export default {
 		attributes: [
 			{
 				name: 'Completed',
-				value: 'T',
+				value: 'True',
 				type: AttributeType.Bool,
 			},
 		],
@@ -17,7 +17,7 @@ export default {
 		attributes: [
 			{
 				name: 'Completed',
-				value: 'T',
+				value: 'True',
 				type: AttributeType.Bool,
 			},
 			{

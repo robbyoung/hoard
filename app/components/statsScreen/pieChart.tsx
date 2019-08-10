@@ -3,22 +3,10 @@ import { View, StyleSheet, Dimensions } from 'react-native';
 import Pie from 'react-native-pie';
 import { ChartData } from '../../state';
 
-const CHART_MARGINS = 40;
+const CHART_MARGINS = 20;
 const styles = StyleSheet.create({
 	chart: {
 		margin: CHART_MARGINS,
-	},
-	legend: {
-		margin: 20,
-	},
-	legendItem: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		margin: 2,
-	},
-	legendText: {
-		fontSize: 25,
-		marginRight: 2,
 	},
 });
 
@@ -30,7 +18,7 @@ export default class PieChart extends Component<PieChartProps> {
 		return (
 			<View style={styles.chart}>
 				<Pie
-					radius={Dimensions.get('window').width / 2 - CHART_MARGINS}
+					radius={Dimensions.get('window').width / 4}
 					series={this.props.data.map((d): number => d.percentage)}
 					colors={this.props.data.map((d): string => d.colour)}
 				/>

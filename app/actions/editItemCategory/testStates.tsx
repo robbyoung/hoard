@@ -20,7 +20,7 @@ export const testCategories: CategoriesState = {
 		attributes: [
 			{
 				name: 'A1',
-				value: 'T',
+				value: 'True',
 				type: AttributeType.Bool,
 			},
 			{

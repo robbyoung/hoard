@@ -24,7 +24,7 @@ const testBooks: Inventory[] = bookNames.map(
 		const attributes: Attribute[] = [
 			{
 				name: 'Completed',
-				value: `${i < 8 ? 'T' : 'F'}`,
+				value: `${i < 8 ? 'True' : 'False'}`,
 				type: AttributeType.Bool,
 			},
 			{
@@ -52,7 +52,7 @@ const testGames: Inventory[] = gameNames.map(
 		const attributes: Attribute[] = [
 			{
 				name: 'Completed',
-				value: `${i < 2 ? 'T' : 'F'}`,
+				value: `${i < 2 ? 'True' : 'False'}`,
 				type: AttributeType.Bool,
 			},
 		];

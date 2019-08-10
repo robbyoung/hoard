@@ -13,7 +13,7 @@ function setBoolAttributeValue(value: boolean, attribute: Attribute): void {
 		attribute: {
 			name: attribute.name,
 			type: attribute.type,
-			value: value ? 'T' : 'F',
+			value: value ? 'True' : 'False',
 		},
 	};
 	store.dispatch(action);
@@ -32,7 +32,7 @@ export default class BoolAttributeInput extends Component<{
 					onValueChange={(value: boolean): void =>
 						setBoolAttributeValue(value, this.props.attribute)
 					}
-					value={this.props.attribute.value === 'T'}
+					value={this.props.attribute.value === 'True'}
 				/>
 			</View>
 		);

@@ -12,7 +12,7 @@ const DEFAULT_TEST_STATE: EditItemState = {
 	attributes: [
 		{
 			name: 'Completed',
-			value: 'F',
+			value: 'False',
 			type: AttributeType.Bool,
 		},
 		{
@@ -86,7 +86,7 @@ describe('New Item Reducer', (): void => {
 			attributes: [
 				{
 					name: 'Completed',
-					value: 'F',
+					value: 'False',
 					type: AttributeType.Bool,
 				},
 			],

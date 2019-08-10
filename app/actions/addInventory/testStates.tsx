@@ -9,7 +9,7 @@ function createInventory(id: string): Inventory {
 		attributes: [
 			{
 				name: 'Completed',
-				value: 'T',
+				value: 'True',
 				type: AttributeType.Bool,
 			},
 			{
