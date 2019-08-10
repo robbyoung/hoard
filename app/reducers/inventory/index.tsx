@@ -7,13 +7,15 @@ import {
 	deleteInventory,
 } from '../../actions/deleteInventory';
 import testInventory from './testInventory';
+import { AsyncStorage } from 'react-native';
 
 const defaultState: InventoryState = testInventory;
 
-export default function inventoryReducer(
-	state: InventoryState = defaultState,
+export default async function inventoryReducer(
+	state: InventoryState | undefined = undefined,
 	action: Action,
-): InventoryState {
+): Promise<InventoryState> {
+	state = await loadState(state);
 	switch (action.type) {
 		case ActionType.AddInventory:
 			return addInventory(state, action as AddInventoryAction);
@@ -21,5 +23,17 @@ export default function inventoryReducer(
 			return deleteInventory(state, action as DeleteInventoryAction);
 		default:
 			return state;
+	}
+}
+
+async function loadState(state: InventoryState | undefined): Promise<InventoryState> {
+	if (state != undefined) {
+		return state;
+	} else {
+		const savedState = await AsyncStorage.getItem('inventory');
+		if (savedState !== null) {
+			return JSON.parse(savedState) as InventoryState;
+		}
+		return defaultState;
 	}
 }
