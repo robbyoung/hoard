@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import * as uuid from 'uuid';
-import { Inventory, InventoryState } from '../../state';
 import { AsyncStorage } from 'react-native';
+import { Inventory, InventoryState } from '../../state';
 
 export interface AddInventoryAction extends Action {
 	newItem: Inventory;
@@ -24,7 +24,13 @@ export function addInventory(
 		newState[matchingIndex] = newItem;
 	}
 
-	void AsyncStorage.setItem('inventory', JSON.stringify(newState));
+	AsyncStorage.setItem('inventory', JSON.stringify(newState)).catch(
+		(error): void => {
+			console.error(
+				'Something went wrong while saving inventory: ' + error,
+			);
+		},
+	);
 
 	return newState;
 }

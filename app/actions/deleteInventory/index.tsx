@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { InventoryState } from '../../state';
 import { AsyncStorage } from 'react-native';
+import { InventoryState } from '../../state';
 
 export interface DeleteInventoryAction extends Action {
 	itemId: string;
@@ -17,7 +17,13 @@ export function deleteInventory(
 		}
 	}
 
-	void AsyncStorage.setItem('inventory', JSON.stringify(newState));
+	void AsyncStorage.setItem('inventory', JSON.stringify(newState)).catch(
+		(error): void => {
+			console.error(
+				'Something went wrong while loading inventory: ' + error,
+			);
+		},
+	);
 
 	return newState;
 }

@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import { AsyncStorage } from 'react-native';
 import { InventoryState } from '../../state';
 import { ActionType } from '../actions';
 import { addInventory, AddInventoryAction } from '../../actions/addInventory';
@@ -7,15 +8,18 @@ import {
 	deleteInventory,
 } from '../../actions/deleteInventory';
 import testInventory from './testInventory';
-import { AsyncStorage } from 'react-native';
 
 const defaultState: InventoryState = testInventory;
+let savedState: InventoryState = [];
 
-export default async function inventoryReducer(
-	state: InventoryState | undefined = undefined,
+export default function inventoryReducer(
+	state: InventoryState = savedState,
 	action: Action,
-): Promise<InventoryState> {
-	state = await loadState(state);
+): InventoryState {
+	if (state === []) {
+		console.error(savedState);
+		state = savedState;
+	}
 	switch (action.type) {
 		case ActionType.AddInventory:
 			return addInventory(state, action as AddInventoryAction);
@@ -26,14 +30,11 @@ export default async function inventoryReducer(
 	}
 }
 
-async function loadState(state: InventoryState | undefined): Promise<InventoryState> {
-	if (state != undefined) {
-		return state;
+export async function loadSavedInventory(): Promise<void> {
+	const state = await AsyncStorage.getItem('inventory');
+	if (state === undefined || state === null) {
+		savedState = defaultState;
 	} else {
-		const savedState = await AsyncStorage.getItem('inventory');
-		if (savedState !== null) {
-			return JSON.parse(savedState) as InventoryState;
-		}
-		return defaultState;
+		savedState = JSON.parse(state) as InventoryState;
 	}
 }
