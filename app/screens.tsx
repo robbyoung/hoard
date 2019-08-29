@@ -3,4 +3,5 @@ export enum Screens {
 	EditItem = 'EditItem',
 	ItemDetails = 'ItemDetails',
 	Stats = 'Stats',
+	Loading = 'Loading',
 }
