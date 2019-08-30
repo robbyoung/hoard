@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import * as uuid from 'uuid';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { Inventory, InventoryState } from '../../state';
 
 export interface AddInventoryAction extends Action {

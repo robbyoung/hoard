@@ -3,7 +3,7 @@ import Overview from './components/overviewScreen/overview';
 import ItemDetails from './components/itemDetailsScreen/itemDetails';
 import Stats from './components/statsScreen/stats';
 import EditItem from './components/editItemScreen/editItem';
-import Loading from './components/loadingScreen/loadingScreen';
+import Loading from './components/loadingScreen/loading';
 import { Screens } from './screens';
 
 const MainNavigator = createStackNavigator(

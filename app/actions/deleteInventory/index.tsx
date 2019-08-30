@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { InventoryState } from '../../state';
 
 export interface DeleteInventoryAction extends Action {
