@@ -2,44 +2,38 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
-	NavigationInjectedProps, NavigationActions, StackActions,
+	NavigationInjectedProps,
+	NavigationActions,
+	StackActions,
 } from 'react-navigation';
-import { Screens } from '../../screens';
 import store from '../../store';
 import { InventoryState } from '../../state';
 import { ActionType } from '../../reducers/actions';
 
-export default class Loading extends Component<
-	NavigationInjectedProps
-> {
+export default class Loading extends Component<NavigationInjectedProps> {
 	public static navigationOptions = {
 		header: null,
-	}
-
-	public render(): JSX.Element {
-		return (
-			<View>
-			</View>
-		);
-	}
-
-	public async componentDidMount() {
-		await this.loadSavedData();
-		this.navigateToOverview();
 	};
 
-	private navigateToOverview() {
+	public render(): JSX.Element {
+		return <View />;
+	}
+
+	public async componentDidMount(): Promise<void> {
+		await this.loadSavedData();
+		this.navigateToOverview();
+	}
+
+	private navigateToOverview(): void {
 		const resetAction = StackActions.reset({
-		  index: 0,
-		  actions: [
-			NavigationActions.navigate({ routeName: 'Overview' }),
-		  ]
+			index: 0,
+			actions: [NavigationActions.navigate({ routeName: 'Overview' })],
 		});
-	
+
 		this.props.navigation.dispatch(resetAction);
 	}
 
-	private async loadSavedData() {
+	private async loadSavedData(): Promise<void> {
 		await this.loadSavedInventory();
 	}
 
@@ -54,5 +48,4 @@ export default class Loading extends Component<
 			});
 		}
 	}
-
 }
