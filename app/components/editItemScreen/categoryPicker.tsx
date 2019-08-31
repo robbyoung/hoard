@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Picker, Text } from 'react-native';
 import store from '../../store';
 import { ActionType } from '../../reducers/actions';
+import { Attribute } from '../../state';
 import { styles } from './editItem';
 
 const SELECT_CATEGORY_TEXT = 'Pick One';
@@ -28,8 +29,13 @@ export default class CategoryPicker extends Component<
 					style={styles.categoryPicker}
 					selectedValue={this.props.chosenCategory}
 					onValueChange={(categoryName): void => {
-						const attributes =
-							store.getState().categories[categoryName] || [];
+						const category = store.getState().categories[
+							categoryName
+						];
+
+						const attributes: Attribute[] = category
+							? category.attributes
+							: [];
 						store.dispatch({
 							type: ActionType.EditItemCategory,
 							categoryName,
