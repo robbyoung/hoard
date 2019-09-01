@@ -3,6 +3,18 @@ import { ActionType } from '../../reducers/actions';
 import { createInventory } from './testStates';
 import { DeleteInventoryAction, deleteInventory } from '.';
 
+interface JestMock {
+	setItem: () => Promise<void>;
+}
+jest.mock(
+	'@react-native-community/async-storage',
+	(): JestMock => {
+		return {
+			setItem: async (): Promise<void> => undefined,
+		};
+	},
+);
+
 describe('Add Inventory Action', (): void => {
 	let state: InventoryState;
 	let action: DeleteInventoryAction;
