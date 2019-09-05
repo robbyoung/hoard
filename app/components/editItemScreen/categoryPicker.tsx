@@ -17,7 +17,7 @@ export default class CategoryPicker extends Component<
 	CategoryPickerProps,
 	CategoryPickerState
 > {
-	public state = {
+	public state: CategoryPickerState = {
 		pickerItems: this.getCategoryPickerItems(),
 	};
 

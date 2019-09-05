@@ -14,6 +14,7 @@ import createHeader from '../overviewScreen/headerIcons';
 import { ValidateEditItemAction } from '../../actions/validateEditAction';
 import { EditItemNameAction } from '../../actions/editItemName';
 import { AddInventoryAction } from '../../actions/addInventory';
+import { NavigationOptions } from '../../aliases';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
@@ -90,7 +91,7 @@ export default class EditItem extends Component<
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
-	public static navigationOptions = (
+	public static navigationOptions: NavigationOptions = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
 		const emptyName = store.getState().editItem.name === '';
@@ -105,7 +106,7 @@ export default class EditItem extends Component<
 		]);
 	};
 
-	public state = {
+	public state: EditItemState = {
 		itemName: '',
 		categoryName: SELECT_CATEGORY_TEXT,
 		attributeFields: [],

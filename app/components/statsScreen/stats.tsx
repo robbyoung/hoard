@@ -13,6 +13,7 @@ import { ActionType } from '../../reducers/actions';
 import { StatsState } from '../../state';
 import { SetStatsAttributeAction } from '../../actions/setStatsAttribute';
 import { SetStatsCategoryAction } from '../../actions/setStatsCategory';
+import { NavigationOptions } from '../../aliases';
 import PieChart from './pieChart';
 import StatsPicker from './statsPicker';
 import Legend from './legend';
@@ -23,11 +24,11 @@ export default class Stats extends Component<
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
-	public static navigationOptions = (): NavigationStackScreenOptions => {
+	public static navigationOptions: NavigationOptions = (): NavigationStackScreenOptions => {
 		return createHeader('Stats', []);
 	};
 
-	public state = store.getState().stats;
+	public state: StatsState = store.getState().stats;
 
 	public componentWillMount(): void {
 		this.unsubscribe = store.subscribe(
