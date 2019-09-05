@@ -7,7 +7,7 @@ import {
 import { Icons } from 'react-native-fontawesome';
 import { Unsubscribe } from 'redux';
 import store from '../../store';
-import { AttributeType } from '../../state';
+import { AttributeType, Attribute } from '../../state';
 import { ActionType } from '../../reducers/actions';
 import { lightColor, darkColor, white, warning, black } from '../../styles';
 import createHeader from '../overviewScreen/headerIcons';
@@ -150,7 +150,7 @@ export default class EditItem extends Component<
 	private setAttributeFields(): void {
 		const newState = store.getState().editItem;
 		const attributeFields = newState.attributes.map(
-			(attribute): JSX.Element => {
+			(attribute: Attribute): JSX.Element => {
 				switch (attribute.type) {
 					case AttributeType.String:
 						return (

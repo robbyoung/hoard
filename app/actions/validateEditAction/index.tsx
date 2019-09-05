@@ -4,6 +4,7 @@ import {
 	CategoriesState,
 	InventoryState,
 	ValidationState,
+	Inventory,
 } from '../../state';
 
 export enum EditItemErrors {
@@ -29,7 +30,8 @@ export function validateEditItem(
 
 	if (
 		inventory.find(
-			(inv): boolean => inv.name === item.name && inv.id !== item.id,
+			(inv: Inventory): boolean =>
+				inv.name === item.name && inv.id !== item.id,
 		)
 	) {
 		newState = EditItemErrors.DuplicateName;

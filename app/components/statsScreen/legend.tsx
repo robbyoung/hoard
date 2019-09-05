@@ -36,7 +36,7 @@ export default class Legend extends Component<LegendProps> {
 		return (
 			<View style={styles.legend}>
 				{this.props.data.map(
-					(data): JSX.Element => (
+					(data: PieChartData): JSX.Element => (
 						<TouchableOpacity
 							key={data.key}
 							onPress={(): void => this.showDetails(data)}>

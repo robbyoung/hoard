@@ -9,7 +9,7 @@ import FontAwesome, { Icons } from 'react-native-fontawesome';
 import store from '../../store';
 import { Screens } from '../../screens';
 import { lightColor, darkColor, black } from '../../styles';
-import { Inventory } from '../../state';
+import { Inventory, Attribute } from '../../state';
 import { SetItemToEditAction } from '../../actions/SetItemToEdit';
 import { ActionType } from '../../reducers/actions';
 import createHeader from '../overviewScreen/headerIcons';
@@ -128,7 +128,7 @@ export default class ItemDetails extends Component<
 			this.setState({
 				item,
 				attributeList: item.attributes.map(
-					(attribute): JSX.Element => (
+					(attribute: Attribute): JSX.Element => (
 						<ItemAttribute
 							attribute={attribute}
 							key={attribute.name}
@@ -142,13 +142,19 @@ export default class ItemDetails extends Component<
 	private static getSavedItemFromState(): Inventory | undefined {
 		const state = store.getState();
 		const itemId = state.editItem.id;
-		const item = state.inventory.find((inv): boolean => inv.id === itemId);
+		const item = state.inventory.find(
+			(inv: Inventory): boolean => inv.id === itemId,
+		);
 		return item;
 	}
 
 	private static confirmDeletion(): Promise<boolean> {
 		return new Promise<boolean>(
-			(resolve): void => {
+			(
+				resolve: (
+					value?: boolean | PromiseLike<boolean> | undefined,
+				) => void,
+			): void => {
 				Alert.alert(
 					'Delete Inventory',
 					'This item will be permanently deleted.',

@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { StatsState, Inventory, ChartData } from '../../state';
+import { StatsState, Inventory, ChartData, Attribute } from '../../state';
 
 export interface SetStatsAttributeAction extends Action {
 	inventory: Inventory[];
@@ -38,19 +38,19 @@ export function setStatsAttribute(
 	}
 
 	const items = action.inventory.filter(
-		(item): boolean => oldState.category === item.category,
+		(item: Inventory): boolean => oldState.category === item.category,
 	);
 	let totalGrouper = 0;
 	const tally: { [id: string]: number } = {};
 	for (const item of items) {
 		const match = item.attributes.find(
-			(a): boolean => a.name === action.attribute,
+			(a: Attribute): boolean => a.name === action.attribute,
 		);
 		const value = match ? match.value : 'Unknown';
 		let amountToAdd = 1;
 		if (action.grouper !== 'None') {
 			const result = item.attributes.find(
-				(a): boolean => a.name === action.grouper,
+				(a: Attribute): boolean => a.name === action.grouper,
 			);
 			if (result !== undefined) {
 				amountToAdd = parseInt(result.value);

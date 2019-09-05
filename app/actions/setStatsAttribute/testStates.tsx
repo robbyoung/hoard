@@ -3,7 +3,7 @@ import { Inventory, AttributeType } from '../../state';
 
 export function createTestInventory(): Inventory[] {
 	return _.range(10).map(
-		(i): Inventory => {
+		(i: number): Inventory => {
 			return {
 				name: `Name${i}`,
 				id: `ID${i}`,

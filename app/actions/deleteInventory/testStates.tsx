@@ -5,7 +5,7 @@ export function createInventory(
 	indexToSkip: number,
 ): InventoryState {
 	const state: InventoryState = [];
-	for (var i = 0; i < count; i++) {
+	for (let i = 0; i < count; i++) {
 		if (i !== indexToSkip) {
 			state.push({
 				name: `NAME${i}`,

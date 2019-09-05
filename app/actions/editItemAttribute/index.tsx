@@ -17,7 +17,7 @@ export function editItemAttribute(
 	};
 
 	const matchIndex = newState.attributes.findIndex(
-		(attr): boolean => attr.name === action.attribute.name,
+		(attr: Attribute): boolean => attr.name === action.attribute.name,
 	);
 	newState.attributes[matchIndex] = action.attribute;
 	return newState;

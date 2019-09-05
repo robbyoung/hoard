@@ -5,7 +5,7 @@ import { EditItemNameAction, editItemName } from '.';
 
 describe('Edit Item Name', (): void => {
 	let state: EditItemState;
-	let action: EditItemNameAction = {
+	const action: EditItemNameAction = {
 		type: ActionType.EditItemName,
 		name: '',
 	};

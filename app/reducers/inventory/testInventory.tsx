@@ -20,7 +20,7 @@ const bookNames = [
 const gameNames = ['Dark Souls', 'Dark Souls III', 'Bloodborne', 'Sekiro'];
 
 const testBooks: Inventory[] = bookNames.map(
-	(name, i): Inventory => {
+	(name: string, i: number): Inventory => {
 		const attributes: Attribute[] = [
 			{
 				name: 'Completed',
@@ -48,7 +48,7 @@ const testBooks: Inventory[] = bookNames.map(
 );
 
 const testGames: Inventory[] = gameNames.map(
-	(name, i): Inventory => {
+	(name: string, i: number): Inventory => {
 		const attributes: Attribute[] = [
 			{
 				name: 'Completed',

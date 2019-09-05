@@ -5,7 +5,7 @@ import { EditItemAttributeAction, editItemAttribute } from '.';
 
 describe('Edit Item Attribute', (): void => {
 	let state: EditItemState;
-	let action: EditItemAttributeAction = {
+	const action: EditItemAttributeAction = {
 		type: ActionType.EditItemAttribute,
 		attribute: createAttribute(0, 'Edited'),
 	};

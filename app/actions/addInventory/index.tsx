@@ -14,7 +14,7 @@ export function addInventory(
 	const newState = [...oldState];
 	const newItem = action.newItem;
 	const matchingIndex = oldState.findIndex(
-		(item): boolean => newItem.id === item.id,
+		(item: Inventory): boolean => newItem.id === item.id,
 	);
 
 	if (matchingIndex === -1) {
@@ -25,7 +25,7 @@ export function addInventory(
 	}
 
 	AsyncStorage.setItem('inventory', JSON.stringify(newState)).catch(
-		(error): void => {
+		(error: Error): void => {
 			console.error(
 				'Something went wrong while saving inventory: ' + error,
 			);

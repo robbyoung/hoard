@@ -28,7 +28,7 @@ export default class CategoryPicker extends Component<
 				<Picker
 					style={styles.categoryPicker}
 					selectedValue={this.props.chosenCategory}
-					onValueChange={(categoryName): void => {
+					onValueChange={(categoryName: string): void => {
 						const category = store.getState().categories[
 							categoryName
 						];
@@ -56,7 +56,7 @@ export default class CategoryPicker extends Component<
 	private getCategoryPickerItems(): JSX.Element[] {
 		const categories = store.getState().categories;
 		const categoryPickerItems = Object.keys(categories).map(
-			(name, i): JSX.Element => (
+			(name: string, i: number): JSX.Element => (
 				<Picker.Item label={name} value={name} key={i} />
 			),
 		);

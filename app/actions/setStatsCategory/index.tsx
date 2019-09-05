@@ -28,21 +28,21 @@ export function setStatsCategory(
 
 	const attributes = action.attributes
 		.filter(
-			(a): boolean => {
+			(a: Attribute): boolean => {
 				return (
 					a.type === AttributeType.Bool ||
 					a.type === AttributeType.Combo
 				);
 			},
 		)
-		.map((a): string => a.name);
+		.map((a: Attribute): string => a.name);
 	const groupers = action.attributes
 		.filter(
-			(a): boolean => {
+			(a: Attribute): boolean => {
 				return a.type === AttributeType.Number;
 			},
 		)
-		.map((a): string => a.name);
+		.map((a: Attribute): string => a.name);
 
 	return {
 		...oldState,

@@ -47,7 +47,7 @@ interface HeaderIconProps {
 class HeaderIcons extends Component<HeaderIconProps> {
 	public render(): JSX.Element {
 		const buttons = this.props.buttons.map(
-			(button, index): JSX.Element => {
+			(button: HeaderIconButton, index: number): JSX.Element => {
 				return (
 					<TouchableOpacity key={index} onPress={button.callback}>
 						<FontAwesome style={styles.headerButton}>

@@ -10,6 +10,7 @@ import { Screens } from '../../screens';
 import { ActionType } from '../../reducers/actions';
 import store from '../../store';
 import { lightColor } from '../../styles';
+import { Inventory } from '../../state';
 import OverviewItem from './overviewItem';
 import createHeader from './headerIcons';
 
@@ -79,7 +80,7 @@ export default class Overview extends Component<
 		return store
 			.getState()
 			.inventory.map(
-				(inventory): JSX.Element => (
+				(inventory: Inventory): JSX.Element => (
 					<OverviewItem
 						key={inventory.id}
 						item={inventory}

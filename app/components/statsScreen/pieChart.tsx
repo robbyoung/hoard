@@ -19,8 +19,12 @@ export default class PieChart extends Component<PieChartProps> {
 			<View style={styles.chart}>
 				<Pie
 					radius={Dimensions.get('window').width / 4}
-					series={this.props.data.map((d): number => d.percentage)}
-					colors={this.props.data.map((d): string => d.colour)}
+					series={this.props.data.map(
+						(d: ChartData): number => d.percentage,
+					)}
+					colors={this.props.data.map(
+						(d: ChartData): string => d.colour,
+					)}
 				/>
 			</View>
 		);

@@ -5,7 +5,7 @@ import { SetStatsCategoryAction, setStatsCategory } from '.';
 
 describe('Set Stats Category', (): void => {
 	let state: StatsState = blankState;
-	let action: SetStatsCategoryAction = {
+	const action: SetStatsCategoryAction = {
 		type: ActionType.SetStatsCategory,
 		category: 'category',
 		attributes: testAttributes,

@@ -10,7 +10,7 @@ import { SetStatsAttributeAction, setStatsAttribute } from '.';
 
 describe('Set Stats Attribute', (): void => {
 	let state: StatsState = blankState;
-	let action: SetStatsAttributeAction = {
+	const action: SetStatsAttributeAction = {
 		type: ActionType.SetStatsAttribute,
 		inventory: createTestInventory(),
 		attribute: 'Pick One',

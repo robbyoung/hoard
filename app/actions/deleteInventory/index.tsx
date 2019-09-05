@@ -11,14 +11,14 @@ export function deleteInventory(
 	action: DeleteInventoryAction,
 ): InventoryState {
 	const newState: InventoryState = [];
-	for (var item of oldState) {
+	for (const item of oldState) {
 		if (item.id !== action.itemId) {
 			newState.push(item);
 		}
 	}
 
 	void AsyncStorage.setItem('inventory', JSON.stringify(newState)).catch(
-		(error): void => {
+		(error: Error): void => {
 			console.error(
 				'Something went wrong while loading inventory: ' + error,
 			);
