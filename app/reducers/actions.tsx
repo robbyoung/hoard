@@ -2,6 +2,7 @@ export enum ActionType {
 	LoadInventory,
 	AddInventory,
 	DeleteInventory,
+	AddCategory,
 	SetStatsCategory,
 	SetStatsAttribute,
 	EditItemName,

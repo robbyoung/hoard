@@ -3,7 +3,7 @@ import { InventoryState } from '../../state';
 import testInventory from './testInventory';
 import reducer from './index';
 
-const DEFAULT_TEST_STATE: InventoryState = testInventory;
+const DEFAULT_TEST_STATE: InventoryState = [];
 
 interface JestMock {
 	setItem: () => Promise<void>;
@@ -23,7 +23,7 @@ describe('Inventory Reducer', (): void => {
 
 	beforeEach(
 		(): void => {
-			state = DEFAULT_TEST_STATE;
+			state = testInventory;
 			action = {
 				type: undefined,
 			};
@@ -33,11 +33,11 @@ describe('Inventory Reducer', (): void => {
 	it('has a default state if none is passed in', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
-		expect(newState).toEqual([]);
+		expect(newState).toEqual(DEFAULT_TEST_STATE);
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {
 		const newState = reducer(state, action);
-		expect(newState).toEqual(DEFAULT_TEST_STATE);
+		expect(newState).toEqual(testInventory);
 	});
 });
