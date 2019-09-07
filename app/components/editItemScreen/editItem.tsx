@@ -14,7 +14,7 @@ import createHeader from '../overviewScreen/headerIcons';
 import { ValidateEditItemAction } from '../../actions/validateEditAction';
 import { EditItemNameAction } from '../../actions/editItemName';
 import { AddInventoryAction } from '../../actions/addInventory';
-import { NavigationOptions } from '../../aliases';
+import { NavigationOptionsWithProps } from '../../aliases';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import CategoryPicker from './categoryPicker';
@@ -91,7 +91,7 @@ export default class EditItem extends Component<
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
-	public static navigationOptions: NavigationOptions = (
+	public static navigationOptions: NavigationOptionsWithProps = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
 		const emptyName = store.getState().editItem.name === '';

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 });
 
 export default class Loading extends Component<NavigationInjectedProps> {
-	public static navigationOptions = {
+	public static navigationOptions: { header: null } = {
 		header: null,
 	};
 

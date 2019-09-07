@@ -14,6 +14,7 @@ import { SetItemToEditAction } from '../../actions/SetItemToEdit';
 import { ActionType } from '../../reducers/actions';
 import createHeader from '../overviewScreen/headerIcons';
 import { DeleteInventoryAction } from '../../actions/deleteInventory';
+import { NavigationOptionsWithProps, PromiseCallback } from '../../aliases';
 import ItemAttribute from './itemAttribute';
 
 const styles = StyleSheet.create({
@@ -55,7 +56,7 @@ export default class ItemDetails extends Component<
 	ItemDetailsState
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
-	public static navigationOptions = (
+	public static navigationOptions: NavigationOptionsWithProps = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
 		return createHeader('Details', [
@@ -150,11 +151,7 @@ export default class ItemDetails extends Component<
 
 	private static confirmDeletion(): Promise<boolean> {
 		return new Promise<boolean>(
-			(
-				resolve: (
-					value?: boolean | PromiseLike<boolean> | undefined,
-				) => void,
-			): void => {
+			(resolve: PromiseCallback<void>): void => {
 				Alert.alert(
 					'Delete Inventory',
 					'This item will be permanently deleted.',

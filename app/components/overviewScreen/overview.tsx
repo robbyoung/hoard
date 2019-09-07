@@ -11,6 +11,7 @@ import { ActionType } from '../../reducers/actions';
 import store from '../../store';
 import { lightColor } from '../../styles';
 import { Inventory } from '../../state';
+import { NavigationOptionsWithProps } from '../../aliases';
 import OverviewItem from './overviewItem';
 import createHeader from './headerIcons';
 
@@ -29,7 +30,7 @@ export default class Overview extends Component<
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
-	public static navigationOptions = (
+	public static navigationOptions: NavigationOptionsWithProps = (
 		props: NavigationInjectedProps,
 	): NavigationStackScreenOptions => {
 		return createHeader('My Stuff', [
@@ -51,7 +52,7 @@ export default class Overview extends Component<
 		]);
 	};
 
-	public state = {
+	public state: OverviewState = {
 		inventoryList: this.getInventoryList(),
 	};
 
