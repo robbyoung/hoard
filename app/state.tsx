@@ -50,6 +50,11 @@ export interface StatsState {
 
 export type EditItemState = Inventory;
 
+export type EditCategoryState = {
+	name: string;
+	category: Category;
+}
+
 export type ValidationState = string;
 
 export interface HoardState {

@@ -10,4 +10,7 @@ export enum ActionType {
 	EditItemAttribute,
 	SetItemToEdit,
 	ValidateEditItem,
+	EditCategoryName,
+	EditCategoryAttribute,
+	SetCategoryToEdit,
 }
