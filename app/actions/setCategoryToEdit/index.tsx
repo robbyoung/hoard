@@ -10,18 +10,18 @@ export function setCategoryToEdit(
 	oldState: EditCategoryState,
 	action: SetCategoryToEditAction,
 ): EditCategoryState {
-	if(action.category === undefined) {
+	if (action.category === undefined) {
 		return {
 			name: '',
 			category: {
 				icon: '',
 				attributes: [],
-			}
-		}
+			},
+		};
 	} else {
 		return {
 			name: action.name,
 			category: action.category,
-		}
+		};
 	}
 }

@@ -1,35 +1,33 @@
 import { Action } from 'redux';
-import { EditItemState, AttributeType } from '../../state';
-import { ActionType } from '../actions';
-import { EditItemNameAction } from '../../actions/editItemName';
-import { SetItemToEditAction } from '../../actions/setItemToEdit';
-import reducer from './index';
+import { AttributeType, EditCategoryState } from '../../state';
+import reducer, { defaultState } from './index';
 
-const DEFAULT_TEST_STATE: EditItemState = {
-	id: 'testId',
-	name: 'American Gods',
-	category: 'Book',
-	attributes: [
-		{
-			name: 'Completed',
-			value: 'False',
-			type: AttributeType.Bool,
-		},
-		{
-			name: 'Page Count',
-			value: '750',
-			type: AttributeType.Number,
-		},
-		{
-			name: 'Series',
-			value: 'N/A',
-			type: AttributeType.String,
-		},
-	],
+const DEFAULT_TEST_STATE: EditCategoryState = {
+	name: 'Book',
+	category: {
+		icon: '',
+		attributes: [
+			{
+				name: 'Completed',
+				value: 'False',
+				type: AttributeType.Bool,
+			},
+			{
+				name: 'Page Count',
+				value: '750',
+				type: AttributeType.Number,
+			},
+			{
+				name: 'Series',
+				value: 'N/A',
+				type: AttributeType.String,
+			},
+		],
+	},
 };
 
-describe('New Item Reducer', (): void => {
-	let state: EditItemState | undefined;
+describe('Edit Category Reducer', (): void => {
+	let state: EditCategoryState | undefined;
 	let action: Action;
 
 	beforeEach(
@@ -44,58 +42,11 @@ describe('New Item Reducer', (): void => {
 	it('has a default state if none is passed in', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
-		expect(newState).toEqual({
-			id: '',
-			name: '',
-			category: '',
-			attributes: [],
-		});
+		expect(newState).toEqual(defaultState);
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {
 		const newState = reducer(state, action);
 		expect(newState).toEqual(DEFAULT_TEST_STATE);
-	});
-
-	it('can update the new item name', (): void => {
-		const newName = 'American Gods (Gaiman)';
-		const setNameAction: EditItemNameAction = {
-			type: ActionType.EditItemName,
-			name: newName,
-		};
-		const newState = reducer(DEFAULT_TEST_STATE, setNameAction);
-		expect(newState.name).toEqual(newName);
-	});
-
-	it('will reset the state if instructed to', (): void => {
-		action.type = ActionType.SetItemToEdit;
-		const newState = reducer(DEFAULT_TEST_STATE, action);
-		expect(newState).toEqual({
-			id: '',
-			name: '',
-			category: '',
-			attributes: [],
-		});
-	});
-
-	it('can reset the state to edit inventory', (): void => {
-		const itemToEdit = {
-			id: 'testId2',
-			name: 'Dark Souls',
-			category: 'Game',
-			attributes: [
-				{
-					name: 'Completed',
-					value: 'False',
-					type: AttributeType.Bool,
-				},
-			],
-		};
-		const resetAction: SetItemToEditAction = {
-			type: ActionType.SetItemToEdit,
-			newItem: itemToEdit,
-		};
-		const newState = reducer(DEFAULT_TEST_STATE, resetAction);
-		expect(newState).toEqual(itemToEdit);
 	});
 });
