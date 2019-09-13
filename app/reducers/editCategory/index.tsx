@@ -13,6 +13,10 @@ import {
 	setCategoryToEdit,
 	SetCategoryToEditAction,
 } from '../../actions/setCategoryToEdit';
+import {
+	EditCategoryIconAction,
+	editCategoryIcon,
+} from '../../actions/editCategoryIcon';
 
 export const defaultState: EditCategoryState = {
 	name: '',
@@ -29,6 +33,8 @@ export default function editItemReducer(
 	switch (action.type) {
 		case ActionType.EditCategoryName:
 			return editCategoryName(state, action as EditCategoryNameAction);
+		case ActionType.EditCategoryIcon:
+			return editCategoryIcon(state, action as EditCategoryIconAction);
 		case ActionType.EditCategoryAttribute:
 			return editCategoryAttribute(
 				state,
