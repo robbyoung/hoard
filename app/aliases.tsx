@@ -12,3 +12,7 @@ export type NavigationOptionsWithProps = (
 export type PromiseCallback<T> = (
 	value?: boolean | PromiseLike<boolean> | undefined,
 ) => T;
+
+export interface JestMock {
+	setItem: () => Promise<void>;
+}

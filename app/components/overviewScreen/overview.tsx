@@ -46,6 +46,9 @@ export default class Overview extends Component<
 			{
 				icon: Icons.folderPlus,
 				callback: (): void => {
+					store.dispatch({
+						type: ActionType.SetCategoryToEdit,
+					});
 					props.navigation.navigate(Screens.EditCategory);
 				},
 			},

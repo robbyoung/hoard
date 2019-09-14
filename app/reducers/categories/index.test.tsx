@@ -1,8 +1,18 @@
 import { Action } from 'redux';
 import { CategoriesState } from '../../state';
 import { ActionType } from '../actions';
+import { JestMock } from '../../aliases';
 import testCategories from './testCategories';
 import reducer from './index';
+
+jest.mock(
+	'@react-native-community/async-storage',
+	(): JestMock => {
+		return {
+			setItem: async (): Promise<void> => undefined,
+		};
+	},
+);
 
 describe('Categories Reducer', (): void => {
 	let state: CategoriesState | undefined;

@@ -84,6 +84,7 @@ export default class Loading extends Component<NavigationInjectedProps> {
 				type: ActionType.LoadCategories,
 				state: savedState,
 			};
+			console.error(savedState);
 			store.dispatch(loadCategoriesAction);
 		}
 	}

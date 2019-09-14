@@ -1,7 +1,17 @@
 import { CategoriesState } from '../../state';
 import { ActionType } from '../../reducers/actions';
+import { JestMock } from '../../aliases';
 import * as testStates from './testStates';
 import { AddCategoryAction, addCategory } from '.';
+
+jest.mock(
+	'@react-native-community/async-storage',
+	(): JestMock => {
+		return {
+			setItem: async (): Promise<void> => undefined,
+		};
+	},
+);
 
 describe('Add Inventory Action', (): void => {
 	let state: CategoriesState;

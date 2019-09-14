@@ -1,12 +1,10 @@
 import { Action } from 'redux';
 import { InventoryState } from '../../state';
 import { ActionType } from '../actions';
+import { JestMock } from '../../aliases';
 import testInventory from './testInventory';
 import reducer from './index';
 
-interface JestMock {
-	setItem: () => Promise<void>;
-}
 jest.mock(
 	'@react-native-community/async-storage',
 	(): JestMock => {
