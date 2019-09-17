@@ -14,6 +14,8 @@ import { EditCategoryNameAction } from '../../actions/editCategoryName';
 import { ActionType } from '../../reducers/actions';
 import { black, lightColor, white } from '../../styles';
 import { AddCategoryAction } from '../../actions/addCategory';
+import { EditCategoryIconAction } from '../../actions/editCategoryIcon';
+import IconPicker from './iconPicker/iconPicker';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -45,6 +47,7 @@ export const styles = StyleSheet.create({
 
 interface EditCategoryState {
 	categoryName: string;
+	categoryIcon: string;
 }
 export default class EditCategory extends Component<
 	NavigationInjectedProps,
@@ -65,6 +68,7 @@ export default class EditCategory extends Component<
 
 	public state: EditCategoryState = {
 		categoryName: '',
+		categoryIcon: '',
 	};
 
 	public componentWillMount(): void {
@@ -88,6 +92,16 @@ export default class EditCategory extends Component<
 						style={styles.title}
 					/>
 				</View>
+				<IconPicker
+					onIconTap={(icon: string): void => {
+						const event: EditCategoryIconAction = {
+							type: ActionType.EditCategoryIcon,
+							icon,
+						};
+						store.dispatch(event);
+					}}
+					selected={this.state.categoryIcon}
+				/>
 			</View>
 		);
 	}
@@ -96,6 +110,7 @@ export default class EditCategory extends Component<
 		const state = store.getState().editCategory;
 		this.setState({
 			categoryName: state.name,
+			categoryIcon: state.category.icon,
 		});
 	}
 
