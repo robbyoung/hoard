@@ -23,3 +23,8 @@ export const availableIcons = [
 	Icons.teeth,
 	Icons.question,
 ];
+
+export function getRandomIcon() {
+	const index = Math.floor(Math.random() * availableIcons.length);
+	return availableIcons[index]
+}

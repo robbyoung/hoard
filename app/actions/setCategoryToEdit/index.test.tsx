@@ -13,7 +13,7 @@ function runTest(
 	const action: SetCategoryToEditAction = {
 		type: ActionType.EditItemAttribute,
 		category: newCategory ? newCategory.category : undefined,
-		name: newCategory ? newCategory.name : '',
+		name: newCategory ? newCategory.name : undefined,
 	};
 
 	const newState = setCategoryToEdit(state, action);

@@ -66,12 +66,8 @@ export default class EditCategory extends Component<
 		]);
 	};
 
-	public state: EditCategoryState = {
-		categoryName: '',
-		categoryIcon: '',
-	};
-
 	public componentWillMount(): void {
+		this.setFields();
 		this.unsubscribe = store.subscribe((): void => this.setFields());
 	}
 
@@ -93,14 +89,14 @@ export default class EditCategory extends Component<
 					/>
 				</View>
 				<IconPicker
-					onIconTap={(icon: string): void => {
+					onIconSelect={(icon: string): void => {
 						const event: EditCategoryIconAction = {
 							type: ActionType.EditCategoryIcon,
 							icon,
 						};
 						store.dispatch(event);
 					}}
-					selected={this.state.categoryIcon}
+					selectedIcon={this.state.categoryIcon}
 				/>
 			</View>
 		);

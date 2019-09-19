@@ -1,8 +1,9 @@
 import { Action } from 'redux';
 import { EditCategoryState, Category } from '../../state';
+import { getRandomIcon } from '../../components/editCategoryScreen/iconPicker/availableIcons';
 
 export interface SetCategoryToEditAction extends Action {
-	name: string;
+	name?: string;
 	category?: Category;
 }
 
@@ -10,11 +11,11 @@ export function setCategoryToEdit(
 	oldState: EditCategoryState,
 	action: SetCategoryToEditAction,
 ): EditCategoryState {
-	if (action.category === undefined) {
+	if (action.category === undefined || action.name === undefined) {
 		return {
 			name: '',
 			category: {
-				icon: '',
+				icon: getRandomIcon(),
 				attributes: [],
 			},
 		};
