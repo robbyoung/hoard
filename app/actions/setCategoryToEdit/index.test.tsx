@@ -3,6 +3,7 @@ import { EditCategoryState } from '../../state';
 import { defaultState } from '../../reducers/editCategory';
 import { createTestState } from './testStates';
 import { SetCategoryToEditAction, setCategoryToEdit } from '.';
+import { availableIcons } from '../../components/editCategoryScreen/iconPicker/availableIcons';
 
 function runTest(
 	oldState: EditCategoryState,
@@ -17,7 +18,15 @@ function runTest(
 	};
 
 	const newState = setCategoryToEdit(state, action);
-	expect(newState).toEqual(newCategory ? newCategory : defaultState);
+	const expectedState = newCategory ? newCategory : defaultState;
+	expect(newState.category.attributes).toEqual(expectedState.category.attributes);
+	expect(newState.name).toEqual(expectedState.name);
+	if (newCategory) {
+		expect(newState.category.icon).toEqual(expectedState.category.icon);
+	} else {
+		const validIcon = availableIcons.indexOf(newState.category.icon) !== -1;
+		expect(validIcon).toBeTruthy();
+	}
 	expect(state).toEqual(oldState);
 }
 
