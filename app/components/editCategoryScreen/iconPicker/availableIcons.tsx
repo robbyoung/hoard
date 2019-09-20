@@ -12,16 +12,16 @@ export const availableIcons = [
 	Icons.venusMars,
 	Icons.umbrella,
 	Icons.puzzlePiece,
-	Icons.yahoo,
 	Icons.walking,
 	Icons.shower,
 	Icons.expand,
 	Icons.kissBeam,
 	Icons.carBattery,
-	Icons.weibo,
-	Icons.readme,
 	Icons.teeth,
 	Icons.question,
+	Icons.locationArrow,
+	Icons.medkit,
+	Icons.meetup,
 ];
 
 export function getRandomIcon() {

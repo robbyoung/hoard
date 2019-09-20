@@ -1,39 +1,50 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import { darkColor } from '../../../styles';
+import { darkColor, white } from '../../../styles';
 import FontAwesome from 'react-native-fontawesome';
 import { availableIcons } from './availableIcons';
 
 
 export const styles = StyleSheet.create({
-	table: {
+	modal: {
+		height: '100%',
+		marginTop: '120%',
+		padding: '3%',
 		flexDirection: "row",
 		flexWrap: "wrap",
-		width: '70%',
-		height: '70%',
+		justifyContent: 'space-evenly',
+		backgroundColor: white,
+		borderTopWidth: 5,
+		borderColor: darkColor,
 	},
 	iconContainer: {
-		margin: 5,
+		width: 40,
+		margin: 2,
 	},
 	icon: {
+		textAlign: 'center',
 		fontSize: 35,
 	},
 	selectedIcon: {
 		color: darkColor,
-		fontSize: 35,
 	},
 });
 
 interface IconModalProps {
 	onIconSelect: (icon: string) => void;
+	closeModal: () => void;
 	selected: string;
 	isVisible: boolean;
 }
 export default class IconModal extends Component<IconModalProps> {
 	public render(): JSX.Element {
 		return (
-			<Modal visible={this.props.isVisible}>
-				<View style={styles.table}>{this.getIconButtons()}</View>
+			<Modal 
+			transparent={true}
+			visible={this.props.isVisible}
+			animated={true}
+			onRequestClose={() => this.props.closeModal()}>
+				<View style={styles.modal}>{this.getIconButtons()}</View>
 			</Modal>
 		);
 	}
@@ -44,11 +55,14 @@ export default class IconModal extends Component<IconModalProps> {
 				return (
 					<View key={icon} style={styles.iconContainer}>
 						<TouchableOpacity
-							onPress={(): void => this.props.onIconSelect(icon)}>
+							onPress={(): void => {
+								this.props.onIconSelect(icon);
+								this.props.closeModal();
+							}}>
 							<FontAwesome
 								style={
 									icon === this.props.selected
-										? styles.selectedIcon
+										? [styles.icon, styles.selectedIcon]
 										: styles.icon
 								}>
 								{icon}

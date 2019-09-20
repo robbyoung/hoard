@@ -38,10 +38,8 @@ export default class IconPicker extends Component<IconPickerProps, IconPickerSta
 				</TouchableOpacity>
 				<IconModal
 					isVisible={this.state.modalVisible}
-					onIconSelect={(icon) => {
-						this.props.onIconSelect(icon);
-						this.toggleIconModal();
-					}}
+					onIconSelect={(icon) => this.props.onIconSelect(icon)}
+					closeModal={() => this.toggleIconModal()}
 					selected={this.props.selectedIcon}
 				/>
 			</View>
