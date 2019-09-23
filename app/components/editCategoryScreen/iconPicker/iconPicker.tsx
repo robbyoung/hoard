@@ -3,14 +3,24 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-fontawesome';
 import IconModal from './iconModal';
-import { lightColor } from '../../../styles';
+import { black, darkColor } from '../../../styles';
 
 export const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
 	},
+	key: {
+		textAlign: 'right',
+		fontSize: 22,
+		fontWeight: 'bold',
+		width: '50%',
+		marginRight: 3,
+		color: darkColor,
+	},
 	icon: {
-		fontSize: 35,
+		fontSize: 30,
+		paddingLeft: 4,
+		color: black,
 	},
 });
 
@@ -31,7 +41,7 @@ export default class IconPicker extends Component<IconPickerProps, IconPickerSta
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
-				<Text>Icon:</Text>
+				<Text style={styles.key}>Icon:</Text>
 				<TouchableOpacity
 					onPress={() => this.toggleIconModal()}>
 						<FontAwesome style={styles.icon}>{this.props.selectedIcon}</FontAwesome>

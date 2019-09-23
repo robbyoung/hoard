@@ -73,7 +73,6 @@ export const styles = StyleSheet.create({
 		fontSize: 22,
 		color: black,
 	},
-
 	errorMessage: {
 		color: warning,
 	},

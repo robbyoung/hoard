@@ -4,7 +4,7 @@ import {
 	NavigationStackScreenOptions,
 } from 'react-navigation';
 import { Component } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput, Text } from 'react-native';
 import { Icons } from 'react-native-fontawesome';
 import React from 'react';
 import store from '../../store';
@@ -16,6 +16,9 @@ import { black, lightColor, white } from '../../styles';
 import { AddCategoryAction } from '../../actions/addCategory';
 import { EditCategoryIconAction } from '../../actions/editCategoryIcon';
 import IconPicker from './iconPicker/iconPicker';
+import { Attribute } from '../../state';
+import AttributeEditor from './attributeEditor';
+import AttributeCreator from './attributeCreator';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -43,11 +46,18 @@ export const styles = StyleSheet.create({
 		color: black,
 		backgroundColor: lightColor,
 	},
+	attributes: {
+		margin: 10,
+		padding: 5,
+		borderRadius: 5,
+		backgroundColor: lightColor,
+	},
 });
 
 interface EditCategoryState {
-	categoryName: string;
-	categoryIcon: string;
+	name: string;
+	icon: string;
+	attributeFields: JSX.Element[];
 }
 export default class EditCategory extends Component<
 	NavigationInjectedProps,
@@ -80,7 +90,7 @@ export default class EditCategory extends Component<
 			<View>
 				<View style={styles.row}>
 					<TextInput
-						value={this.state.categoryName}
+						value={this.state.name}
 						onChangeText={(value: string): void =>
 							this.setCategoryName(value)
 						}
@@ -88,25 +98,40 @@ export default class EditCategory extends Component<
 						style={styles.title}
 					/>
 				</View>
-				<IconPicker
-					onIconSelect={(icon: string): void => {
-						const event: EditCategoryIconAction = {
-							type: ActionType.EditCategoryIcon,
-							icon,
-						};
-						store.dispatch(event);
-					}}
-					selectedIcon={this.state.categoryIcon}
-				/>
+				<View style={styles.attributes}>
+					<IconPicker
+						onIconSelect={(icon: string): void => {
+							const event: EditCategoryIconAction = {
+								type: ActionType.EditCategoryIcon,
+								icon,
+							};
+							store.dispatch(event);
+						}}
+						selectedIcon={this.state.icon}
+					/>
+					{this.state.attributeFields}
+					<AttributeCreator
+						onCreate={(a: Attribute) => this.setAttribute(a)}
+					></AttributeCreator>
+				</View>
 			</View>
 		);
+	}
+
+	private getAttributeField(attribute: Attribute): JSX.Element {
+		return (<AttributeEditor
+			attribute={attribute}
+			onChange={(a: Attribute) => this.setAttribute(a)}
+			>
+		</AttributeEditor>);
 	}
 
 	private setFields(): void {
 		const state = store.getState().editCategory;
 		this.setState({
-			categoryName: state.name,
-			categoryIcon: state.category.icon,
+			name: state.name,
+			icon: state.category.icon,
+			attributeFields: state.category.attributes.map((a) => this.getAttributeField(a)),
 		});
 	}
 
@@ -116,6 +141,13 @@ export default class EditCategory extends Component<
 			name,
 		};
 		store.dispatch(action);
+	}
+
+	private setAttribute(a: Attribute) {
+		store.dispatch({
+			type: ActionType.EditCategoryAttribute,
+			attribute: a,
+		});
 	}
 
 	private static submitCategory(navigator: NavigationInjectedProps): void {
