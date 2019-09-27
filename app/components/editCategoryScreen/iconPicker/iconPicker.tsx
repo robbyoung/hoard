@@ -2,12 +2,12 @@ import { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-fontawesome';
-import IconModal from './iconModal';
 import { black, darkColor } from '../../../styles';
+import IconModal from './iconModal';
 
 export const styles = StyleSheet.create({
 	row: {
-		flexDirection: "row",
+		flexDirection: 'row',
 	},
 	key: {
 		textAlign: 'right',
@@ -33,18 +33,22 @@ interface IconPickerState {
 	modalVisible: boolean;
 }
 
-export default class IconPicker extends Component<IconPickerProps, IconPickerState> {
+export default class IconPicker extends Component<
+	IconPickerProps,
+	IconPickerState
+> {
 	public state: IconPickerState = {
 		modalVisible: false,
-	}
+	};
 
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
 				<Text style={styles.key}>Icon:</Text>
-				<TouchableOpacity
-					onPress={() => this.toggleIconModal()}>
-						<FontAwesome style={styles.icon}>{this.props.selectedIcon}</FontAwesome>
+				<TouchableOpacity onPress={() => this.toggleIconModal()}>
+					<FontAwesome style={styles.icon}>
+						{this.props.selectedIcon}
+					</FontAwesome>
 				</TouchableOpacity>
 				<IconModal
 					isVisible={this.state.modalVisible}

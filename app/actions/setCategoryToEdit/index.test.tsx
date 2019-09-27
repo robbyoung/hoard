@@ -1,9 +1,9 @@
 import { ActionType } from '../../reducers/actions';
 import { EditCategoryState } from '../../state';
 import { defaultState } from '../../reducers/editCategory';
+import { availableIcons } from '../../components/editCategoryScreen/iconPicker/availableIcons';
 import { createTestState } from './testStates';
 import { SetCategoryToEditAction, setCategoryToEdit } from '.';
-import { availableIcons } from '../../components/editCategoryScreen/iconPicker/availableIcons';
 
 function runTest(
 	oldState: EditCategoryState,
@@ -19,7 +19,9 @@ function runTest(
 
 	const newState = setCategoryToEdit(state, action);
 	const expectedState = newCategory ? newCategory : defaultState;
-	expect(newState.category.attributes).toEqual(expectedState.category.attributes);
+	expect(newState.category.attributes).toEqual(
+		expectedState.category.attributes,
+	);
 	expect(newState.name).toEqual(expectedState.name);
 	if (newCategory) {
 		expect(newState.category.icon).toEqual(expectedState.category.icon);

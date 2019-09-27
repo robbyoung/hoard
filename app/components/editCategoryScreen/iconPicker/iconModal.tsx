@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import { darkColor, white } from '../../../styles';
 import FontAwesome from 'react-native-fontawesome';
+import { darkColor, white } from '../../../styles';
 import { availableIcons } from './availableIcons';
-
 
 export const styles = StyleSheet.create({
 	modal: {
 		height: '100%',
 		marginTop: '120%',
 		padding: '3%',
-		flexDirection: "row",
-		flexWrap: "wrap",
+		flexDirection: 'row',
+		flexWrap: 'wrap',
 		justifyContent: 'space-evenly',
 		backgroundColor: white,
 		borderTopWidth: 5,
@@ -39,11 +38,11 @@ interface IconModalProps {
 export default class IconModal extends Component<IconModalProps> {
 	public render(): JSX.Element {
 		return (
-			<Modal 
-			transparent={true}
-			visible={this.props.isVisible}
-			animated={true}
-			onRequestClose={() => this.props.closeModal()}>
+			<Modal
+				transparent={true}
+				visible={this.props.isVisible}
+				animated={true}
+				onRequestClose={() => this.props.closeModal()}>
 				<View style={styles.modal}>{this.getIconButtons()}</View>
 			</Modal>
 		);

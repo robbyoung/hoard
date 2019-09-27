@@ -10,7 +10,7 @@ export default class AttributeEditor extends Component<AttributeEditorProps> {
 	public render(): JSX.Element {
 		return (
 			<View>
-				
+				<Text>{this.props.attribute.name}</Text>
 			</View>
 		);
 	}

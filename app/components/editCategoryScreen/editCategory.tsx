@@ -15,8 +15,8 @@ import { ActionType } from '../../reducers/actions';
 import { black, lightColor, white } from '../../styles';
 import { AddCategoryAction } from '../../actions/addCategory';
 import { EditCategoryIconAction } from '../../actions/editCategoryIcon';
-import IconPicker from './iconPicker/iconPicker';
 import { Attribute } from '../../state';
+import IconPicker from './iconPicker/iconPicker';
 import AttributeEditor from './attributeEditor';
 import AttributeCreator from './attributeCreator';
 
@@ -112,18 +112,20 @@ export default class EditCategory extends Component<
 					{this.state.attributeFields}
 					<AttributeCreator
 						onCreate={(a: Attribute) => this.setAttribute(a)}
-					></AttributeCreator>
+					/>
 				</View>
 			</View>
 		);
 	}
 
 	private getAttributeField(attribute: Attribute): JSX.Element {
-		return (<AttributeEditor
-			attribute={attribute}
-			onChange={(a: Attribute) => this.setAttribute(a)}
-			>
-		</AttributeEditor>);
+		return (
+			<AttributeEditor
+				key={attribute.name}
+				attribute={attribute}
+				onChange={(a: Attribute) => this.setAttribute(a)}
+			/>
+		);
 	}
 
 	private setFields(): void {
@@ -131,7 +133,9 @@ export default class EditCategory extends Component<
 		this.setState({
 			name: state.name,
 			icon: state.category.icon,
-			attributeFields: state.category.attributes.map((a) => this.getAttributeField(a)),
+			attributeFields: state.category.attributes.map((a) =>
+				this.getAttributeField(a),
+			),
 		});
 	}
 

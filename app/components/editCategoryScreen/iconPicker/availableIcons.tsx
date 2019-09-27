@@ -26,5 +26,5 @@ export const availableIcons = [
 
 export function getRandomIcon() {
 	const index = Math.floor(Math.random() * availableIcons.length);
-	return availableIcons[index]
+	return availableIcons[index];
 }
