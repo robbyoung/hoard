@@ -38,10 +38,14 @@ interface HoardPickerProps {
 	defaultText?: string;
 	selected?: string;
 	error?: string;
+	hidden?: boolean;
 	onSelect: (s: string) => void;
 }
 export default class HoardPicker extends Component<HoardPickerProps> {
 	public render(): JSX.Element {
+		if (this.props.hidden) {
+			return <View />;
+		}
 		return (
 			<View style={styles.row}>
 				<Text style={styles.title}>{this.props.title}</Text>

@@ -15,10 +15,10 @@ import { ValidateEditItemAction } from '../../actions/validateEditAction';
 import { EditItemNameAction } from '../../actions/editItemName';
 import { AddInventoryAction } from '../../actions/addInventory';
 import { NavigationOptionsWithProps } from '../../aliases';
+import HoardPicker from '../hoardPicker';
 import BoolAttributeInput from './attributeInputs/boolAttributeInput';
 import StringAttributeInput from './attributeInputs/stringAttributeInput';
 import NumberAttributeInput from './attributeInputs/numberAttributeInput';
-import HoardPicker from '../hoardPicker';
 
 const SELECT_CATEGORY_TEXT = 'Pick One';
 
@@ -138,25 +138,25 @@ export default class EditItem extends Component<
 					/>
 				</View>
 				<View style={styles.attributes}>
-
-				<HoardPicker
-					title='Category'
-					defaultText='Pick One'
-					items={Object.keys(store.getState().categories)}
-					selected={this.state.categoryName}
-					onSelect={(categoryName: string): void => {
-						const category = store.getState().categories[
-							categoryName
-						];
-						const attributes: Attribute[] = category
-							? category.attributes
-							: [];
-						store.dispatch({
-							type: ActionType.EditItemCategory,
-							categoryName,
-							attributes,
-						});
-					}}/>
+					<HoardPicker
+						title="Category"
+						defaultText="Pick One"
+						items={Object.keys(store.getState().categories)}
+						selected={this.state.categoryName}
+						onSelect={(categoryName: string): void => {
+							const category = store.getState().categories[
+								categoryName
+							];
+							const attributes: Attribute[] = category
+								? category.attributes
+								: [];
+							store.dispatch({
+								type: ActionType.EditItemCategory,
+								categoryName,
+								attributes,
+							});
+						}}
+					/>
 
 					{this.state.attributeFields}
 				</View>
