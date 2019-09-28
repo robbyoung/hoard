@@ -19,7 +19,7 @@ describe('Set Stats Category', (): void => {
 	});
 
 	it('can unset the category of a stats display', (): void => {
-		action.category = 'Pick One';
+		action.category = '';
 		const newState = setStatsCategory(action, state);
 		expect(newState).toEqual(blankState);
 		expect(state).toEqual(categoryState);

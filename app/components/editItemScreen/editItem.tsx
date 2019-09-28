@@ -62,18 +62,10 @@ export const styles = StyleSheet.create({
 		marginRight: 3,
 		color: darkColor,
 	},
-	categoryPicker: {
-		width: '49%',
-		height: 30,
-		fontSize: 22,
-		marginLeft: 3,
-		backgroundColor: white,
-	},
 	text: {
 		fontSize: 22,
 		color: black,
 	},
-
 	errorMessage: {
 		color: warning,
 	},

@@ -13,7 +13,7 @@ describe('Set Stats Attribute', (): void => {
 	const action: SetStatsAttributeAction = {
 		type: ActionType.SetStatsAttribute,
 		inventory: createTestInventory(),
-		attribute: 'Pick One',
+		attribute: '',
 		grouper: 'None',
 	};
 
@@ -42,7 +42,7 @@ describe('Set Stats Attribute', (): void => {
 	});
 
 	it('can unset the attribute of a stats display', (): void => {
-		action.attribute = 'Pick One';
+		action.attribute = '';
 		const newState = setStatsAttribute(action, state);
 		expect(newState).toEqual(blankState);
 		expect(state).toEqual(attributeState);

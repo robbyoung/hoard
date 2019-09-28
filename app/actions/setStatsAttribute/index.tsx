@@ -27,10 +27,10 @@ export function setStatsAttribute(
 	action: SetStatsAttributeAction,
 	oldState: StatsState,
 ): StatsState {
-	if (action.attribute == 'Pick One') {
+	if (action.attribute === '') {
 		const newState: StatsState = {
 			...oldState,
-			attribute: 'Pick One',
+			attribute: '',
 			grouper: 'None',
 			data: [],
 		};

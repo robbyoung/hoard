@@ -48,6 +48,7 @@ export default class Stats extends Component<
 						title={'Category:'}
 						selected={this.state.category}
 						items={this.state.categoryList}
+						defaultText="Pick One"
 						onSelect={(category: string): void => {
 							const action: SetStatsCategoryAction = {
 								type: ActionType.SetStatsCategory,
@@ -61,9 +62,10 @@ export default class Stats extends Component<
 					/>
 					<HoardPicker
 						title={'Attribute:'}
-						hidden={this.state.attributeList.length <= 1}
+						hidden={this.state.attributeList.length === 0}
 						selected={this.state.attribute}
 						items={this.state.attributeList}
+						defaultText="Pick One"
 						onSelect={(attribute: string): void => {
 							const action: SetStatsAttributeAction = {
 								type: ActionType.SetStatsAttribute,
@@ -77,7 +79,7 @@ export default class Stats extends Component<
 					<HoardPicker
 						title={'Group By:'}
 						hidden={
-							this.state.attribute == 'Pick One' ||
+							!this.state.attribute ||
 							this.state.grouperList.length <= 1
 						}
 						selected={this.state.grouper}

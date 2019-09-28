@@ -28,9 +28,9 @@ export function createTestInventory(): Inventory[] {
 export const blankState = {
 	data: [],
 	category: 'category',
-	categoryList: ['Pick One', 'category'],
-	attribute: 'Pick One',
-	attributeList: ['Pick One', 'bool'],
+	categoryList: ['category'],
+	attribute: '',
+	attributeList: ['bool'],
 	grouper: 'None',
 	grouperList: ['None', 'number'],
 };
@@ -41,9 +41,9 @@ export const attributeState = {
 		{ key: 'False', count: 5, percentage: 50, colour: '#2f69c6' },
 	],
 	category: 'category',
-	categoryList: ['Pick One', 'category'],
+	categoryList: ['category'],
 	attribute: 'bool',
-	attributeList: ['Pick One', 'bool'],
+	attributeList: ['bool'],
 	grouper: 'None',
 	grouperList: ['None', 'number'],
 };
@@ -54,9 +54,9 @@ export const grouperState = {
 		{ key: 'False', count: 10, percentage: 66.67, colour: '#2f69c6' },
 	],
 	category: 'category',
-	categoryList: ['Pick One', 'category'],
+	categoryList: ['category'],
 	attribute: 'bool',
-	attributeList: ['Pick One', 'bool'],
+	attributeList: ['bool'],
 	grouper: 'number',
 	grouperList: ['None', 'number'],
 };

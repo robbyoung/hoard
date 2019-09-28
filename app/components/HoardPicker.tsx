@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { View, Picker, Text, StyleSheet } from 'react-native';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
-import { white, darkColor, lightColor, black } from '../styles';
-
-const SELECT_CATEGORY_TEXT = 'Pick One';
+import { white, lightColor, black } from '../styles';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -37,7 +34,6 @@ interface HoardPickerProps {
 	items: string[];
 	defaultText?: string;
 	selected?: string;
-	error?: string;
 	hidden?: boolean;
 	onSelect: (s: string) => void;
 }
@@ -53,9 +49,12 @@ export default class HoardPicker extends Component<HoardPickerProps> {
 					<Picker
 						style={styles.picker}
 						selectedValue={this.props.selected}
-						onValueChange={(value: string): void =>
-							this.props.onSelect(value)
-						}>
+						onValueChange={(value: string): void => {
+							if (value === this.props.defaultText) {
+								value = '';
+							}
+							this.props.onSelect(value);
+						}}>
 						{this.getPickerItems()}
 					</Picker>
 				</View>
