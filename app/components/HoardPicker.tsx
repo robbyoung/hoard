@@ -67,7 +67,7 @@ export default class HoardPicker extends Component<HoardPickerProps> {
 		);
 
 		const name = this.props.defaultText;
-		if (name !== undefined && this.props.selected === undefined) {
+		if (name !== undefined && !this.props.selected) {
 			pickerItems = [
 				<Picker.Item label={name} value={name} key={-1} />,
 				...pickerItems,
