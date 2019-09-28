@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Picker, Text, StyleSheet } from 'react-native';
-import { white, darkColor, lightColor, black } from '../styles';
 import FontAwesome, { Icons } from 'react-native-fontawesome';
+import { white, darkColor, lightColor, black } from '../styles';
 
 const SELECT_CATEGORY_TEXT = 'Pick One';
 
@@ -30,53 +30,50 @@ export const styles = StyleSheet.create({
 		height: 30,
 		fontSize: 22,
 	},
-	chevron: {
-		height: 30,
-		paddingRight: 10,
-		paddingTop: 5,
-		fontSize: 22,
-		backgroundColor: white,
-	}
 });
 
 interface HoardPickerProps {
 	title: string;
 	items: string[];
-	selected?: string;
 	defaultText?: string;
+	selected?: string;
 	error?: string;
 	onSelect: (s: string) => void;
 }
-export default class HoardPicker extends Component<
-	HoardPickerProps
-> {
+export default class HoardPicker extends Component<HoardPickerProps> {
 	public render(): JSX.Element {
 		return (
 			<View style={styles.row}>
 				<Text style={styles.title}>{this.props.title}</Text>
 				<View style={styles.pickerContainer}>
-				<Picker
-					style={styles.picker}
-					selectedValue={this.props.selected}
-					onValueChange={(value: string): void => this.props.onSelect(value)}
-				>
-					<Picker.Item
-						label={SELECT_CATEGORY_TEXT}
-						value={SELECT_CATEGORY_TEXT}
-						key={-1}
-					/>
-					{this.getPickerItems()}
-				</Picker>
+					<Picker
+						style={styles.picker}
+						selectedValue={this.props.selected}
+						onValueChange={(value: string): void =>
+							this.props.onSelect(value)
+						}>
+						{this.getPickerItems()}
+					</Picker>
 				</View>
 			</View>
 		);
 	}
 
 	private getPickerItems(): JSX.Element[] {
-		return this.props.items.map(
+		let pickerItems = this.props.items.map(
 			(name: string, i: number): JSX.Element => (
 				<Picker.Item label={name} value={name} key={i} />
 			),
 		);
+
+		const name = this.props.defaultText;
+		if (name !== undefined && this.props.selected === undefined) {
+			pickerItems = [
+				<Picker.Item label={name} value={name} key={-1} />,
+				...pickerItems,
+			];
+		}
+
+		return pickerItems;
 	}
 }
