@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginLeft: 5,
 		width: '48%',
-	}
+	},
 });
 
 interface HoardTextboxProps {

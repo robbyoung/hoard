@@ -7,7 +7,7 @@ import {
 import { Icons } from 'react-native-fontawesome';
 import { Unsubscribe } from 'redux';
 import store from '../../store';
-import { AttributeType, Attribute } from '../../state';
+import { Attribute } from '../../state';
 import { ActionType } from '../../reducers/actions';
 import { lightColor, darkColor, white, warning, black } from '../../styles';
 import createHeader from '../overviewScreen/headerIcons';
@@ -16,10 +16,8 @@ import { EditItemNameAction } from '../../actions/editItemName';
 import { AddInventoryAction } from '../../actions/addInventory';
 import { NavigationOptionsWithProps } from '../../aliases';
 import HoardPicker from '../hoardPicker';
-import BoolAttributeInput from './attributeInputs/boolAttributeInput';
-import StringAttributeInput from './attributeInputs/stringAttributeInput';
-import NumberAttributeInput from './attributeInputs/numberAttributeInput';
-
+import { EditItemAttributeAction } from '../../actions/editItemAttribute';
+import ItemAttributeEditor from './itemAttributeEditor';
 const SELECT_CATEGORY_TEXT = 'Pick One';
 
 export const styles = StyleSheet.create({
@@ -163,31 +161,15 @@ export default class EditItem extends Component<
 		const newState = store.getState().editItem;
 		const attributeFields = newState.attributes.map(
 			(attribute: Attribute): JSX.Element => {
-				switch (attribute.type) {
-					case AttributeType.String:
-						return (
-							<StringAttributeInput
-								attribute={attribute}
-								key={attribute.name}
-							/>
-						);
-					case AttributeType.Bool:
-						return (
-							<BoolAttributeInput
-								attribute={attribute}
-								key={attribute.name}
-							/>
-						);
-					case AttributeType.Number:
-						return (
-							<NumberAttributeInput
-								attribute={attribute}
-								key={attribute.name}
-							/>
-						);
-					default:
-						throw new Error('Invalid attribute type');
-				}
+				return (
+					<ItemAttributeEditor
+						attribute={attribute}
+						onChange={(s: string, a: Attribute): void =>
+							this.setAttributeValue(s, a)
+						}
+						key={attribute.name}
+					/>
+				);
 			},
 		);
 		this.setState({
@@ -204,6 +186,18 @@ export default class EditItem extends Component<
 			name,
 		};
 		store.dispatch(setNameAction);
+	}
+
+	private setAttributeValue(value: string, attribute: Attribute): void {
+		const action: EditItemAttributeAction = {
+			type: ActionType.EditItemAttribute,
+			attribute: {
+				name: attribute.name,
+				type: attribute.type,
+				value,
+			},
+		};
+		store.dispatch(action);
 	}
 
 	private static async submitItem(

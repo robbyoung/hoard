@@ -1,7 +1,7 @@
 export enum AttributeType {
-	Bool,
 	String,
 	Number,
+	Bool,
 	Percent,
 	Rating,
 	Combo,
