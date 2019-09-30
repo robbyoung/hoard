@@ -14,8 +14,8 @@ import { StatsState } from '../../state';
 import { SetStatsAttributeAction } from '../../actions/setStatsAttribute';
 import { SetStatsCategoryAction } from '../../actions/setStatsCategory';
 import { NavigationOptions } from '../../aliases';
+import HoardPicker from '../hoardPicker';
 import PieChart from './pieChart';
-import StatsPicker from './statsPicker';
 import Legend from './legend';
 
 export default class Stats extends Component<
@@ -44,11 +44,11 @@ export default class Stats extends Component<
 		return (
 			<View>
 				<ScrollView>
-					<StatsPicker
+					<HoardPicker
 						title={'Category:'}
-						enabled={true}
 						selected={this.state.category}
-						choices={this.state.categoryList}
+						items={this.state.categoryList}
+						defaultText="Pick One"
 						onSelect={(category: string): void => {
 							const action: SetStatsCategoryAction = {
 								type: ActionType.SetStatsCategory,
@@ -60,11 +60,12 @@ export default class Stats extends Component<
 							store.dispatch(action);
 						}}
 					/>
-					<StatsPicker
+					<HoardPicker
 						title={'Attribute:'}
-						enabled={this.state.attributeList.length > 1}
+						hidden={this.state.attributeList.length === 0}
 						selected={this.state.attribute}
-						choices={this.state.attributeList}
+						items={this.state.attributeList}
+						defaultText="Pick One"
 						onSelect={(attribute: string): void => {
 							const action: SetStatsAttributeAction = {
 								type: ActionType.SetStatsAttribute,
@@ -75,14 +76,14 @@ export default class Stats extends Component<
 							store.dispatch(action);
 						}}
 					/>
-					<StatsPicker
+					<HoardPicker
 						title={'Group By:'}
-						enabled={
-							this.state.attribute != 'Pick One' &&
-							this.state.grouperList.length > 1
+						hidden={
+							!this.state.attribute ||
+							this.state.grouperList.length <= 1
 						}
 						selected={this.state.grouper}
-						choices={this.state.grouperList}
+						items={this.state.grouperList}
 						onSelect={(grouper: string): void => {
 							const action: SetStatsAttributeAction = {
 								type: ActionType.SetStatsAttribute,

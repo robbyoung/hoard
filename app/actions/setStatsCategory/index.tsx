@@ -14,13 +14,13 @@ export function setStatsCategory(
 		return oldState;
 	}
 
-	if (action.category == 'Pick One') {
+	if (action.category === '') {
 		return {
 			data: [],
 			category: action.category,
 			categoryList: oldState.categoryList,
-			attribute: 'Pick One',
-			attributeList: ['Pick One'],
+			attribute: '',
+			attributeList: [],
 			grouper: 'None',
 			grouperList: ['None'],
 		};
@@ -48,8 +48,8 @@ export function setStatsCategory(
 		...oldState,
 		data: [],
 		category: action.category,
-		attribute: 'Pick One',
-		attributeList: ['Pick One', ...attributes],
+		attribute: '',
+		attributeList: attributes,
 		grouper: 'None',
 		grouperList: ['None', ...groupers],
 	};

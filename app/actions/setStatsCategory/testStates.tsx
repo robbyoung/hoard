@@ -20,10 +20,10 @@ export const testAttributes: Attribute[] = [
 
 export const blankState = {
 	data: [],
-	category: 'Pick One',
-	categoryList: ['Pick One', 'category'],
-	attribute: 'Pick One',
-	attributeList: ['Pick One'],
+	category: '',
+	categoryList: ['category'],
+	attribute: '',
+	attributeList: [],
 	grouper: 'None',
 	grouperList: ['None'],
 };
@@ -31,9 +31,9 @@ export const blankState = {
 export const categoryState = {
 	data: [],
 	category: 'category',
-	categoryList: ['Pick One', 'category'],
-	attribute: 'Pick One',
-	attributeList: ['Pick One', 'bool', 'combo'],
+	categoryList: ['category'],
+	attribute: '',
+	attributeList: ['bool', 'combo'],
 	grouper: 'None',
 	grouperList: ['None', 'number'],
 };

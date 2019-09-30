@@ -7,7 +7,7 @@ import {
 import { Icons } from 'react-native-fontawesome';
 import { Unsubscribe } from 'redux';
 import store from '../../store';
-import { AttributeType, Attribute } from '../../state';
+import { Attribute } from '../../state';
 import { ActionType } from '../../reducers/actions';
 import { lightColor, darkColor, white, warning, black } from '../../styles';
 import createHeader from '../overviewScreen/headerIcons';
@@ -15,11 +15,9 @@ import { ValidateEditItemAction } from '../../actions/validateEditAction';
 import { EditItemNameAction } from '../../actions/editItemName';
 import { AddInventoryAction } from '../../actions/addInventory';
 import { NavigationOptionsWithProps } from '../../aliases';
-import BoolAttributeInput from './attributeInputs/boolAttributeInput';
-import StringAttributeInput from './attributeInputs/stringAttributeInput';
-import CategoryPicker from './categoryPicker';
-import NumberAttributeInput from './attributeInputs/numberAttributeInput';
-
+import HoardPicker from '../hoardPicker';
+import { EditItemAttributeAction } from '../../actions/editItemAttribute';
+import ItemAttributeEditor from './itemAttributeEditor';
 const SELECT_CATEGORY_TEXT = 'Pick One';
 
 export const styles = StyleSheet.create({
@@ -61,13 +59,6 @@ export const styles = StyleSheet.create({
 		width: '50%',
 		marginRight: 3,
 		color: darkColor,
-	},
-	categoryPicker: {
-		width: '49%',
-		height: 30,
-		fontSize: 22,
-		marginLeft: 3,
-		backgroundColor: white,
 	},
 	text: {
 		fontSize: 22,
@@ -137,7 +128,26 @@ export default class EditItem extends Component<
 					/>
 				</View>
 				<View style={styles.attributes}>
-					<CategoryPicker chosenCategory={this.state.categoryName} />
+					<HoardPicker
+						title="Category"
+						defaultText="Pick One"
+						items={Object.keys(store.getState().categories)}
+						selected={this.state.categoryName}
+						onSelect={(categoryName: string): void => {
+							const category = store.getState().categories[
+								categoryName
+							];
+							const attributes: Attribute[] = category
+								? category.attributes
+								: [];
+							store.dispatch({
+								type: ActionType.EditItemCategory,
+								categoryName,
+								attributes,
+							});
+						}}
+					/>
+
 					{this.state.attributeFields}
 				</View>
 				<Text style={styles.errorMessage}>
@@ -151,31 +161,15 @@ export default class EditItem extends Component<
 		const newState = store.getState().editItem;
 		const attributeFields = newState.attributes.map(
 			(attribute: Attribute): JSX.Element => {
-				switch (attribute.type) {
-					case AttributeType.String:
-						return (
-							<StringAttributeInput
-								attribute={attribute}
-								key={attribute.name}
-							/>
-						);
-					case AttributeType.Bool:
-						return (
-							<BoolAttributeInput
-								attribute={attribute}
-								key={attribute.name}
-							/>
-						);
-					case AttributeType.Number:
-						return (
-							<NumberAttributeInput
-								attribute={attribute}
-								key={attribute.name}
-							/>
-						);
-					default:
-						throw new Error('Invalid attribute type');
-				}
+				return (
+					<ItemAttributeEditor
+						attribute={attribute}
+						onChange={(s: string, a: Attribute): void =>
+							this.setAttributeValue(s, a)
+						}
+						key={attribute.name}
+					/>
+				);
 			},
 		);
 		this.setState({
@@ -192,6 +186,18 @@ export default class EditItem extends Component<
 			name,
 		};
 		store.dispatch(setNameAction);
+	}
+
+	private setAttributeValue(value: string, attribute: Attribute): void {
+		const action: EditItemAttributeAction = {
+			type: ActionType.EditItemAttribute,
+			attribute: {
+				name: attribute.name,
+				type: attribute.type,
+				value,
+			},
+		};
+		store.dispatch(action);
 	}
 
 	private static async submitItem(
