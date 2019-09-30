@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
 		width: '48%',
 	},
 	title: {
-		width: '90%',
+		width: '70%',
 		fontSize: 30,
 		textAlign: 'center',
 		margin: '5%',
@@ -50,7 +50,6 @@ export const styles = StyleSheet.create({
 		margin: 10,
 		padding: 5,
 		borderRadius: 5,
-		backgroundColor: lightColor,
 	},
 });
 
@@ -97,8 +96,6 @@ export default class EditCategory extends Component<
 						placeholder="Name"
 						style={styles.title}
 					/>
-				</View>
-				<View style={styles.attributes}>
 					<IconPicker
 						onIconSelect={(icon: string): void => {
 							const event: EditCategoryIconAction = {
@@ -109,6 +106,8 @@ export default class EditCategory extends Component<
 						}}
 						selectedIcon={this.state.icon}
 					/>
+				</View>
+				<View style={styles.attributes}>
 					{this.state.attributeFields}
 					<AttributeCreator
 						onCreate={(a: Attribute) => this.setAttribute(a)}
