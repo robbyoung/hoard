@@ -42,7 +42,7 @@ export default class IconModal extends Component<IconModalProps> {
 				transparent={true}
 				visible={this.props.isVisible}
 				animated={true}
-				onRequestClose={() => this.props.closeModal()}>
+				onRequestClose={(): void => this.props.closeModal()}>
 				<View style={styles.modal}>{this.getIconButtons()}</View>
 			</Modal>
 		);

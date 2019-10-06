@@ -4,7 +4,7 @@ import {
 	NavigationStackScreenOptions,
 } from 'react-navigation';
 import { Component } from 'react';
-import { View, StyleSheet, TextInput, Text } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { Icons } from 'react-native-fontawesome';
 import React from 'react';
 import store from '../../store';
@@ -110,7 +110,7 @@ export default class EditCategory extends Component<
 				<View style={styles.attributes}>
 					{this.state.attributeFields}
 					<AttributeCreator
-						onCreate={(a: Attribute) => this.setAttribute(a)}
+						onCreate={(a: Attribute): void => this.setAttribute(a)}
 					/>
 				</View>
 			</View>
@@ -122,7 +122,7 @@ export default class EditCategory extends Component<
 			<AttributeEditor
 				key={attribute.name}
 				attribute={attribute}
-				onChange={(a: Attribute) => this.setAttribute(a)}
+				onChange={(a: Attribute): void => this.setAttribute(a)}
 			/>
 		);
 	}
@@ -132,8 +132,8 @@ export default class EditCategory extends Component<
 		this.setState({
 			name: state.name,
 			icon: state.category.icon,
-			attributeFields: state.category.attributes.map((a) =>
-				this.getAttributeField(a),
+			attributeFields: state.category.attributes.map(
+				(a: Attribute): JSX.Element => this.getAttributeField(a),
 			),
 		});
 	}
@@ -146,7 +146,7 @@ export default class EditCategory extends Component<
 		store.dispatch(action);
 	}
 
-	private setAttribute(a: Attribute) {
+	private setAttribute(a: Attribute): void {
 		store.dispatch({
 			type: ActionType.EditCategoryAttribute,
 			attribute: a,

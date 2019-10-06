@@ -4,13 +4,15 @@ import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { Attribute, AttributeType } from '../../state';
 import HoardTextbox from '../hoardTextbox';
 import { lightColor, darkColor, white } from '../../styles';
+import HoardPicker from '../hoardPicker';
 
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		backgroundColor: lightColor,
+		borderRadius: 5,
 	},
-	textField: {
+	fields: {
 		width: '85%',
 	},
 	button: {
@@ -25,13 +27,13 @@ const styles = StyleSheet.create({
 		fontSize: 22,
 		textAlign: 'center',
 		color: white,
-	}
+	},
 });
 
 const emptyAttribute: Attribute = {
 	name: '',
-	type: AttributeType.Bool,
-	value: 'T',
+	type: AttributeType.String,
+	value: '',
 };
 
 interface AttributeCreatorProps {
@@ -46,11 +48,11 @@ export default class AttributeEditor extends Component<
 	public render(): JSX.Element {
 		return (
 			<View style={styles.container}>
-				<View style={styles.textField}>
+				<View style={styles.fields}>
 					<HoardTextbox
-						title='Name'
+						title="Name"
 						value={this.state.name}
-						onChange={(newValue: string) => {
+						onChange={(newValue: string): void => {
 							this.setState({
 								name: newValue,
 								type: this.state.type,
@@ -58,15 +60,28 @@ export default class AttributeEditor extends Component<
 							});
 						}}
 					/>
+					<HoardPicker
+						title="Type"
+						selected={this.state.type}
+						onSelect={(selected: string): void => {
+							this.setState({
+								name: this.state.name,
+								type: selected as AttributeType,
+								value: this.state.value,
+							});
+						}}
+						items={Object.values(AttributeType)}
+					/>
 				</View>
 				<TouchableOpacity
 					style={styles.button}
-					onPress={() => {
+					onPress={(): void => {
 						this.props.onCreate(this.state);
 						this.setState(emptyAttribute);
-					}}
-				>
-					<FontAwesome style={styles.buttonIcon}>{Icons.plus}</FontAwesome>
+					}}>
+					<FontAwesome style={styles.buttonIcon}>
+						{Icons.plus}
+					</FontAwesome>
 				</TouchableOpacity>
 			</View>
 		);

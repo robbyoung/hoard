@@ -24,7 +24,7 @@ export const availableIcons = [
 	Icons.meetup,
 ];
 
-export function getRandomIcon() {
+export function getRandomIcon(): string {
 	const index = Math.floor(Math.random() * availableIcons.length);
 	return availableIcons[index];
 }
