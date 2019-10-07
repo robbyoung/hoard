@@ -8,12 +8,15 @@ import HoardPicker from '../hoardPicker';
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: 'row',
+		padding: 5,
 		backgroundColor: lightColor,
-		borderRadius: 5,
+		borderRadius: 10,
 	},
-	fields: {
-		width: '85%',
+	innerContainer: {
+		flexDirection: 'row',
+	},
+	picker: {
+		flex: 1,
 	},
 	button: {
 		margin: 10,
@@ -48,41 +51,43 @@ export default class AttributeEditor extends Component<
 	public render(): JSX.Element {
 		return (
 			<View style={styles.container}>
-				<View style={styles.fields}>
-					<HoardTextbox
-						title="Name"
-						value={this.state.name}
-						onChange={(newValue: string): void => {
-							this.setState({
-								name: newValue,
-								type: this.state.type,
-								value: this.state.value,
-							});
-						}}
-					/>
-					<HoardPicker
-						title="Type"
-						selected={this.state.type}
-						onSelect={(selected: string): void => {
-							this.setState({
-								name: this.state.name,
-								type: selected as AttributeType,
-								value: this.state.value,
-							});
-						}}
-						items={Object.values(AttributeType)}
-					/>
+				<HoardTextbox
+					title="Name"
+					value={this.state.name}
+					onChange={(newValue: string): void => {
+						this.setState({
+							name: newValue,
+							type: this.state.type,
+							value: this.state.value,
+						});
+					}}
+				/>
+				<View style={styles.innerContainer}>
+					<View style={styles.picker}>
+						<HoardPicker
+							title="Type"
+							selected={this.state.type}
+							onSelect={(selected: string): void => {
+								this.setState({
+									name: this.state.name,
+									type: selected as AttributeType,
+									value: this.state.value,
+								});
+							}}
+							items={Object.values(AttributeType)}
+						/>
+					</View>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={(): void => {
+							this.props.onCreate(this.state);
+							this.setState(emptyAttribute);
+						}}>
+						<FontAwesome style={styles.buttonIcon}>
+							{Icons.plus}
+						</FontAwesome>
+					</TouchableOpacity>
 				</View>
-				<TouchableOpacity
-					style={styles.button}
-					onPress={(): void => {
-						this.props.onCreate(this.state);
-						this.setState(emptyAttribute);
-					}}>
-					<FontAwesome style={styles.buttonIcon}>
-						{Icons.plus}
-					</FontAwesome>
-				</TouchableOpacity>
 			</View>
 		);
 	}

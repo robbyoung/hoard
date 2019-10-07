@@ -14,7 +14,6 @@ export const styles = StyleSheet.create({
 		textAlign: 'right',
 		fontSize: 22,
 		fontWeight: 'bold',
-		width: '50%',
 		marginRight: 3,
 		color: black,
 	},
@@ -26,7 +25,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: white,
 		borderRadius: 5,
 		marginLeft: 5,
-		width: '48%',
+		flex: 1,
 	},
 	error: {
 		paddingTop: 1,
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: warning,
 		borderRadius: 5,
 		marginLeft: 5,
-		width: '48%',
+		flex: 1,
 	},
 });
 
@@ -47,6 +46,7 @@ interface HoardTextboxProps {
 	numeric?: boolean;
 	error?: boolean;
 	hidden?: boolean;
+	titleWidth?: number;
 	onChange: (s: string) => void;
 }
 export default class HoardTextbox extends Component<HoardTextboxProps> {
