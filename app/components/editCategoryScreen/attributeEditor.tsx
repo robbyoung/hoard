@@ -1,16 +1,40 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Attribute } from '../../state';
-import { lightColor } from '../../styles';
+import { lightColor, black, darkColor } from '../../styles';
+import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		padding: 5,
+		padding: 10,
 		marginBottom: 20,
 		backgroundColor: lightColor,
 		borderRadius: 10,
 	},
+	name: {
+		fontSize: 22,
+		fontWeight: 'bold',
+		color: black,
+	},
+	type: {
+		textAlign: 'right',
+		fontSize: 22,
+		fontWeight: 'bold',
+		marginLeft: 10,
+		color: darkColor,
+	},
+	delete: {
+		flex: 1,
+		flexDirection: 'row-reverse',
+	},
+	deleteButton: {
+		width: 30,
+	},
+	deleteIcon: {
+		color: darkColor,
+		fontSize: 25,
+	}
 });
 
 interface AttributeEditorProps {
@@ -21,7 +45,9 @@ export default class AttributeEditor extends Component<AttributeEditorProps> {
 	public render(): JSX.Element {
 		return (
 			<View style={styles.container}>
-				<Text>{this.props.attribute.name}</Text>
+				<Text style={styles.name}>{this.props.attribute.name}</Text>
+				<Text style={styles.type}>{this.props.attribute.type}</Text>
+				<View style={styles.delete}><TouchableOpacity style={styles.deleteButton}><FontAwesome style={styles.deleteIcon}>{Icons.trash}</FontAwesome></TouchableOpacity></View>
 			</View>
 		);
 	}
