@@ -110,7 +110,7 @@ export default class EditCategory extends Component<
 				<View style={styles.attributes}>
 					{this.state.attributeFields}
 					<AttributeCreator
-						onCreate={(a: Attribute): void => this.setAttribute(a)}
+						onCreate={(a: Attribute): boolean => this.newAttribute(a)}
 					/>
 				</View>
 			</View>
@@ -144,6 +144,17 @@ export default class EditCategory extends Component<
 			name,
 		};
 		store.dispatch(action);
+	}
+
+	private newAttribute(a: Attribute): boolean {
+		const attributeNames = store.getState().editCategory.category.attributes.map((a: Attribute): string => {
+			return a.name;
+		});
+		if (a.name === "" || attributeNames.includes(a.name)) {
+			return false;
+		}
+		this.setAttribute(a);
+		return true;
 	}
 
 	private setAttribute(a: Attribute): void {

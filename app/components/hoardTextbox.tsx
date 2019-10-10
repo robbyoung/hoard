@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
-import { white, lightColor, black, warning } from '../styles';
+import { white, lightColor, black, lightWarning } from '../styles';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
 		paddingBottom: 1,
 		fontSize: 20,
 		color: black,
-		backgroundColor: warning,
+		backgroundColor: lightWarning,
 		borderRadius: 5,
 		marginLeft: 5,
 		flex: 1,

@@ -40,38 +40,52 @@ const emptyAttribute: Attribute = {
 };
 
 interface AttributeCreatorProps {
-	onCreate: (a: Attribute) => void;
+	onCreate: (a: Attribute) => boolean;
+}
+interface AttributeCreatorState {
+	attribute: Attribute;
+	error: boolean;
 }
 export default class AttributeEditor extends Component<
 	AttributeCreatorProps,
-	Attribute
+	AttributeCreatorState
 > {
-	public state: Attribute = emptyAttribute;
+	public state: AttributeCreatorState = {
+		attribute: emptyAttribute,
+		error: false,
+	}
 
 	public render(): JSX.Element {
 		return (
 			<View style={styles.container}>
 				<HoardTextbox
 					title="Name"
-					value={this.state.name}
+					value={this.state.attribute.name}
 					onChange={(newValue: string): void => {
 						this.setState({
-							name: newValue,
-							type: this.state.type,
-							value: this.state.value,
+							attribute: {
+								name: newValue,
+								type: this.state.attribute.type,
+								value: this.state.attribute.value,
+							},
+							error: false,
 						});
 					}}
+					error={this.state.error}
 				/>
 				<View style={styles.innerContainer}>
 					<View style={styles.picker}>
 						<HoardPicker
 							title="Type"
-							selected={this.state.type}
+							selected={this.state.attribute.type}
 							onSelect={(selected: string): void => {
 								this.setState({
-									name: this.state.name,
-									type: selected as AttributeType,
-									value: this.state.value,
+									attribute: {
+										name: this.state.attribute.name,
+										type: selected as AttributeType,
+										value: this.state.attribute.value,
+									},
+									error: this.state.error,
 								});
 							}}
 							items={Object.values(AttributeType)}
@@ -79,10 +93,7 @@ export default class AttributeEditor extends Component<
 					</View>
 					<TouchableOpacity
 						style={styles.button}
-						onPress={(): void => {
-							this.props.onCreate(this.state);
-							this.setState(emptyAttribute);
-						}}>
+						onPress={(): void => this.onCreateWrapper()}>
 						<FontAwesome style={styles.buttonIcon}>
 							{Icons.plus}
 						</FontAwesome>
@@ -90,5 +101,20 @@ export default class AttributeEditor extends Component<
 				</View>
 			</View>
 		);
+	}
+
+	private onCreateWrapper(): void {
+		const success = this.props.onCreate(this.state.attribute);
+		if (success) {
+			this.setState({
+				attribute: emptyAttribute,
+				error: false,
+			});
+		} else {
+			this.setState({
+				attribute: this.state.attribute,
+				error: true,
+			});
+		}
 	}
 }
