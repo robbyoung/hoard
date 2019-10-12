@@ -53,7 +53,7 @@ export default class AttributeEditor extends Component<
 	public state: AttributeCreatorState = {
 		attribute: emptyAttribute,
 		error: false,
-	}
+	};
 
 	public render(): JSX.Element {
 		return (

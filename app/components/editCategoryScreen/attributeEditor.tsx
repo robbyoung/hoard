@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import FontAwesome, { Icons } from 'react-native-fontawesome';
 import { Attribute } from '../../state';
 import { lightColor, black, darkColor } from '../../styles';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
 
 const styles = StyleSheet.create({
 	container: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 	deleteIcon: {
 		color: darkColor,
 		fontSize: 25,
-	}
+	},
 });
 
 interface AttributeEditorProps {
@@ -47,7 +47,13 @@ export default class AttributeEditor extends Component<AttributeEditorProps> {
 			<View style={styles.container}>
 				<Text style={styles.name}>{this.props.attribute.name}</Text>
 				<Text style={styles.type}>{this.props.attribute.type}</Text>
-				<View style={styles.delete}><TouchableOpacity style={styles.deleteButton}><FontAwesome style={styles.deleteIcon}>{Icons.trash}</FontAwesome></TouchableOpacity></View>
+				<View style={styles.delete}>
+					<TouchableOpacity style={styles.deleteButton}>
+						<FontAwesome style={styles.deleteIcon}>
+							{Icons.trash}
+						</FontAwesome>
+					</TouchableOpacity>
+				</View>
 			</View>
 		);
 	}

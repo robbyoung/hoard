@@ -3,6 +3,7 @@ import { EditCategoryState, Attribute } from '../../state';
 
 export interface EditCategoryAttributeAction extends Action {
 	attribute: Attribute;
+	delete: boolean;
 }
 
 export function editCategoryAttribute(
@@ -10,15 +11,21 @@ export function editCategoryAttribute(
 	action: EditCategoryAttributeAction,
 ): EditCategoryState {
 	const newAttribute: Attribute = action.attribute;
-	const attributes: Attribute[] = [...oldState.category.attributes];
+	let attributes: Attribute[] = [...oldState.category.attributes];
 	const index: number = attributes.findIndex(
 		(a: Attribute) => newAttribute.name === a.name,
 	);
-	if (index !== -1) {
-		attributes[index] = newAttribute;
-	} else {
+
+	if (index === -1) {
 		attributes.push(newAttribute);
+	} else if (action.delete === true) {
+		attributes = attributes.filter((_a: Attribute, i: number) => {
+			return i !== index;
+		});
+	} else {
+		attributes[index] = newAttribute;
 	}
+
 	return {
 		name: oldState.name,
 		category: {

@@ -19,14 +19,17 @@ export function createAlteredAttribute(index: number): Attribute {
 export function createTestState(
 	numAttributes: number,
 	differentIndex = -1,
+	deleteIndex = -1,
 ): EditCategoryState {
 	const attributes: Attribute[] = [];
 	for (let i = 0; i < numAttributes; i++) {
-		attributes.push(
-			differentIndex === i
-				? createAlteredAttribute(i)
-				: createAttribute(i),
-		);
+		if (i !== deleteIndex) {
+			attributes.push(
+				differentIndex === i
+					? createAlteredAttribute(i)
+					: createAttribute(i),
+			);
+		}
 	}
 	if (differentIndex === numAttributes) {
 		attributes.push(createAlteredAttribute(numAttributes));
