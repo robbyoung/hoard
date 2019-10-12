@@ -2,6 +2,7 @@ import { Unsubscribe } from 'redux';
 import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
+	ScrollView,
 } from 'react-navigation';
 import { Component } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
@@ -86,7 +87,7 @@ export default class EditCategory extends Component<
 
 	public render(): JSX.Element {
 		return (
-			<View>
+			<ScrollView>
 				<View style={styles.row}>
 					<TextInput
 						value={this.state.name}
@@ -115,7 +116,7 @@ export default class EditCategory extends Component<
 						}
 					/>
 				</View>
-			</View>
+			</ScrollView>
 		);
 	}
 
