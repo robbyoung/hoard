@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
 interface AttributeEditorProps {
 	attribute: Attribute;
 	onChange: (a: Attribute) => void;
+	onDelete: (a: Attribute) => void;
 }
 export default class AttributeEditor extends Component<AttributeEditorProps> {
 	public render(): JSX.Element {
@@ -48,7 +49,8 @@ export default class AttributeEditor extends Component<AttributeEditorProps> {
 				<Text style={styles.name}>{this.props.attribute.name}</Text>
 				<Text style={styles.type}>{this.props.attribute.type}</Text>
 				<View style={styles.delete}>
-					<TouchableOpacity style={styles.deleteButton}>
+					<TouchableOpacity style={styles.deleteButton}
+					onPress={() => this.props.onDelete(this.props.attribute)}>
 						<FontAwesome style={styles.deleteIcon}>
 							{Icons.trash}
 						</FontAwesome>

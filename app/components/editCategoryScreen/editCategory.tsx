@@ -124,7 +124,8 @@ export default class EditCategory extends Component<
 			<AttributeEditor
 				key={attribute.name}
 				attribute={attribute}
-				onChange={(a: Attribute): void => this.setAttribute(a)}
+				onChange={(a: Attribute): void => this.setAttribute(a, false)}
+				onDelete={(a: Attribute): void => this.setAttribute(a, true)}
 			/>
 		);
 	}
@@ -159,14 +160,15 @@ export default class EditCategory extends Component<
 		if (a.name === '' || attributeNames.includes(a.name)) {
 			return false;
 		}
-		this.setAttribute(a);
+		this.setAttribute(a, false);
 		return true;
 	}
 
-	private setAttribute(a: Attribute): void {
+	private setAttribute(a: Attribute, toDelete: boolean): void {
 		store.dispatch({
 			type: ActionType.EditCategoryAttribute,
 			attribute: a,
+			delete: toDelete,
 		});
 	}
 
