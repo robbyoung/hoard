@@ -16,7 +16,7 @@ import { ActionType } from '../../reducers/actions';
 import { black, lightColor, white } from '../../styles';
 import { AddCategoryAction } from '../../actions/addCategory';
 import { EditCategoryIconAction } from '../../actions/editCategoryIcon';
-import { Attribute } from '../../state';
+import { Attribute, CategoriesState, EditCategoryState } from '../../state';
 import IconPicker from './iconPicker/iconPicker';
 import AttributeEditor from './attributeEditor';
 import AttributeCreator from './attributeCreator';
@@ -54,14 +54,14 @@ export const styles = StyleSheet.create({
 	},
 });
 
-interface EditCategoryState {
+interface EditCategoryPageState {
 	name: string;
 	icon: string;
 	attributeFields: JSX.Element[];
 }
 export default class EditCategory extends Component<
 	NavigationInjectedProps,
-	EditCategoryState
+	EditCategoryPageState
 > {
 	private unsubscribe: Unsubscribe = (): void => undefined;
 
@@ -174,13 +174,29 @@ export default class EditCategory extends Component<
 	}
 
 	private static submitCategory(navigator: NavigationInjectedProps): void {
-		const editState = store.getState().editCategory;
-		const action: AddCategoryAction = {
-			type: ActionType.AddCategory,
-			category: editState.category,
-			categoryName: editState.name,
-		};
-		store.dispatch(action);
-		navigator.navigation.goBack();
+		const state = store.getState();
+		const edited = state.editCategory;
+		const categories = state.categories;
+
+		if (this.validateCategory(edited, categories)) {
+			const action: AddCategoryAction = {
+				type: ActionType.AddCategory,
+				category: edited.category,
+				categoryName: edited.name,
+			};
+			store.dispatch(action);
+			navigator.navigation.goBack();
+		}
+	}
+
+	private static validateCategory(edited: EditCategoryState, categories: CategoriesState): boolean {
+		if (edited.category.attributes.length === 0) {
+			return false;
+		} else if (edited.name === "") {
+			return false;
+		} else if(Object.keys(categories).find((c) => edited.name === c)) {
+			return false;
+		}
+		return true;
 	}
 }
