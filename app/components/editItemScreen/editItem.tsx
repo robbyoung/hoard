@@ -18,6 +18,7 @@ import { NavigationOptionsWithProps } from '../../aliases';
 import HoardPicker from '../hoardPicker';
 import { EditItemAttributeAction } from '../../actions/editItemAttribute';
 import ItemAttributeEditor from './itemAttributeEditor';
+import HoardTitlebox from '../hoardTitlebox';
 const SELECT_CATEGORY_TEXT = 'Pick One';
 
 export const styles = StyleSheet.create({
@@ -40,17 +41,6 @@ export const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginLeft: 5,
 		width: '48%',
-	},
-	title: {
-		width: '90%',
-		fontSize: 30,
-		textAlign: 'center',
-		margin: '5%',
-		marginTop: 10,
-		marginBottom: 0,
-		fontWeight: 'bold',
-		color: black,
-		backgroundColor: lightColor,
 	},
 	key: {
 		textAlign: 'right',
@@ -117,16 +107,12 @@ export default class EditItem extends Component<
 	public render(): JSX.Element {
 		return (
 			<View>
-				<View style={styles.row}>
-					<TextInput
-						value={this.state.itemName}
-						onChangeText={(value: string): void =>
-							this.setItemName(value)
-						}
-						placeholder="Name"
-						style={styles.title}
-					/>
-				</View>
+				<HoardTitlebox
+					value={this.state.itemName}
+					placeholder="Name"
+					error={false}
+					onChange={(value: string): void => this.setItemName(value)}
+				/>
 				<View style={styles.attributes}>
 					<HoardPicker
 						title="Category"
