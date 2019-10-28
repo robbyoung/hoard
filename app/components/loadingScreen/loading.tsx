@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
 	NavigationInjectedProps,
@@ -13,21 +13,6 @@ import { darkColor, white } from '../../styles';
 import { LoadInventoryAction } from '../../reducers/inventory';
 import { LoadCategoriesAction } from '../../reducers/categories';
 
-const styles = StyleSheet.create({
-	background: {
-		width: '100%',
-		height: '100%',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: white,
-	},
-	title: {
-		fontWeight: 'bold',
-		fontSize: 32,
-		color: darkColor,
-	},
-});
-
 export default class Loading extends Component<NavigationInjectedProps> {
 	public static navigationOptions: { header: null } = {
 		header: null,
@@ -35,9 +20,7 @@ export default class Loading extends Component<NavigationInjectedProps> {
 
 	public render(): JSX.Element {
 		return (
-			<View style={styles.background}>
-				<Text style={styles.title}>HOARD</Text>
-			</View>
+			<View/>
 		);
 	}
 

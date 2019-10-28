@@ -4,6 +4,7 @@ import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
 } from 'react-navigation';
+import SplashScreen from 'react-native-splash-screen';
 import { Unsubscribe } from 'redux';
 import { Icons } from 'react-native-fontawesome';
 import { Screens } from '../../screens';
@@ -72,6 +73,10 @@ export default class Overview extends Component<
 					inventoryList: this.getInventoryList(),
 				}),
 		);
+	}
+
+	public componentDidMount(): void {
+		SplashScreen.hide();
 	}
 
 	public componentWillUnmount(): void {
