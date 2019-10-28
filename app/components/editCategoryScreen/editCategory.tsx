@@ -13,14 +13,13 @@ import createHeader from '../overviewScreen/headerIcons';
 import { NavigationOptionsWithProps } from '../../aliases';
 import { EditCategoryNameAction } from '../../actions/editCategoryName';
 import { ActionType } from '../../reducers/actions';
-import { black, lightColor, white } from '../../styles';
 import { AddCategoryAction } from '../../actions/addCategory';
 import { EditCategoryIconAction } from '../../actions/editCategoryIcon';
 import { Attribute, CategoriesState, EditCategoryState } from '../../state';
+import HoardTitlebox from '../hoardTitlebox';
 import IconPicker from './iconPicker/iconPicker';
 import AttributeEditor from './attributeEditor';
 import AttributeCreator from './attributeCreator';
-import HoardTitlebox from '../hoardTitlebox';
 
 export const styles = StyleSheet.create({
 	row: {
@@ -169,12 +168,17 @@ export default class EditCategory extends Component<
 		}
 	}
 
-	private static validateCategory(edited: EditCategoryState, categories: CategoriesState): boolean {
+	private static validateCategory(
+		edited: EditCategoryState,
+		categories: CategoriesState,
+	): boolean {
 		if (edited.category.attributes.length === 0) {
 			return false;
-		} else if (edited.name === "") {
+		} else if (edited.name === '') {
 			return false;
-		} else if(Object.keys(categories).find((c) => edited.name === c)) {
+		} else if (
+			Object.keys(categories).find((c: string) => edited.name === c)
+		) {
 			return false;
 		}
 		return true;

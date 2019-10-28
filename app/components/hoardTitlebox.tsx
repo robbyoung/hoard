@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { StyleSheet, TextInput } from 'react-native';
 import { lightColor, black } from '../styles';
 
 export const styles = StyleSheet.create({
-    title: {
+	title: {
 		width: '100%',
 		fontSize: 30,
 		textAlign: 'center',
@@ -31,7 +31,14 @@ export default class HoardTitlebox extends Component<HoardTitleboxProps> {
 					this.props.onChange(value)
 				}
 				placeholder={this.props.placeholder}
-				style={[styles.title, { width: this.props.width ? `${this.props.width}%` : '90%' }]}
+				style={[
+					styles.title,
+					{
+						width: this.props.width
+							? `${this.props.width}%`
+							: '90%',
+					},
+				]}
 			/>
 		);
 	}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
@@ -17,8 +17,8 @@ import { AddInventoryAction } from '../../actions/addInventory';
 import { NavigationOptionsWithProps } from '../../aliases';
 import HoardPicker from '../hoardPicker';
 import { EditItemAttributeAction } from '../../actions/editItemAttribute';
-import ItemAttributeEditor from './itemAttributeEditor';
 import HoardTitlebox from '../hoardTitlebox';
+import ItemAttributeEditor from './itemAttributeEditor';
 const SELECT_CATEGORY_TEXT = 'Pick One';
 
 export const styles = StyleSheet.create({
@@ -110,7 +110,6 @@ export default class EditItem extends Component<
 				<HoardTitlebox
 					value={this.state.itemName}
 					placeholder="Name"
-					error={false}
 					onChange={(value: string): void => this.setItemName(value)}
 				/>
 				<View style={styles.attributes}>
