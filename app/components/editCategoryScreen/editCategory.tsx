@@ -5,7 +5,7 @@ import {
 	ScrollView,
 } from 'react-navigation';
 import { Component } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Icons } from 'react-native-fontawesome';
 import React from 'react';
 import store from '../../store';
@@ -20,32 +20,12 @@ import { Attribute, CategoriesState, EditCategoryState } from '../../state';
 import IconPicker from './iconPicker/iconPicker';
 import AttributeEditor from './attributeEditor';
 import AttributeCreator from './attributeCreator';
+import HoardTitlebox from '../hoardTitlebox';
 
 export const styles = StyleSheet.create({
 	row: {
 		flexDirection: 'row',
 		margin: 5,
-	},
-	textField: {
-		paddingTop: 1,
-		paddingBottom: 1,
-		fontSize: 20,
-		color: black,
-		backgroundColor: white,
-		borderRadius: 5,
-		marginLeft: 5,
-		width: '48%',
-	},
-	title: {
-		width: '70%',
-		fontSize: 30,
-		textAlign: 'center',
-		margin: '5%',
-		marginTop: 10,
-		marginBottom: 0,
-		fontWeight: 'bold',
-		color: black,
-		backgroundColor: lightColor,
 	},
 	attributes: {
 		margin: 10,
@@ -89,13 +69,13 @@ export default class EditCategory extends Component<
 		return (
 			<ScrollView>
 				<View style={styles.row}>
-					<TextInput
+					<HoardTitlebox
 						value={this.state.name}
-						onChangeText={(value: string): void =>
+						onChange={(value: string): void =>
 							this.setCategoryName(value)
 						}
 						placeholder="Name"
-						style={styles.title}
+						width={70}
 					/>
 					<IconPicker
 						onIconSelect={(icon: string): void => {
