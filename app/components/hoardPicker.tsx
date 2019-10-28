@@ -14,18 +14,18 @@ export const styles = StyleSheet.create({
 		textAlign: 'right',
 		fontSize: 22,
 		fontWeight: 'bold',
-		width: '50%',
 		marginRight: 3,
 		color: black,
 	},
 	pickerContainer: {
 		backgroundColor: white,
-		width: '48%',
 		marginLeft: 5,
+		flex: 1,
 	},
 	picker: {
 		height: 30,
 		fontSize: 22,
+		width: '100%',
 	},
 });
 

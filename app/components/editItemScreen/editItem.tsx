@@ -9,7 +9,7 @@ import { Unsubscribe } from 'redux';
 import store from '../../store';
 import { Attribute } from '../../state';
 import { ActionType } from '../../reducers/actions';
-import { lightColor, darkColor, white, warning, black } from '../../styles';
+import { lightColor, darkColor, white, darkWarning, black } from '../../styles';
 import createHeader from '../overviewScreen/headerIcons';
 import { ValidateEditItemAction } from '../../actions/validateEditAction';
 import { EditItemNameAction } from '../../actions/editItemName';
@@ -55,7 +55,7 @@ export const styles = StyleSheet.create({
 		color: black,
 	},
 	errorMessage: {
-		color: warning,
+		color: darkWarning,
 	},
 });
 

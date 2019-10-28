@@ -1,10 +1,10 @@
 export enum AttributeType {
-	String,
-	Number,
-	Bool,
-	Percent,
-	Rating,
-	Combo,
+	String = 'Text',
+	Number = 'Number',
+	Bool = 'True/False',
+	Percent = 'Percentage',
+	Rating = 'Rating',
+	Combo = 'Option',
 }
 
 export interface Attribute {
@@ -49,6 +49,11 @@ export interface StatsState {
 }
 
 export type EditItemState = Inventory;
+
+export type EditCategoryState = {
+	name: string;
+	category: Category;
+};
 
 export type ValidationState = string;
 

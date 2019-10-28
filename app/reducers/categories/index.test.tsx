@@ -1,8 +1,8 @@
 import { Action } from 'redux';
-import { InventoryState } from '../../state';
+import { CategoriesState } from '../../state';
 import { ActionType } from '../actions';
 import { JestMock } from '../../aliases';
-import testInventory from './testInventory';
+import testCategories from './testCategories';
 import reducer from './index';
 
 jest.mock(
@@ -14,13 +14,13 @@ jest.mock(
 	},
 );
 
-describe('Inventory Reducer', (): void => {
-	let state: InventoryState | undefined;
+describe('Categories Reducer', (): void => {
+	let state: CategoriesState | undefined;
 	let action: Action;
 
 	beforeEach(
 		(): void => {
-			state = testInventory;
+			state = testCategories;
 			action = {
 				type: undefined,
 			};
@@ -30,20 +30,20 @@ describe('Inventory Reducer', (): void => {
 	it('has a default state if none is passed in', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
-		expect(newState).toEqual([]);
+		expect(newState).toEqual(testCategories);
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {
 		const newState = reducer(state, action);
-		expect(newState).toEqual(testInventory);
+		expect(newState).toEqual(testCategories);
 	});
 
 	it('can handle state loaded from storage', (): void => {
 		const action = {
-			type: ActionType.LoadInventory,
-			state: [],
+			type: ActionType.LoadCategories,
+			state: {},
 		};
 		const newState = reducer(state, action);
-		expect(newState).toEqual([]);
+		expect(newState).toEqual({});
 	});
 });

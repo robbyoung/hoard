@@ -3,6 +3,7 @@ import inventory from './inventory';
 import categories from './categories';
 import stats from './stats';
 import editItem from './editItem';
+import editCategory from './editCategory';
 import validation from './validation';
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
 	categories,
 	stats,
 	editItem,
+	editCategory,
 	validation,
 });

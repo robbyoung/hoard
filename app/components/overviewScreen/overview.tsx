@@ -35,18 +35,27 @@ export default class Overview extends Component<
 	): NavigationStackScreenOptions => {
 		return createHeader('My Stuff', [
 			{
-				icon: Icons.chartPie,
-				callback: (): void => {
-					props.navigation.navigate(Screens.Stats);
-				},
-			},
-			{
 				icon: Icons.plusCircle,
 				callback: (): void => {
 					store.dispatch({
 						type: ActionType.SetItemToEdit,
 					});
 					props.navigation.navigate(Screens.EditItem);
+				},
+			},
+			{
+				icon: Icons.folderPlus,
+				callback: (): void => {
+					store.dispatch({
+						type: ActionType.SetCategoryToEdit,
+					});
+					props.navigation.navigate(Screens.EditCategory);
+				},
+			},
+			{
+				icon: Icons.chartPie,
+				callback: (): void => {
+					props.navigation.navigate(Screens.Stats);
 				},
 			},
 		]);

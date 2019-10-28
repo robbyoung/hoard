@@ -1,11 +1,9 @@
 import { InventoryState } from '../../state';
 import { AddInventoryAction, addInventory } from '../../actions/addInventory';
 import { ActionType } from '../../reducers/actions';
+import { JestMock } from '../../aliases';
 import * as testStates from './testStates';
 
-interface JestMock {
-	setItem: () => Promise<void>;
-}
 jest.mock(
 	'@react-native-community/async-storage',
 	(): JestMock => {

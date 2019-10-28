@@ -7,7 +7,7 @@ import {
 	deleteInventory,
 } from '../../actions/deleteInventory';
 
-interface LoadInventoryAction extends Action {
+export interface LoadInventoryAction extends Action {
 	state: InventoryState;
 }
 

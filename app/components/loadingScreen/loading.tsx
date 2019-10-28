@@ -7,9 +7,11 @@ import {
 	StackActions,
 } from 'react-navigation';
 import store from '../../store';
-import { InventoryState } from '../../state';
+import { InventoryState, CategoriesState } from '../../state';
 import { ActionType } from '../../reducers/actions';
 import { darkColor, white } from '../../styles';
+import { LoadInventoryAction } from '../../reducers/inventory';
+import { LoadCategoriesAction } from '../../reducers/categories';
 
 const styles = StyleSheet.create({
 	background: {
@@ -54,7 +56,10 @@ export default class Loading extends Component<NavigationInjectedProps> {
 	}
 
 	private async loadSavedData(): Promise<void> {
-		await this.loadSavedInventory();
+		await Promise.all([
+			this.loadSavedInventory(),
+			this.loadSavedCategories(),
+		]);
 	}
 
 	private async loadSavedInventory(): Promise<void> {
@@ -62,10 +67,24 @@ export default class Loading extends Component<NavigationInjectedProps> {
 		let savedState: InventoryState;
 		if (state !== undefined && state !== null) {
 			savedState = JSON.parse(state) as InventoryState;
-			store.dispatch({
+			const loadInventoryAction: LoadInventoryAction = {
 				type: ActionType.LoadInventory,
 				state: savedState,
-			});
+			};
+			store.dispatch(loadInventoryAction);
+		}
+	}
+
+	private async loadSavedCategories(): Promise<void> {
+		const state = await AsyncStorage.getItem('categories');
+		let savedState: CategoriesState;
+		if (state !== undefined && state !== null) {
+			savedState = JSON.parse(state) as CategoriesState;
+			const loadCategoriesAction: LoadCategoriesAction = {
+				type: ActionType.LoadCategories,
+				state: savedState,
+			};
+			store.dispatch(loadCategoriesAction);
 		}
 	}
 }
