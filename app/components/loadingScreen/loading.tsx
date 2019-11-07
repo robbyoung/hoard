@@ -9,7 +9,6 @@ import {
 import store from '../../store';
 import { InventoryState, CategoriesState } from '../../state';
 import { ActionType } from '../../reducers/actions';
-import { darkColor, white } from '../../styles';
 import { LoadInventoryAction } from '../../reducers/inventory';
 import { LoadCategoriesAction } from '../../reducers/categories';
 
@@ -19,9 +18,7 @@ export default class Loading extends Component<NavigationInjectedProps> {
 	};
 
 	public render(): JSX.Element {
-		return (
-			<View/>
-		);
+		return <View />;
 	}
 
 	public async componentDidMount(): Promise<void> {

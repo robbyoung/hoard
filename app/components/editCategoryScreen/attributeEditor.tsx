@@ -51,7 +51,7 @@ export default class AttributeEditor extends Component<AttributeEditorProps> {
 				<View style={styles.delete}>
 					<TouchableOpacity
 						style={styles.deleteButton}
-						onPress={() =>
+						onPress={(): void =>
 							this.props.onDelete(this.props.attribute)
 						}>
 						<FontAwesome style={styles.deleteIcon}>
