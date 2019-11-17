@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView, Text } from 'react-native';
 import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
@@ -15,6 +15,7 @@ import { Inventory } from '../../state';
 import { NavigationOptionsWithProps } from '../../aliases';
 import OverviewItem from './overviewItem';
 import createHeader from './headerIcons';
+import HoardTabView from '../hoardTabView';
 
 const styles = StyleSheet.create({
 	overview: {
@@ -85,9 +86,7 @@ export default class Overview extends Component<
 
 	public render(): JSX.Element {
 		return (
-			<View style={styles.overview}>
-				<ScrollView>{this.state.inventoryList}</ScrollView>
-			</View>
+			<HoardTabView></HoardTabView>
 		);
 	}
 
