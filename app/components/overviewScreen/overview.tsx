@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
 
 interface OverviewState {
 	inventoryList: JSX.Element[];
+	tabIndex: number;
 }
 export default class Overview extends Component<
 	NavigationInjectedProps,
@@ -65,6 +66,7 @@ export default class Overview extends Component<
 
 	public state: OverviewState = {
 		inventoryList: this.getInventoryList(),
+		tabIndex: 0,
 	};
 
 	public componentWillMount(): void {
@@ -86,7 +88,24 @@ export default class Overview extends Component<
 
 	public render(): JSX.Element {
 		return (
-			<HoardTabView></HoardTabView>
+			<HoardTabView
+				index={this.state.tabIndex}
+				onTabChange={(index: number) => this.setState({
+					...this.state,
+					tabIndex: index,
+				})}
+				tabs={[
+					{
+						content:<ScrollView>{this.getInventoryList()}</ScrollView>,
+						key:"inventory",
+						title:"Inventory"
+					}, {
+						content:<View><Text>Categories</Text></View>,
+						key:"categories",
+						title:"Categories"
+					}
+				]}
+			></HoardTabView>
 		);
 	}
 
