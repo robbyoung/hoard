@@ -23,6 +23,7 @@ export interface Inventory {
 export type InventoryState = Inventory[];
 
 export interface Category {
+	id: string;
 	attributes: Attribute[];
 	icon: string;
 }

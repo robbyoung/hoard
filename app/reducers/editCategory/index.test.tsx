@@ -23,6 +23,7 @@ const DEFAULT_TEST_STATE: EditCategoryState = {
 				type: AttributeType.String,
 			},
 		],
+		id: '',
 	},
 };
 

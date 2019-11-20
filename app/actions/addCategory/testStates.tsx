@@ -15,6 +15,7 @@ export function createCategory(): Category {
 				type: AttributeType.String,
 			},
 		],
+		id: '',
 	};
 }
 
@@ -35,4 +36,5 @@ export const alteredCategory: Category = {
 			type: AttributeType.Bool,
 		},
 	],
+	id: '',
 };

@@ -12,7 +12,7 @@ export function editCategoryIcon(
 	return {
 		name: oldState.name,
 		category: {
-			attributes: oldState.category.attributes,
+			...oldState.category,
 			icon: action.icon,
 		},
 	};

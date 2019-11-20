@@ -39,6 +39,7 @@ export function createTestState(
 		category: {
 			icon: 'TestIcon',
 			attributes,
+			id: '',
 		},
 	};
 }

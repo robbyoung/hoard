@@ -29,6 +29,7 @@ export function editCategoryAttribute(
 	return {
 		name: oldState.name,
 		category: {
+			id: oldState.category.id,
 			icon: oldState.category.icon,
 			attributes,
 		},

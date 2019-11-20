@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import uuid from 'uuid';
 import { EditCategoryState } from '../../state';
 import { ActionType } from '../actions';
 import {
@@ -23,6 +24,7 @@ export const defaultState: EditCategoryState = {
 	category: {
 		icon: '',
 		attributes: [],
+		id: uuid.v4(),
 	},
 };
 

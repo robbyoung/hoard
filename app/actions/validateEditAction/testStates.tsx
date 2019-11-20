@@ -4,6 +4,7 @@ export const testCategories: CategoriesState = {
 	category: {
 		icon: '',
 		attributes: [],
+		id: '',
 	},
 };
 

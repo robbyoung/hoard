@@ -1,4 +1,5 @@
 import { Icons } from 'react-native-fontawesome';
+import uuid from 'uuid';
 import { AttributeType } from '../../state';
 
 export default {
@@ -11,6 +12,7 @@ export default {
 				type: AttributeType.Bool,
 			},
 		],
+		id: uuid.v4(),
 	},
 	Book: {
 		icon: Icons.book,
@@ -31,5 +33,6 @@ export default {
 				type: AttributeType.String,
 			},
 		],
+		id: uuid.v4(),
 	},
 };

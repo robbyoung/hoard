@@ -17,6 +17,7 @@ export function createTestState(name: string): EditCategoryState {
 					type: AttributeType.String,
 				},
 			],
+			id: '',
 		},
 	};
 }

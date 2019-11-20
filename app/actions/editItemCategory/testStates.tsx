@@ -4,6 +4,7 @@ export const testCategories: CategoriesState = {
 	noAttributes: {
 		icon: '',
 		attributes: [],
+		id: '',
 	},
 	oneAttribute: {
 		icon: '',
@@ -14,6 +15,7 @@ export const testCategories: CategoriesState = {
 				type: AttributeType.String,
 			},
 		],
+		id: '',
 	},
 	twoAttributes: {
 		icon: '',
@@ -29,6 +31,7 @@ export const testCategories: CategoriesState = {
 				type: AttributeType.String,
 			},
 		],
+		id: '',
 	},
 };
 

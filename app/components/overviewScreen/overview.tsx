@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import {
 	NavigationInjectedProps,
 	NavigationStackScreenOptions,
@@ -10,18 +10,12 @@ import { Icons } from 'react-native-fontawesome';
 import { Screens } from '../../screens';
 import { ActionType } from '../../reducers/actions';
 import store from '../../store';
-import { lightColor } from '../../styles';
 import { Inventory } from '../../state';
 import { NavigationOptionsWithProps } from '../../aliases';
+import HoardTabView from '../hoardTabView';
 import OverviewItem from './overviewItem';
 import createHeader from './headerIcons';
-import HoardTabView from '../hoardTabView';
-
-const styles = StyleSheet.create({
-	overview: {
-		backgroundColor: lightColor,
-	},
-});
+import OverviewCategory from './overviewCategory';
 
 interface OverviewState {
 	inventoryList: JSX.Element[];
@@ -90,22 +84,29 @@ export default class Overview extends Component<
 		return (
 			<HoardTabView
 				index={this.state.tabIndex}
-				onTabChange={(index: number) => this.setState({
-					...this.state,
-					tabIndex: index,
-				})}
+				onTabChange={(index: number): void =>
+					this.setState({
+						...this.state,
+						tabIndex: index,
+					})
+				}
 				tabs={[
 					{
-						content:<ScrollView>{this.getInventoryList()}</ScrollView>,
-						key:"inventory",
-						title:"Inventory"
-					}, {
-						content:<View><Text>Categories</Text></View>,
-						key:"categories",
-						title:"Categories"
-					}
+						content: (
+							<ScrollView>{this.getInventoryList()}</ScrollView>
+						),
+						key: 'inventory',
+						title: 'Inventory',
+					},
+					{
+						content: (
+							<ScrollView>{this.getCategoryList()}</ScrollView>
+						),
+						key: 'categories',
+						title: 'Categories',
+					},
 				]}
-			></HoardTabView>
+			/>
 		);
 	}
 
@@ -121,5 +122,20 @@ export default class Overview extends Component<
 					/>
 				),
 			);
+	}
+
+	private getCategoryList(): JSX.Element[] {
+		const categories = store.getState().categories;
+		const categoryNames = Object.keys(categories);
+		return categoryNames.map(
+			(name: string): JSX.Element => (
+				<OverviewCategory
+					key={categories[name].id}
+					name={name}
+					category={categories[name]}
+					navigation={this.props.navigation}
+				/>
+			),
+		);
 	}
 }

@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import uuid from 'uuid';
 import { EditCategoryState, Category } from '../../state';
 import { getRandomIcon } from '../../components/editCategoryScreen/iconPicker/availableIcons';
 
@@ -17,6 +18,7 @@ export function setCategoryToEdit(
 			category: {
 				icon: getRandomIcon(),
 				attributes: [],
+				id: uuid.v4(),
 			},
 		};
 	} else {

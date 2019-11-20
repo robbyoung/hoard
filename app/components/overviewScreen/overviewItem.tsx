@@ -10,7 +10,7 @@ import { ActionType } from '../../reducers/actions';
 import { darkColor, black, white } from '../../styles';
 import { SetItemToEditAction } from '../../actions/setItemToEdit';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		marginBottom: 1,

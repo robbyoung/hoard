@@ -177,7 +177,11 @@ export default class EditCategory extends Component<
 		} else if (edited.name === '') {
 			return false;
 		} else if (
-			Object.keys(categories).find((c: string) => edited.name === c)
+			Object.keys(categories).find(
+				(c: string) =>
+					edited.name === c &&
+					edited.category.id !== categories[c].id,
+			)
 		) {
 			return false;
 		}
