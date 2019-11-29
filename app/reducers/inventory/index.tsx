@@ -6,14 +6,12 @@ import {
 	DeleteInventoryAction,
 	deleteInventory,
 } from '../../actions/deleteInventory';
-import testInventory from './testInventory';
-
 export interface LoadInventoryAction extends Action {
 	state: InventoryState;
 }
 
 export default function inventoryReducer(
-	state: InventoryState = testInventory,
+	state: InventoryState = [],
 	action: Action,
 ): InventoryState {
 	switch (action.type) {

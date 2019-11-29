@@ -30,7 +30,7 @@ describe('Categories Reducer', (): void => {
 	it('has a default state if none is passed in', (): void => {
 		state = undefined;
 		const newState = reducer(state, action);
-		expect(newState).toEqual(testCategories);
+		expect(newState).toEqual({});
 	});
 
 	it('can return state unchanged for unrelated actions', (): void => {
