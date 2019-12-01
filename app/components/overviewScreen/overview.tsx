@@ -52,6 +52,11 @@ export default class Overview extends Component<
 			{
 				icon: Icons.chartPie,
 				callback: (): void => {
+					store.dispatch({
+						type: ActionType.SetStatsCategory,
+						category: '',
+
+					})
 					props.navigation.navigate(Screens.Stats);
 				},
 			},
